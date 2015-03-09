@@ -58,7 +58,9 @@ set laststatus=2
 set statusline=%<%F\ %h%m%r%=%-14.(%l,%c%)\ %p%%
 set t_Co=256
 set termbidi
+set hidden
 syntax on
+autocmd BufDelete * syntax on
 nnoremap <C-s> :w<CR>
 vnoremap <C-s> <C-c>:w<CR>
 inoremap <C-s> <C-o>:w<CR>
@@ -186,9 +188,4 @@ augroup END
 let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
 execute "set rtp+=" . g:opamshare . "/merlin/vim"
 let g:syntastic_ocaml_checkers = ['merlin']
-"https://github.com/tyru/dotfiles/blob/master/dotfiles/.vim/dict/scala.dict
-let g:neocomplcache_enable_at_startup = 1
-let g:neocomplcache_dictionary_filetype_lists = {
-  \ 'default' : '',
-  \ 'scala' : $HOME . '/.vim/dict/scala.dict',
-  \ }
+let g:extra_whitespace_ignored_filetypes = ['git']
