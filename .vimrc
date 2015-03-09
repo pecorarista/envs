@@ -17,6 +17,7 @@ Bundle 'hugoroy/.vim'
 Bundle 'jelera/vim-javascript-syntax'
 Bundle 'junegunn/vim-easy-align'
 Bundle 'kannokanno/previm'
+Bundle 'ktvoelker/sbt-vim'
 Bundle 'lambdatoast/elm.vim'
 Bundle 'nathanaelkane/vim-indent-guides'
 Bundle 'ntpeters/vim-better-whitespace'
@@ -68,6 +69,8 @@ let g:neocomplete#enable_at_startup=1
 if !exists('g:neocomplete#force_omni_input_patterns')
     let g:neocomplete#force_omni_input_patterns = {}
 endif
+
+"C & C++
 let g:marching_clang_command="clang"
 let g:marching#clang_command#options="-std=c++11"
 let g:marching_enable_neocomplete=1
@@ -82,12 +85,35 @@ augroup vimrc-cpp
     autocmd!
     autocmd FileType cpp call s:cpp()
 augroup END
+
+"Haskell
+let g:necoghc_enable_detailed_browse=1
+autocmd fileType haskell nnoremap <buffer> <silent> <Leader>g :<C-u>GhcModCheckAndLintAsync<CR>
+autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
+
+"Python
+autocmd FileType python setlocal omnifunc=jedi#completions
+let g:neocomplete#force_omni_input_patterns.python='\h\w*\|[^. \t]\.\w*'
 let g:jedi#completions_enabled=0
 let g:jedi#auto_vim_configuration=0
 let g:jedi#popup_on_dot=0
-let g:neocomplete#force_omni_input_patterns.python='\h\w*\|[^. \t]\.\w*'
-autocmd FileType python setlocal omnifunc=jedi#completions
-autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
+
+"Java & Scala
+"http://eclim.org
+"https://gist.github.com/seansawyer/9e13a2d5a6887cd0f296
+"$ECLIPSE_HOME/eclimd
+"<C-x> <C-o>
+let g:EclimCompletionMethod = "omnifunc"
+let g:neocomplete#force_omni_input_patterns.java = '\k\.\k*'
+let g:neocomplete#force_omni_input_patterns.scala = '\k\.\k*'
+
+"opam install omake
+"opam install merlin
+"https://github.com/the-lambda-church/merlin/wiki/vim-from-scratch
+let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
+execute "set rtp+=" . g:opamshare . "/merlin/vim"
+let g:syntastic_ocaml_checkers = ['merlin']
+
 autocmd FileType tex NeoCompleteLock
 nnoremap <silent> <Leader>p :<C-u>call InitializePythonFile()<CR>
 "to prevent jedi from stating to detect encoding before string 'utf-8' is completely typed
@@ -98,8 +124,6 @@ inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
 function! s:my_cr_function()
     return neocomplete#close_popup() . "\<CR>"
 endfunction
-let g:necoghc_enable_detailed_browse=1
-nnoremap <silent> <Leader>g :<C-u>GhcModCheckAndLintAsync<CR>
 inoremap <silent> <C-a> <C-o>:<C-u>call ArabicToggle()<CR>
 inoremap <silent> <C-y> <C-o>:<C-u>call HebrewToggle()<CR>
 inoremap <C-e> <End>
@@ -122,7 +146,8 @@ au BufNewFile,BufRead *.md nnoremap <silent> <C-p> :<C-u>PrevimOpen<CR>
 function! LuaTeXCompile()
     !lualatex %
     !evince %<.pdf &
-endfunction au BufNewFile,BufRead *.tex nnoremap <silent> <Leader>l :<C-u>call LuaTeXCompile()<CR>
+endfunction
+au BufNewFile,BufRead *.tex nnoremap <silent> <Leader>l :<C-u>call LuaTeXCompile()<CR>
 function! TransparencyToggle()
     if (g:colors_name=='molokai')
         colorscheme molokai-transparent
@@ -178,8 +203,3 @@ let dbext_default_host="localhost"
 augroup filetypedetect
     au BufNewFile,BufRead *.css,*.hamlet setlocal tabstop=2 shiftwidth=2 softtabstop=2
 augroup END
-"opam install omake
-"https://github.com/the-lambda-church/merlin/wiki/vim-from-scratch
-let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
-execute "set rtp+=" . g:opamshare . "/merlin/vim"
-let g:syntastic_ocaml_checkers = ['merlin']
