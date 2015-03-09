@@ -3,7 +3,6 @@ filetype off
 set rtp+=~/.vim/bundle/vundle/
 call vundle#begin()
 Bundle 'andviro/flake8-vim'
-Bundle 'bronson/vim-trailing-whitespace'
 Bundle 'davidhalter/jedi-vim'
 Bundle 'dag/vim2hs'
 Bundle 'def-lkb/merlin'
@@ -20,6 +19,7 @@ Bundle 'junegunn/vim-easy-align'
 Bundle 'kannokanno/previm'
 Bundle 'lambdatoast/elm.vim'
 Bundle 'nathanaelkane/vim-indent-guides'
+Bundle 'ntpeters/vim-better-whitespace'
 Bundle 'osyo-manga/vim-reunions'
 Bundle 'osyo-manga/vim-marching'
 Bundle 'othree/html5.vim'
@@ -58,12 +58,9 @@ set laststatus=2
 set statusline=%<%F\ %h%m%r%=%-14.(%l,%c%)\ %p%%
 set t_Co=256
 set termbidi
+"to prevent syntax highlight from disappearing
 set hidden
 syntax on
-autocmd BufDelete * syntax on
-nnoremap <C-s> :w<CR>
-vnoremap <C-s> <C-c>:w<CR>
-inoremap <C-s> <C-o>:w<CR>
 colorscheme molokai-transparent
 hi clear Conceal
 let g:neocomplete#enable_smart_case=1
@@ -108,7 +105,6 @@ inoremap <silent> <C-y> <C-o>:<C-u>call HebrewToggle()<CR>
 inoremap <C-e> <End>
 inoremap <C-b> <Left>
 inoremap <C-f> <Right>
-inoremap <C-d> "_dd
 nnoremap <silent> <C-a> :<C-u>call ArabicToggle()<CR>
 nnoremap <silent> <C-y> :<C-u>call HebrewToggle()<CR>
 nnoremap <C-b> <Left>
@@ -126,8 +122,7 @@ au BufNewFile,BufRead *.md nnoremap <silent> <C-p> :<C-u>PrevimOpen<CR>
 function! LuaTeXCompile()
     !lualatex %
     !evince %<.pdf &
-endfunction
-au BufNewFile,BufRead *.tex nnoremap <silent> <Leader>l :<C-u>call LuaTeXCompile()<CR>
+endfunction au BufNewFile,BufRead *.tex nnoremap <silent> <Leader>l :<C-u>call LuaTeXCompile()<CR>
 function! TransparencyToggle()
     if (g:colors_name=='molokai')
         colorscheme molokai-transparent
@@ -188,4 +183,3 @@ augroup END
 let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
 execute "set rtp+=" . g:opamshare . "/merlin/vim"
 let g:syntastic_ocaml_checkers = ['merlin']
-let g:extra_whitespace_ignored_filetypes = ['git']
