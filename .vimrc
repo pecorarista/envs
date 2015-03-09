@@ -106,6 +106,7 @@ let g:jedi#popup_on_dot=0
 let g:EclimCompletionMethod = "omnifunc"
 let g:neocomplete#force_omni_input_patterns.java = '\k\.\k*'
 let g:neocomplete#force_omni_input_patterns.scala = '\k\.\k*'
+set completeopt-=preview
 
 "opam install omake
 "opam install merlin
@@ -203,3 +204,4 @@ let dbext_default_host="localhost"
 augroup filetypedetect
     au BufNewFile,BufRead *.css,*.hamlet setlocal tabstop=2 shiftwidth=2 softtabstop=2
 augroup END
+let g:better_whitespace_filetypes_blacklist=['git']
