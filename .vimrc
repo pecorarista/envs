@@ -30,7 +30,7 @@ Bundle 'Shougo/neocomplete'
 Bundle 'Shougo/unite.vim'
 Bundle 'Shougo/vimfiler.vim'
 Bundle 'Shougo/vimproc.vim'
-Bundle 'scrooloose/syntastic'
+"Bundle 'scrooloose/syntastic'
 Bundle 'thinca/vim-quickrun'
 Bundle 'tomasr/molokai'
 Bundle 'tpope/vim-fugitive'
@@ -137,6 +137,7 @@ nnoremap <C-e> <End>
 nnoremap <C-4> <End>
 nnoremap <C-f> <Right>
 noremap <Leader>m :<C-u>!make<CR>
+nnoremap <buffer> <silent> <Leader>q :<C-u>QuickRun<CR>
 let g:indent_guides_enable_on_vim_startup=0
 nnoremap <silent> <Leader>v :<C-u>IndentGuidesToggle<CR>
 let g:indent_guides_guide_size=4
