@@ -29,7 +29,7 @@ Plugin 'Shougo/neocomplete'
 Plugin 'Shougo/unite.vim'
 Plugin 'Shougo/vimfiler.vim'
 Plugin 'Shougo/vimproc.vim'
-Plugin 'scrooloose/syntastic'
+"Plugin 'scrooloose/syntastic'
 Plugin 'thinca/vim-quickrun'
 Plugin 'tomasr/molokai'
 Plugin 'tpope/vim-fugitive'
@@ -130,12 +130,13 @@ inoremap <silent> <C-y> <C-o>:<C-u>call HebrewToggle()<CR>
 inoremap <C-e> <End>
 inoremap <C-b> <Left>
 inoremap <C-f> <Right>
+inoremap <silent> <C-c> :<C-u>only<CR>
 nnoremap <silent> <C-a> :<C-u>call ArabicToggle()<CR>
 nnoremap <silent> <C-y> :<C-u>call HebrewToggle()<CR>
-nnoremap <C-b> <Left>
 nnoremap <C-e> <End>
-nnoremap <C-4> <End>
+nnoremap <C-b> <Left>
 nnoremap <C-f> <Right>
+nnoremap <silent> <C-c> :<C-u>only<CR>
 noremap <Leader>m :<C-u>!make<CR>
 nnoremap <buffer> <silent> <Leader>q :<C-u>QuickRun<CR>
 let g:indent_guides_enable_on_vim_startup=0
@@ -145,11 +146,6 @@ let g:PyFlakeOnWrite=0
 let g:previm_open_cmd='google-chrome --new-window'
 let g:haskell_conceal_enumerations=0
 au BufNewFile,BufRead *.md nnoremap <silent> <C-p> :<C-u>PrevimOpen<CR>
-function! LuaTeXCompile()
-    !lualatex %
-    !evince %<.pdf &
-endfunction
-au BufNewFile,BufRead *.tex nnoremap <silent> <Leader>l :<C-u>call LuaTeXCompile()<CR>
 function! TransparencyToggle()
     if (g:colors_name=='molokai')
         colorscheme molokai-transparent
@@ -185,6 +181,14 @@ function! IPA()
     s/""/ˌ/egI | s/"/ˈ/egI
     s/?/ʔ/egI
 endfunction
+let g:quickrun_config = {}
+let g:quickrun_config = {
+    \   'tex':{
+    \     'command' : 'latexmk',
+    \     'cmdopt': '-pv',
+    \     'exec': ['%c %o %s']
+    \   },
+    \ }
 nnoremap <silent> <Leader>i :<C-u>call IPA()<CR><End>
 nnoremap <silent> <Leader>o :<C-u>call TransparencyToggle()<CR>
 nnoremap <silent> <Leader>t :<C-u>GhcModType<CR>
@@ -203,6 +207,6 @@ let dbext_default_passwd=""
 let dbext_default_dbname=""
 let dbext_default_host="localhost"
 augroup filetypedetect
-    au BufNewFile,BufRead *.css,*.hamlet setlocal tabstop=2 shiftwidth=2 softtabstop=2
+    au BufNewFile,BufRead *.css,*.hamlet,*.scala.html,*.bib setlocal tabstop=2 shiftwidth=2 softtabstop=2
 augroup END
 let g:better_whitespace_filetypes_blacklist=['git']
