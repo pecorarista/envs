@@ -183,6 +183,11 @@ function! IPA()
 endfunction
 let g:quickrun_config = {}
 let g:quickrun_config = {
+    \   "_" : {
+    \       "outputter/buffer/split" : ":botright 8sp",
+    \       "runner" : "vimproc",
+    \       "runner/vimproc/updatetime" : 40,
+    \   },
     \   'tex':{
     \     'command' : 'latexmk',
     \     'cmdopt': '-pv',
