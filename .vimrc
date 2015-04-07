@@ -17,7 +17,9 @@ Plugin 'jelera/vim-javascript-syntax'
 Plugin 'junegunn/vim-easy-align'
 Plugin 'kannokanno/previm'
 Plugin 'ktvoelker/sbt-vim'
+"Plugin 'LaTeX-Box-Team/LaTeX-Box'
 Plugin 'lambdatoast/elm.vim'
+"Plugin 'lervag/vimtex'
 Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'ntpeters/vim-better-whitespace'
 Plugin 'osyo-manga/vim-reunions'
@@ -97,6 +99,11 @@ let g:neocomplete#force_omni_input_patterns.python='\h\w*\|[^. \t]\.\w*'
 let g:jedi#completions_enabled=0
 let g:jedi#auto_vim_configuration=0
 let g:jedi#popup_on_dot=0
+"to prevent jedi from stating to detect encoding before string 'utf-8' is completely typed
+nnoremap <silent> <Leader>p :<C-u>call InitializePythonFile()<CR>
+function! InitializePythonFile()
+    1s@^@# -*- encoding: utf-8 -*-@
+endfunction
 
 "Java & Scala
 "http://eclim.org
@@ -108,6 +115,7 @@ let g:neocomplete#force_omni_input_patterns.java = '\k\.\k*'
 let g:neocomplete#force_omni_input_patterns.scala = '\k\.\k*'
 set completeopt-=preview
 
+"OCaml
 "opam install omake
 "opam install merlin
 "https://github.com/the-lambda-church/merlin/wiki/vim-from-scratch
@@ -115,12 +123,9 @@ let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
 execute "set rtp+=" . g:opamshare . "/merlin/vim"
 let g:syntastic_ocaml_checkers = ['merlin']
 
-autocmd FileType tex NeoCompleteLock
-nnoremap <silent> <Leader>p :<C-u>call InitializePythonFile()<CR>
-"to prevent jedi from stating to detect encoding before string 'utf-8' is completely typed
-function! InitializePythonFile()
-    1s@^@# -*- encoding: utf-8 -*-@
-endfunction
+"LaTeX
+"autocmd FileType tex NeoCompleteLock
+
 inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
 function! s:my_cr_function()
     return neocomplete#close_popup() . "\<CR>"
@@ -128,13 +133,11 @@ endfunction
 inoremap <silent> <C-a> <C-o>:<C-u>call ArabicToggle()<CR>
 inoremap <silent> <C-y> <C-o>:<C-u>call HebrewToggle()<CR>
 inoremap <C-e> <End>
-inoremap <C-b> <Left>
 inoremap <C-f> <Right>
 inoremap <silent> <C-c> :<C-u>only<CR>
 nnoremap <silent> <C-a> :<C-u>call ArabicToggle()<CR>
 nnoremap <silent> <C-y> :<C-u>call HebrewToggle()<CR>
 nnoremap <C-e> <End>
-nnoremap <C-b> <Left>
 nnoremap <C-f> <Right>
 nnoremap <silent> <C-c> :<C-u>only<CR>
 noremap <Leader>m :<C-u>!make<CR>
