@@ -87,6 +87,7 @@ augroup vimrc-cpp
     autocmd!
     autocmd FileType cpp call s:cpp()
 augroup END
+autocmd FileType make setlocal noexpandtab
 
 "Haskell
 let g:necoghc_enable_detailed_browse=1
