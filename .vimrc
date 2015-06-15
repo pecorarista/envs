@@ -23,6 +23,7 @@ NeoBundle 'Shougo/vimproc.vim', {
 NeoBundle 'Shougo/neocomplete'
 NeoBundle 'Shougo/unite.vim'
 
+NeoBundle 'haya14busa/incsearch.vim'
 NeoBundle 'junegunn/vim-easy-align'
 NeoBundle 'ntpeters/vim-better-whitespace'
 NeoBundle 'scrooloose/syntastic'
@@ -97,6 +98,8 @@ hi Pmenu ctermfg=White
 hi PmenuSel ctermfg=Red
 hi Pmenu ctermbg=Black
 
+map /  <Plug>(incsearch-forward)
+map ?  <Plug>(incsearch-backward)
 inoremap <C-e> <End>
 inoremap <C-f> <Right>
 nnoremap <C-e> <End>
@@ -108,7 +111,6 @@ let g:neocomplete#enable_at_startup=1
 if !exists('g:neocomplete#force_omni_input_patterns')
   let g:neocomplete#force_omni_input_patterns = {}
 endif
-
 nnoremap <buffer> <silent> <Leader>q :<C-u>QuickRun<CR>
 
 "C & C++
