@@ -100,6 +100,11 @@ hi Pmenu ctermbg=Black
 
 map /  <Plug>(incsearch-forward)
 map ?  <Plug>(incsearch-backward)
+set hlsearch
+let g:incsearch#auto_nohlsearch = 1
+map n  <Plug>(incsearch-nohl-n)
+map N  <Plug>(incsearch-nohl-N)
+
 inoremap <C-e> <End>
 inoremap <C-f> <Right>
 nnoremap <C-e> <End>
