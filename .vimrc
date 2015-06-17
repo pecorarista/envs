@@ -29,6 +29,7 @@ NeoBundle 'ntpeters/vim-better-whitespace'
 NeoBundle 'scrooloose/syntastic'
 NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'tomasr/molokai'
+NeoBundle 'tyru/open-browser.vim'
 
 "C & C++
 NeoBundleLazy 'osyo-manga/vim-marching', {
@@ -150,7 +151,6 @@ let g:quickrun_config = {
 
 "Markdown
 au BufNewFile,BufRead *.md nnoremap <silent> <C-p> :<C-u>PrevimOpen<CR>
-let g:previm_open_cmd='google-chrome --new-window'
 
 "OCaml
 "opam install omake
