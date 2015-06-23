@@ -161,6 +161,9 @@ let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
 execute 'set rtp+=' . g:opamshare . '/merlin/vim'
 let g:syntastic_ocaml_checkers = ['merlin']
 
+"Python
+let g:syntastic_python_checkers = ["flake8"]
+
 function! IPA()
   s/I/ɪ/egI | s/U/ʊ/egI
   s/@/ə/egI
