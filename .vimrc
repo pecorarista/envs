@@ -102,7 +102,7 @@ hi Pmenu ctermbg=Black
 map /  <Plug>(incsearch-forward)
 map ?  <Plug>(incsearch-backward)
 set hlsearch
-let g:incsearch#auto_nohlsearch = 1
+let g:incsearch#auto_nohlsearch=1
 map n  <Plug>(incsearch-nohl-n)
 map N  <Plug>(incsearch-nohl-N)
 
@@ -115,7 +115,7 @@ let g:better_whitespace_filetypes_blacklist=['git']
 let g:neocomplete#enable_smart_case=1
 let g:neocomplete#enable_at_startup=1
 if !exists('g:neocomplete#force_omni_input_patterns')
-  let g:neocomplete#force_omni_input_patterns = {}
+  let g:neocomplete#force_omni_input_patterns={}
 endif
 nnoremap <buffer> <silent> <Leader>q :<C-u>QuickRun<CR>
 
@@ -129,6 +129,7 @@ let g:neocomplete#force_omni_input_patterns.cpp='[^.[:digit:] *\t]\%(\.\|->\)\w*
 
 "Haskell
 let g:necoghc_enable_detailed_browse=1
+let g:haskell_conceal_enumerations=0
 autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
 autocmd fileType haskell nnoremap <buffer> <silent> <Leader>g :<C-u>GhcModCheckAndLintAsync<CR>
 nnoremap <silent> <Leader>t :<C-u>GhcModType<CR>
