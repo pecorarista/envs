@@ -45,6 +45,7 @@ NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'dag/vim2hs'
 NeoBundle 'eagletmt/ghcmod-vim'
 NeoBundle 'eagletmt/neco-ghc'
+NeoBundle 'pbrisbin/vim-syntax-shakespeare'
 
 "HTML5
 NeoBundle 'othree/html5.vim'
@@ -80,7 +81,7 @@ set expandtab
 set nofoldenable
 autocmd FileType make setlocal noexpandtab
 augroup filetypedetect
-  au BufNewFile,BufRead *.css,*.hamlet,*.scala.html,*.bib setlocal tabstop=2 shiftwidth=2 softtabstop=2
+  au BufNewFile,BufRead *.hamlet,*.scala.html,*.bib setlocal tabstop=2 shiftwidth=2 softtabstop=2
 augroup END
 set nobackup
 set nowritebackup
@@ -140,12 +141,12 @@ let g:quickrun_config = {}
 let g:quickrun_config = {
   \   '_' : {
   \     'outputter/buffer/split' : ':botright 8sp',
+  \     'outputter/buffer/close_on_empty' : 1,
   \     'runner' : 'vimproc',
-  \     "runner/vimproc/updatetime" : 40,
   \   },
   \   'tex' : {
   \     'command' : 'latexmk',
-  \     'cmdopt': '-pv',
+  \     'cmdopt' : '-pv',
   \     'exec': ['%c %o %s']
   \   },
   \ }
