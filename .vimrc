@@ -112,6 +112,7 @@ inoremap <C-f> <Right>
 nnoremap <C-e> <End>
 nnoremap <C-f> <Right>
 
+let g:neobundle#log_filename=$HOME . "/neobundle.log"
 let g:better_whitespace_filetypes_blacklist=['git']
 let g:neocomplete#enable_smart_case=1
 let g:neocomplete#enable_at_startup=1
