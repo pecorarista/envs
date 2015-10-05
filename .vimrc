@@ -37,6 +37,9 @@ NeoBundleLazy 'osyo-manga/vim-marching', {
   \ 'autoload' : {'filetypes' : ['c', 'cpp']}
   \ }
 
+"CoffeeScript
+NeoBundle 'kchmck/vim-coffee-script'
+
 "Git
 NeoBundle 'gregsexton/gitv'
 NeoBundle 'tpope/vim-fugitive'
@@ -81,7 +84,7 @@ set expandtab
 set nofoldenable
 autocmd FileType make setlocal noexpandtab
 augroup filetypedetect
-  au BufNewFile,BufRead *.hamlet,*.scala.html,*.bib setlocal tabstop=2 shiftwidth=2 softtabstop=2
+  au BufNewFile,BufRead *.hamlet,*.scala.html,*.bib,*.coffee setlocal tabstop=2 shiftwidth=2 softtabstop=2
 augroup END
 set nobackup
 set nowritebackup
@@ -167,9 +170,10 @@ let g:syntastic_ocaml_checkers = ['merlin']
 "Python
 let g:syntastic_python_checkers = ["flake8"]
 
+"ŋ Compose n + g
+"ə Compose e + e
 function! IPA()
   s/I/ɪ/egI | s/U/ʊ/egI
-  s/@/ə/egI
   s/E/ε/egI | s/3/ɜ/egI | s/2/ʌ/egI | s/O/ɔ/egI
   s/5/ɐ/egI
   s/A/ɑ/egI | s/6/ɒ/egI
