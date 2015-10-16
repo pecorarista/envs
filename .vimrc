@@ -150,7 +150,7 @@ let g:quickrun_config = {
   \   },
   \   'tex' : {
   \     'command' : 'latexmk',
-  \     'cmdopt' : '-pv',
+  \     'cmdopt' : '-pv -shell-escape',
   \     'exec': ['%c %o %s']
   \   },
   \ }
