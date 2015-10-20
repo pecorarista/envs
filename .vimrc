@@ -22,6 +22,7 @@ NeoBundle 'Shougo/vimproc.vim', {
   \ }
 NeoBundle 'Shougo/neocomplete'
 NeoBundle 'Shougo/unite.vim'
+NeoBundle 'Shougo/unite-outline'
 
 NeoBundle 'haya14busa/incsearch.vim'
 NeoBundle 'junegunn/vim-easy-align'
@@ -169,6 +170,16 @@ let g:syntastic_ocaml_checkers = ['merlin']
 
 "Python
 let g:syntastic_python_checkers = ["flake8"]
+
+"Scala
+nnoremap <silent> <Leader>s :<C-u>:Unite file:$HOME/.nyandoc -default-action=rec<CR><End>
+
+"Unite
+let g:unite_enable_start_insert = 1
+let g:unite_enable_ignore_case = 1
+let g:unite_enable_smart_case = 1
+let g:unite_enable_split_vertically = 1
+let g:unite_split_rule = "rightbelow"
 
 "ŋ Compose n + g
 "ə Compose e + e

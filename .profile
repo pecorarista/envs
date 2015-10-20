@@ -16,11 +16,6 @@ if [ -n "$BASH_VERSION" ]; then
     fi
 fi
 
-# set PATH so it includes user's private bin if it exists
-if [ -d "$HOME/bin" ] ; then
-    PATH="$HOME/bin:$PATH"
-fi
-
 # OPAM configuration
 . $HOME/.opam/opam-init/init.sh > /dev/null 2> /dev/null || true
 
@@ -31,5 +26,20 @@ export INFOPATH=$TEXLIVE/texmf-dist/doc/info
 export MANPATH=$TEXLIVE/texmf-dist/doc/man
 export EDITOR=vim
 export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
-export PATH=$TEXLIVE/bin/x86_64-linux:$HOME/.cabal/bin:$HOME/Development/ghc-7.8.4/bin:$HOME/.rbenv/shims:/opt/anaconda/bin:$HOME/.local/bin:$PATH
+export GHC_HOME=$HOME/Development/ghc-7.8.4
+export CABAL_HOME=$HOME/.cabal
+export ANACONDA_HOME=$HOME/anaconda3
+
+export PATH=$TEXLIVE/bin/x86_64-linux:$ANACONDA_HOME/bin:$GHC_HOME/bin:$CABAL_HOME/bin:$PATH
+
+if [ -d "$HOME/jvm" ] ; then
+    export JAVA_HOME=$HOME/jvm/jdk1.8.0_60
+    export PATH=JAVA_HOME/bin:$PATH
+fi
+
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/bin" ] ; then
+    PATH="$HOME/bin:$PATH"
+fi
+
 export FCITX_NO_PREEDIT_APPS=konsole
