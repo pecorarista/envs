@@ -180,6 +180,7 @@ let g:unite_enable_ignore_case = 1
 let g:unite_enable_smart_case = 1
 let g:unite_enable_split_vertically = 1
 let g:unite_split_rule = "rightbelow"
+call unite#custom#default_action('file' , 'right')
 
 "ŋ Compose n + g
 "ə Compose e + e
