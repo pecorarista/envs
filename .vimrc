@@ -23,6 +23,7 @@ NeoBundle 'Shougo/vimproc.vim', {
 NeoBundle 'Shougo/neocomplete'
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/unite-outline'
+NeoBundle 'Shougo/vimfiler'
 
 NeoBundle 'haya14busa/incsearch.vim'
 NeoBundle 'junegunn/vim-easy-align'
@@ -141,6 +142,9 @@ autocmd fileType haskell nnoremap <buffer> <silent> <Leader>g :<C-u>GhcModCheckA
 nnoremap <silent> <Leader>t :<C-u>GhcModType<CR>
 nnoremap <silent> <Leader>c :<C-u>GhcModTypeClear<CR>
 
+"Java
+au BufNewFile,BufRead *.java set tags+=$HOME/tags/java.tags
+
 "LaTeX
 let g:quickrun_config = {}
 let g:quickrun_config = {
@@ -156,9 +160,6 @@ let g:quickrun_config = {
   \   },
   \ }
 
-"Markdown
-au BufNewFile,BufRead *.md nnoremap <silent> <C-p> :<C-u>PrevimOpen<CR>
-
 "OCaml
 "opam install omake
 "opam install merlin
@@ -172,15 +173,14 @@ let g:syntastic_ocaml_checkers = ['merlin']
 let g:syntastic_python_checkers = ["flake8"]
 
 "Scala
-nnoremap <silent> <Leader>s :<C-u>:Unite file:$HOME/.nyandoc -default-action=rec<CR><End>
+au BufNewFile,BufRead *.scala set tags+=$HOME/tags/scala.tags
+nnoremap <silent> <Leader>s :<C-u>:VimFiler $HOME/.nyandoc<CR><End>
 
 "Unite
 let g:unite_enable_start_insert = 1
 let g:unite_enable_ignore_case = 1
 let g:unite_enable_smart_case = 1
-let g:unite_enable_split_vertically = 1
-let g:unite_split_rule = "rightbelow"
-call unite#custom#default_action('file' , 'right')
+nnoremap <C-p> <C-u>:bp<CR><End>
 
 "ŋ Compose n + g
 "ə Compose e + e
