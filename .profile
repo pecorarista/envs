@@ -30,11 +30,11 @@ export GHC_HOME=$HOME/Development/ghc-7.8.4
 export CABAL_HOME=$HOME/.cabal
 export ANACONDA_HOME=$HOME/anaconda3
 
-export PATH=$TEXLIVE/bin/x86_64-linux:$GHC_HOME/bin:$CABAL_HOME/bin:$PATH
+export PATH=$TEXLIVE/bin/x86_64-linux:$GHC_HOME/bin:$CABAL_HOME/bin:$HOME/Development/scala-2.10.6/bin:$PATH
 
 if [ -d "$HOME/jvm" ] ; then
-    export JAVA_HOME=$HOME/jvm/jdk1.8.0_60
-    export PATH=JAVA_HOME/bin:$PATH
+    export JAVA_HOME=$HOME/jvm/default
+    export PATH=$JAVA_HOME/bin:$PATH
 fi
 
 # set PATH so it includes user's private bin if it exists
