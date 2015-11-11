@@ -145,8 +145,8 @@ let g:necoghc_enable_detailed_browse=1
 let g:haskell_conceal_enumerations=0
 autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
 autocmd fileType haskell nnoremap <buffer> <silent> <Leader>g :<C-u>GhcModCheckAndLintAsync<CR>
-nnoremap <silent> <Leader>t :<C-u>GhcModType<CR>
-nnoremap <silent> <Leader>c :<C-u>GhcModTypeClear<CR>
+autocmd FileType haskell nnoremap <silent> <Leader>t :<C-u>GhcModType<CR>
+autocmd FileType haskell nnoremap <silent> <Leader>c :<C-u>GhcModTypeClear<CR>
 
 "Java
 au BufNewFile,BufRead *.java set tags+=$HOME/tags/java.tags
@@ -180,18 +180,17 @@ let g:syntastic_python_checkers = ["flake8"]
 
 "Scala
 au BufNewFile,BufRead *.scala set tags+=$HOME/tags/scala.tags
-nnoremap <silent> <Leader>s :<C-u>:VimFiler $HOME/.nyandoc<CR><End>
+nnoremap <silent> <Leader>s :<C-u>VimFiler $HOME/.nyandoc<CR><End>
 
 "VimFiler
 let g:vimfiler_as_default_explorer = 1
 autocmd FileType vimfiler nmap <buffer> <C-h> <Plug>(vimfiler_switch_to_history_directory)
-autocmd FileType vimfiler nmap <buffer> <BS> <Plug>(vimfiler_switch_to_parent_directory)
+nnoremap <silent> <Leader>f :<C-u>VimFiler -split -simple -winwidth=45 -no-quit<CR><End>
 
 "Unite
 let g:unite_enable_start_insert = 1
 let g:unite_enable_ignore_case = 1
 let g:unite_enable_smart_case = 1
-nnoremap <C-p> <C-u>:bp<CR><End>
 
 "ŋ Compose n + g
 "ə Compose e + e
