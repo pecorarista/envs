@@ -33,6 +33,9 @@ NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'tomasr/molokai'
 NeoBundle 'tyru/open-browser.vim'
 
+"Ansible
+NeoBundle 'chase/vim-ansible-yaml'
+
 "C & C++
 NeoBundleLazy 'osyo-manga/vim-marching', {
   \ 'depends' : ['Shougo/vimproc.vim', 'osyo-manga/vim-reunions'],
@@ -86,7 +89,9 @@ set expandtab
 set nofoldenable
 autocmd FileType make setlocal noexpandtab
 augroup filetypedetect
-  au BufNewFile,BufRead *.hamlet,*.scala.html,*.bib,*.js,*.coffee setlocal tabstop=2 shiftwidth=2 softtabstop=2
+  \ au BufNewFile,BufRead
+  \ *.bib,*.coffee,*.hamlet,*.js,*.scala.html,*.txt,*.yml
+  \ setlocal tabstop=2 shiftwidth=2 softtabstop=2
 augroup END
 set nobackup
 set nowritebackup
@@ -115,6 +120,7 @@ map N  <Plug>(incsearch-nohl-N)
 inoremap <C-e> <End>
 inoremap <C-f> <Right>
 nnoremap <C-e> <End>
+nnoremap <C-f> <Right>
 nnoremap <C-f> <Right>
 
 let g:neobundle#log_filename=$HOME . "/neobundle.log"
@@ -175,6 +181,11 @@ let g:syntastic_python_checkers = ["flake8"]
 "Scala
 au BufNewFile,BufRead *.scala set tags+=$HOME/tags/scala.tags
 nnoremap <silent> <Leader>s :<C-u>:VimFiler $HOME/.nyandoc<CR><End>
+
+"VimFiler
+let g:vimfiler_as_default_explorer = 1
+autocmd FileType vimfiler nmap <buffer> <C-h> <Plug>(vimfiler_switch_to_history_directory)
+autocmd FileType vimfiler nmap <buffer> <BS> <Plug>(vimfiler_switch_to_parent_directory)
 
 "Unite
 let g:unite_enable_start_insert = 1
