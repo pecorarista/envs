@@ -28,7 +28,6 @@ export EDITOR=vim
 export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
 export GHC_HOME=$HOME/Development/ghc-7.8.4
 export CABAL_HOME=$HOME/.cabal
-export ANACONDA_HOME=$HOME/anaconda3
 
 export PATH=$TEXLIVE/bin/x86_64-linux:$GHC_HOME/bin:$CABAL_HOME/bin:$HOME/Development/scala-2.10.6/bin:$PATH
 
@@ -43,3 +42,7 @@ if [ -d "$HOME/bin" ] ; then
 fi
 
 export FCITX_NO_PREEDIT_APPS=konsole
+
+export ANACONDA_HOME=$HOME/anaconda3
+# export ANACONDA_HOME=$HOME/anaconda2
+export PATH=$ANACONDA_HOME/bin:$PATH

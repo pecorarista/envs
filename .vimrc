@@ -96,6 +96,7 @@ hi clear Conceal
 hi Pmenu ctermfg=White
 hi PmenuSel ctermfg=Red
 hi Pmenu ctermbg=Black
+highlight CursorColumn ctermbg=Cyan
 
 map /  <Plug>(incsearch-forward)
 map ?  <Plug>(incsearch-backward)
@@ -147,7 +148,6 @@ let g:quickrun_config = {
 let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
 execute 'set rtp+=' . g:opamshare . '/merlin/vim'
 let g:syntastic_ocaml_checkers = ['merlin']
-
 "Python
 let g:syntastic_python_checkers = ["flake8"]
 
