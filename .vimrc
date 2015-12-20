@@ -96,7 +96,7 @@ hi clear Conceal
 hi Pmenu ctermfg=White
 hi PmenuSel ctermfg=Red
 hi Pmenu ctermbg=Black
-highlight CursorColumn ctermbg=Cyan
+hi CursorColumn ctermbg=Cyan
 
 map /  <Plug>(incsearch-forward)
 map ?  <Plug>(incsearch-backward)
