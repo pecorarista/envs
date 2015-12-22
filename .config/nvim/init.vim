@@ -1,6 +1,6 @@
-set runtimepath+=~/.nvim/bundle/neobundle.vim/
+set runtimepath+=~/.config/nvim/bundle/neobundle.vim/
 
-call neobundle#begin(expand('~/.nvim/bundle/'))
+call neobundle#begin(expand('~/.config/nvim/bundle/'))
 
 "Vim
 NeoBundleFetch 'Shougo/neobundle.vim'
@@ -59,3 +59,4 @@ inoremap <C-f> <Right>
 nnoremap <C-e> <End>
 nnoremap <C-f> <Right>
 let g:deoplete#enable_at_startup = 1
+let g:python3_host_prog = expand('$HOME') . '/anaconda3/bin/python'
