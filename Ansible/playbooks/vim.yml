@@ -1,0 +1,82 @@
+---
+# vim:ft=ansible:
+# Arch Linux
+- hosts: localhost
+  vars:
+    - ansible_python_interpreter: /usr/bin/python2
+  tasks:
+    - name: Install Neovim
+      pacman:
+        name: neovim
+        state: latest
+      sudo: yes
+    - name: Create ~/.config/nvim
+      file:
+        path: ~/.config/nvim
+        state: directory
+    - name: Check if ~/.config/nvim/init.vim exists
+      stat:
+        path: ~/.config/nvim/init.vim
+      register: config
+    - name: Create ~/.config/nvim/init.vim
+      command: ln -s ~/envs/.config/nvim/init.vim ~/.config/nvim/init.vim
+      when: config.stat.exists == False
+    - name: Create ~/.config/nvim/bundle
+      file:
+        path: ~/.config/nvim/bundle
+        state: directory
+    - name: Clone NeoBundle
+      git:
+        repo: "https://github.com/Shougo/neobundle.vim"
+        dest: ~/.config/nvim/bundle/neobundle.vim
+    - name: Install xsel
+      pacman:
+        name: xsel
+        state: latest
+      sudo: yes
+    - name: Check if ~/anaconda3/bin/python exists
+      command: ~/anaconda3/bin/python --version
+      register: python
+      changed_when: False
+    - name: Create ~/Downloads
+      file:
+        path: ~/Downloads
+        state: directory
+      when: python|failed
+    - name: Download Anaconda
+      get_url:
+        url: "https://3230d63b5fc54e62148e-c95ac804525aac4b6dba79b00b39d1d3.ssl.cf1.rackcdn.com/Anaconda3-2.4.0-Linux-x86_64.sh"
+        dest: ~/Downloads/Anaconda3-2.4.0-Linux-x86_64.sh
+        sha256sum: fb4e480059e991f2fa632b5a9bcdd284c7f0677814cd719c11d524453f96a40d
+        force: yes
+      when: python|failed
+    - name: Install Anaconda
+      shell: bash ~/Downloads/Anaconda3-2.4.0-Linux-x86_64.sh -b
+      when: python|failed
+    - name: Check if a python package "neovim" is installed
+      shell: ~/anaconda3/bin/pip freeze | grep neovim
+      register: neovim
+      ignore_errors: True
+      changed_when: False
+    - name: Install the neovim package
+      shell: ~/anaconda3/bin/pip install neovim
+      when: neovim|failed
+    - name: Aliases for nvim
+      lineinfile:
+        dest: ~/.bashrc
+        state: present
+        line: "{{ item }}"
+      with_items:
+        - alias vi='nvim'
+        - alias vim='nvim'
+    - name: Set vim as the default editor
+      lineinfile:
+        dest: ~/.profile
+        state: present
+        line: export EDITOR=vim
+    - name: Enable colors in vim
+      lineinfile:
+        dest: ~/.profile
+        state: present
+        line: export NVIM_TUI_ENABLE_TRUE_COLOR=1
+...
