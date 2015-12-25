@@ -1,15 +1,66 @@
 ---
 # vim:ft=ansible:
-# Arch Linux
 - hosts: localhost
+  connection: local
   vars:
     - ansible_python_interpreter: /usr/bin/python2
   tasks:
-    - name: Install Neovim
+    - name: Install Neovim (Arch Linux)
       pacman:
         name: neovim
         state: latest
       sudo: yes
+      when: ansible_os_family == "Archlinux"
+    - name: Install requirements (Ubuntu)
+      apt:
+        name: "{{ item }}"
+        state: latest
+      sudo: yes
+      with_items:
+        - git
+        - libtool
+        - libtool-bin
+        - autoconf
+        - automake
+        - cmake
+        - libncurses5-dev
+        - g++
+        - python-dev
+        - python-pip
+        - python3-dev
+        - python3-pip
+      when: ansible_os_family == "Debian"
+    - name: Install requirements (RHEL)
+      yum:
+        name: "{{ item }}"
+        state: latest
+      sudo: yes
+      with_items:
+        - git
+      when: ansible_os_family == "RedHat"
+    - name: Check if Neovim is installed
+      shell: /usr/local/bin/nvim --version
+      ignore_errors: True
+      changed_when: False
+      register: nvim
+    - name: Create ~/Library
+      file:
+        path: ~/Library
+        state: directory
+      when: (ansible_os_family != "Archlinux") and (nvim|failed)
+    - name: Compile Neovim
+      git:
+        repo: "https://github.com/neovim/neovim.git"
+        dest: ~/Library/neovim
+        version: ad34a376eb164852d2983341a9137a1e06a24bb9
+      when: (ansible_os_family != "Archlinux") and (nvim|failed)
+    - name: Install Neovim
+      shell: |
+        make cmake
+        sudo make install
+      args:
+        chdir: ~/Library/neovim
+      when: (ansible_os_family != "Archlinux") and (nvim|failed)
     - name: Create ~/.config/nvim
       file:
         path: ~/.config/nvim
@@ -29,14 +80,22 @@
       git:
         repo: "https://github.com/Shougo/neobundle.vim"
         dest: ~/.config/nvim/bundle/neobundle.vim
-    - name: Install xsel
+    - name: Install xsel (Arch Linux)
       pacman:
         name: xsel
         state: latest
       sudo: yes
+      when: ansible_os_family == "Archlinux"
+    - name: Install xsel (Ubuntu)
+      apt:
+        name: xsel
+        state: latest
+      sudo: yes
+      when: ansible_os_family == "Debian"
     - name: Check if ~/anaconda3/bin/python exists
       command: ~/anaconda3/bin/python --version
       register: python
+      ignore_errors: True
       changed_when: False
     - name: Create ~/Downloads
       file:
