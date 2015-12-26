@@ -30,13 +30,39 @@
         - python3-dev
         - python3-pip
       when: ansible_os_family == "Debian"
+    - name: Install epel-release (RHEL)
+      yum:
+        name: "http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-5.noarch.rpm"
+        state: present
+      sudo: yes
+      when: ansible_os_family == "RedHat"
+    - name: Install ius-release (RHEL)
+      yum:
+        name: https://rhel7.iuscommunity.org/ius-release.rpm
+        state: present
+      sudo: yes
+      when: ansible_os_family == "RedHat"
     - name: Install requirements (RHEL)
       yum:
         name: "{{ item }}"
         state: latest
+        enablerepo: epel,ius-release
       sudo: yes
       with_items:
         - git
+        - libtool
+        - autoconf
+        - automake
+        - cmake
+        - gcc
+        - gcc-c++
+        - make
+        - pkgconfig
+        - python-devel
+        - python-pip
+        - python34u-devel
+        - python34u-pip
+        - unzip
       when: ansible_os_family == "RedHat"
     - name: Check if Neovim is installed
       shell: /usr/local/bin/nvim --version
@@ -92,6 +118,16 @@
         state: latest
       sudo: yes
       when: ansible_os_family == "Debian"
+    - name: Install requirements (RHEL)
+      yum:
+        name: "{{ item }}"
+        state: latest
+        enablerepo: epel
+      sudo: yes
+      with_items:
+        - bzip2
+        - xsel
+      when: ansible_os_family == "RedHat"
     - name: Check if ~/anaconda3/bin/python exists
       command: ~/anaconda3/bin/python --version
       register: python
@@ -128,14 +164,32 @@
       with_items:
         - alias vi='nvim'
         - alias vim='nvim'
+    - name: Check if .profile exists
+      stat:
+        path: ~/.profile
+      register: profile
     - name: Set vim as the default editor
       lineinfile:
         dest: ~/.profile
         state: present
         line: export EDITOR=vim
+      when: profile.stat.exists == True
     - name: Enable colors in vim
       lineinfile:
         dest: ~/.profile
         state: present
         line: export NVIM_TUI_ENABLE_TRUE_COLOR=1
+      when: profile.stat.exists == True
+    - name: Set vim as the default editor
+      lineinfile:
+        dest: ~/.bash_profile
+        state: present
+        line: export EDITOR=vim
+      when: profile.stat.exists == False
+    - name: Enable colors in vim
+      lineinfile:
+        dest: ~/.bash_profile
+        state: present
+        line: export NVIM_TUI_ENABLE_TRUE_COLOR=1
+      when: profile.stat.exists == False
 ...

@@ -10,7 +10,6 @@ NeoBundle 'junegunn/vim-easy-align'
 NeoBundle 'ntpeters/vim-better-whitespace'
 NeoBundle 'Shougo/deoplete.nvim'
 NeoBundle 'tomasr/molokai'
-NeoBundle 'freeo/vim-kalisi'
 
 "Ansible
 NeoBundle 'chase/vim-ansible-yaml'
