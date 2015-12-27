@@ -14,6 +14,9 @@ NeoBundle 'tomasr/molokai'
 "Ansible
 NeoBundle 'chase/vim-ansible-yaml'
 
+"Markdown
+NeoBundle 'kannokanno/previm'
+
 "Scala
 NeoBundle 'derekwyatt/vim-scala'
 
@@ -59,3 +62,4 @@ nnoremap <C-e> <End>
 nnoremap <C-f> <Right>
 let g:deoplete#enable_at_startup = 1
 let g:python3_host_prog = expand('$HOME') . '/anaconda3/bin/python'
+let g:previm_open_cmd = 'google-chrome'

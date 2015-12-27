@@ -1,74 +1,66 @@
-## Vim
-```sh
-mkdir -p ~/.vim/bundle
-git clone https://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
-```
+# Kubuntu 15.10 日本語環境・開発環境設定方法
 
-## Python
-```sh
-w3m https://www.continuum.io/downloads
-# Download the latest version of Anaconda
-bash Anaconda*
-vim ~/.profile
-# export ANACONDA_HOME=$HOME/anaconda3
-# export PATH=$ANACONDA_HOME/bin:$PATH
-    ```
+#### 起動時に NumLock On
+<img src="Screenshots/konsole-font.png" alt="konsole-font"/>
 
-## Haskell
-```sh
-rm -rf ~/.ghc
-rm -rf ~/.cabal
-cd ~/Development/Haskell
-wget https://www.haskell.org/ghc/dist/7.8.4/ghc-7.8.4-x86_64-unknown-linux-deb7.tar.xz
-tar -xvf ghc-7.8.4-x86_64-unknown-linux-deb7.tar.xz
-cd ghc-7.84
-./configure --prefix=$HOME/Development/ghc-7.8.4
-make install
-vim ~/.profile
-# export GHC_HOME=$HOME/Development/ghc-7.8.4
-# export PATH=$GHC_HOME/bin
-wget https://www.haskell.org/cabal/release/cabal-1.20.0.3/Cabal-1.20.0.3.tar.gz
-tar -xzvf Cabal-1.20.0.3.tar.gz
-cd Cabal-1.20.0.3.tar.gz
-ghc --make Setup.hs
-./Setup configure --user
-./Setup build
-./Setup install
-wget https://www.haskell.org/cabal/release/cabal-install-1.20.1.0/cabal-install-1.20.1.0.tar.gz
-tar -xzvf cabal-install-1.20.1.0.tar.gz
-cd cabal-install-1.20.1.0
-vim ~/.profile
-# export CABAL_HOME=$HOME/.cabal
-# export PATH=CABAL_HOME/bin:$PATH
-. ~/.profile
-cabal install ghc-mod
-```
-See [https://gist.github.com/yantonov/10083524](https://gist.github.com/yantonov/10083524).
+#### Compose Key を有効にする
+<img src="Screenshots/composekey.png" alt="composekey"/>
+
+#### Alt + grave で IM を日本語に切り替える
+Walk Through Windows of Current Application のショートカットキーを削除  
+<img src="Screenshots/kwin-shortcut.png" alt="kwin-shortcut"/>
+
+IM の設定で Trigger Input Method の項目を変更する。  
+<img src="Screenshots/altgrave.png" alt="altgrave"/>
+
+#### konsole で日本語に変換したとき、色の反転する範囲がおかしい
+フォントを Ubuntu Mono にする。  
+<img src="Screenshots/konsole-font.png" alt="konsole-font"/>
+
+#### konsole で日本語のフォントの下の部分が見きれる
+Line Spacing を 2 にする。  
+<img src="Screenshots/konsole-line-spacing.png" alt="konsole-line-spacing"/>
+
+#### シングルクリックでファイルが開かないようにする
+Mouse 項目で設定する。Apply を忘れないように気をつける。  
+<img src="Screenshots/click-behavior.png" alt="click-behavior"/>
+
+#### Vim
+Ansible ディレクトリ内参照
 
 ```sh
-# https://github.com/commercialhaskell/stack
-wget -q -O- https://s3.amazonaws.com/download.fpcomplete.com/ubuntu/fpco.key | sudo apt-key add -
-echo 'deb http://download.fpcomplete.com/ubuntu/wily stable main'|sudo tee /etc/apt/sources.list.d/fpco.list
-sudo apt-get update && sudo apt-get install stack -y
-stack setup 7.10.2
-stack install ghc-mod
-git clone https://github.com/belliture/ghc-mod-stack-wrapper.git ~/Development/ghc-mod-stack-wrapper
-cd ~/Development/ghc-mod-stack-wrapper/linux
-chmod +x *
-cd ~/bin/
-ln -s ~/Development/ghc-mod-stack-wrapper/linux/ghc-mod
-```
+sudo apt-get update
+sudo apt-get upgrade
+sudo do-release-upgrade -d
+sudo apt-get install nvidia-340
+reboot
+sudo apt-get install fcitx fcitx-mozc kde-config-fcitx
+im-config -n fcitx
+sudo apt-get install tmux git
 
-## Scala
-```sh
+# Google Chrome, Slack, Skype, Dropbox
+sudo apt-get install sni-qt:i386
+
+# Java
 sudo add-apt-repository ppa:webupd8team/java
 sudo apt-get update
 sudo apt-get install oracle-java8-installer
+sudo update-alternatives --config java
 
+# Scala
 echo "deb https://dl.bintray.com/sbt/debian /" | sudo tee -a /etc/apt/sources.list.d/sbt.list
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 642AC823
 sudo apt-get update
 sudo apt-get install sbt
 
-# https://github.com/todesking/nyandoc
+# TeXLive
+sudo apt-get install texlive-full xzdec
+tlmgr init-usertree
+tlmgr update --self
+
+# Haskell
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 575159689BEFB442
+echo 'deb http://download.fpcomplete.com/ubuntu wily main' | sudo tee /etc/apt/sources.list.d/fpco.list
+sudo apt-get update
+sudo apt-get install stack
 ```
