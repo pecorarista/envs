@@ -192,4 +192,69 @@
         state: present
         line: export NVIM_TUI_ENABLE_TRUE_COLOR=1
       when: profile.stat.exists == False
+    # http://qiita.com/makisyu/items/d6b32d88cdd97b01a00f
+    - name: Check if ~/bin/tmux exists
+      shell: ~/bin/tmux --version
+      ignore_errors: True
+      changed_when: False
+      register: tmux
+    - name: Download libevent
+      get_url:
+        url: "https://github.com/downloads/libevent/libevent/libevent-2.0.21-stable.tar.gz"
+        dest: ~/Downloads/libevent-2.0.21-stable.tar.gz
+        sha256sum: 22a530a8a5ba1cb9c080cba033206b17dacd21437762155c6d30ee6469f574f5
+        force: yes
+      when: tmux|failed
+    - name: Extract libevent
+      unarchive:
+        src: ~/Downloads/libevent-2.0.21-stable.tar.gz
+        dest: ~/Library/
+        copy: no
+      when: tmux|failed
+    - name: Create a directory "build"
+      file:
+        path: ~/Library/libevent-2.0.21-stable/build
+        state: directory
+      when: tmux|failed
+    - name: Compile libevent
+      shell: |
+        ./configure --prefix="{{ ansible_env.HOME }}/Library/libevent-2.0.21-stable/build"
+        make
+        make install
+      args:
+        chdir: ~/Library/libevent-2.0.21-stable
+      when: tmux|failed
+    - name: Clone tmux
+      git:
+        repo: "https://github.com/tmux/tmux"
+        dest: ~/Library/tmux
+    - name: Create a directory "build"
+      file:
+        path: ~/Library/tmux/build
+        state: directory
+      when: tmux|failed
+    - name: Configure tmux
+      shell: |
+        sh ~/Library/tmux/autogen.sh
+        PKG_CONFIG_PATH="{{ ansible_env.HOME }}/Library/libevent-2.0.21-stable/build/lib/pkgconfig" \
+        ./configure --enable-static --prefix="{{ ansible_env.HOME }}/Library/tmux/build"
+      environment:
+      args:
+        chdir: ~/Library/tmux
+      when: tmux|failed
+    - name: Compile tmux
+      shell: |
+        make
+        make install
+      args:
+        chdir: ~/Library/tmux
+      when: tmux|failed
+    - name: Create ~/bin
+      file:
+        path: ~/bin
+        state: directory
+      when: tmux|failed
+    - name: Create a link to tmux
+      shell: ln -s ~/Library/tmux/build/bin/tmux ~/bin/tmux
+      when: tmux|failed
 ...

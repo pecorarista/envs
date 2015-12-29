@@ -45,7 +45,6 @@ set clipboard=unnamed,unnamedplus
 set backspace=indent,eol,start
 set termbidi
 set statusline=%<%F\ %h%m%r%=%-14.(%l,%c%)\ %p%%
-set t_Co=256
 syntax on
 colorscheme molokai
 hi clear Conceal
