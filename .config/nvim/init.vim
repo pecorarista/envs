@@ -1,28 +1,27 @@
-set runtimepath+=~/.config/nvim/bundle/neobundle.vim/
+call plug#begin('~/.config/nvim/plugged')
 
-call neobundle#begin(expand('~/.config/nvim/bundle/'))
-
-"Vim
-NeoBundleFetch 'Shougo/neobundle.vim'
-
-NeoBundle 'haya14busa/incsearch.vim'
-NeoBundle 'junegunn/vim-easy-align'
-NeoBundle 'ntpeters/vim-better-whitespace'
-NeoBundle 'Shougo/deoplete.nvim'
-NeoBundle 'tomasr/molokai'
+Plug 'haya14busa/incsearch.vim'
+Plug 'junegunn/vim-easy-align'
+Plug 'ntpeters/vim-better-whitespace'
+Plug 'Shougo/deoplete.nvim'
+Plug 'Shougo/vimproc.vim', { 'do': 'make' }
+Plug 'scrooloose/syntastic'
+Plug 'thinca/vim-quickrun'
+Plug 'tomasr/molokai'
 
 "Ansible
-NeoBundle 'chase/vim-ansible-yaml'
+Plug 'chase/vim-ansible-yaml'
 
 "Markdown
-NeoBundle 'kannokanno/previm'
+Plug 'kannokanno/previm'
+
+"Python
+Plug 'andviro/flake8-vim'
 
 "Scala
-NeoBundle 'derekwyatt/vim-scala'
+Plug 'derekwyatt/vim-scala'
 
-call neobundle#end()
-filetype plugin indent on
-NeoBundleCheck
+call plug#end()
 
 set number
 set shortmess+=I
@@ -46,7 +45,11 @@ set backspace=indent,eol,start
 set termbidi
 set statusline=%<%F\ %h%m%r%=%-14.(%l,%c%)\ %p%%
 syntax on
-colorscheme molokai
+try
+  colorscheme molokai
+catch
+  colorscheme default
+endtry
 hi clear Conceal
 hi Normal       ctermbg=NONE
 hi Normal       guibg=NONE
@@ -61,4 +64,25 @@ nnoremap <C-e> <End>
 nnoremap <C-f> <Right>
 let g:deoplete#enable_at_startup = 1
 let g:python3_host_prog = expand('$HOME') . '/anaconda3/bin/python'
+nnoremap <buffer> <silent> <Leader>q :<C-u>QuickRun<CR>
+
+"LaTeX
+let g:quickrun_config = {}
+let g:quickrun_config = {
+  \   '_' : {
+  \     'outputter/buffer/split' : ':botright 8sp',
+  \     'outputter/buffer/close_on_empty' : 1,
+  \     'runner' : 'vimproc',
+  \   },
+  \   'tex' : {
+  \     'command' : 'latexmk',
+  \     'cmdopt' : '-pv -shell-escape',
+  \     'exec': ['%c %o %s']
+  \   },
+  \ }
+
+"Markdown
 let g:previm_open_cmd = 'google-chrome'
+
+"Python
+let g:syntastic_python_checkers = ["flake8"]

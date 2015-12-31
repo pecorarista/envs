@@ -98,14 +98,14 @@
     - name: Create ~/.config/nvim/init.vim
       command: ln -s ~/envs/.config/nvim/init.vim ~/.config/nvim/init.vim
       when: config.stat.exists == False
-    - name: Create ~/.config/nvim/bundle
+    - name: Create ~/.config/nvim/autoload
       file:
-        path: ~/.config/nvim/bundle
+        path: ~/.config/nvim/autoload
         state: directory
-    - name: Clone NeoBundle
-      git:
-        repo: "https://github.com/Shougo/neobundle.vim"
-        dest: ~/.config/nvim/bundle/neobundle.vim
+    - name: Download vim-plug
+      get_url:
+        url: "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
+        dest: ~/.config/nvim/autoload/plug.vim
     - name: Install xsel (Arch Linux)
       pacman:
         name: xsel
@@ -194,7 +194,9 @@
       when: profile.stat.exists == False
     # http://qiita.com/makisyu/items/d6b32d88cdd97b01a00f
     - name: Check if ~/bin/tmux exists
-      shell: ~/bin/tmux --version
+      stat:
+        path: ~/bin/tmux
+      register: tmux
       ignore_errors: True
       changed_when: False
       register: tmux
@@ -204,18 +206,18 @@
         dest: ~/Downloads/libevent-2.0.21-stable.tar.gz
         sha256sum: 22a530a8a5ba1cb9c080cba033206b17dacd21437762155c6d30ee6469f574f5
         force: yes
-      when: tmux|failed
+      when: tmux.stat.exists == False
     - name: Extract libevent
       unarchive:
         src: ~/Downloads/libevent-2.0.21-stable.tar.gz
         dest: ~/Library/
         copy: no
-      when: tmux|failed
+      when: tmux.stat.exists == False
     - name: Create a directory "build"
       file:
         path: ~/Library/libevent-2.0.21-stable/build
         state: directory
-      when: tmux|failed
+      when: tmux.stat.exists == False
     - name: Compile libevent
       shell: |
         ./configure --prefix="{{ ansible_env.HOME }}/Library/libevent-2.0.21-stable/build"
@@ -223,16 +225,17 @@
         make install
       args:
         chdir: ~/Library/libevent-2.0.21-stable
-      when: tmux|failed
+      when: tmux.stat.exists == False
     - name: Clone tmux
       git:
         repo: "https://github.com/tmux/tmux"
         dest: ~/Library/tmux
+      when: tmux.stat.exists == False
     - name: Create a directory "build"
       file:
         path: ~/Library/tmux/build
         state: directory
-      when: tmux|failed
+      when: tmux.stat.exists == False
     - name: Configure tmux
       shell: |
         sh ~/Library/tmux/autogen.sh
@@ -241,20 +244,20 @@
       environment:
       args:
         chdir: ~/Library/tmux
-      when: tmux|failed
+      when: tmux.stat.exists == False
     - name: Compile tmux
       shell: |
         make
         make install
       args:
         chdir: ~/Library/tmux
-      when: tmux|failed
+      when: tmux.stat.exists == False
     - name: Create ~/bin
       file:
         path: ~/bin
         state: directory
-      when: tmux|failed
+      when: tmux.stat.exists == False
     - name: Create a link to tmux
       shell: ln -s ~/Library/tmux/build/bin/tmux ~/bin/tmux
-      when: tmux|failed
+      when: tmux.stat.exists == False
 ...
