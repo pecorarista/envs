@@ -1,5 +1,0 @@
---langdef=markdown-scala-nyandoc
---regex-markdown-scala-nyandoc=/^#+ .*(def|val|var|type)[[:space:]]+([^ (\[]+)/\2/
-
---langdef=markdown-java-nyandoc
---regex-markdown-java-nyandoc=/^#+ .*[[:space:]]([a-zA-Z0-9]+(<.+>)?)\(/\1/

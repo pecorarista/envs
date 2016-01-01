@@ -51,12 +51,11 @@ catch
   colorscheme default
 endtry
 hi clear Conceal
-hi Normal       ctermbg=NONE
-hi Normal       guibg=NONE
-hi Pmenu        ctermfg=White
-hi PmenuSel     ctermfg=Red
-hi Pmenu        ctermbg=Black
-hi Special      guifg=#66D9EF guibg=bg gui=bold
+hi Normal ctermbg=NONE guibg=NONE
+hi Pmenu ctermfg=White
+hi PmenuSel ctermfg=Red
+hi Pmenu ctermbg=Black
+hi Special guifg=#66D9EF guibg=bg gui=bold
 hi CursorColumn ctermbg=Cyan
 inoremap <C-e> <End>
 inoremap <C-f> <Right>
@@ -79,6 +78,11 @@ let g:quickrun_config = {
   \     'cmdopt' : '-pv -shell-escape',
   \     'exec': ['%c %o %s']
   \   },
+  \   'jtex' : {
+  \     'command' : 'latexmk',
+  \     'cmdopt' : '-r ~/.jlatexmkrc -pv -shell-escape',
+  \     'exec': ['%c %o %s']
+  \   },
   \ }
 
 "Markdown
@@ -86,3 +90,4 @@ let g:previm_open_cmd = 'google-chrome'
 
 "Python
 let g:syntastic_python_checkers = ["flake8"]
+set listchars=tab:>-,extends:<,trail:-,eol:$
