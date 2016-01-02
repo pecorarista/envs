@@ -4,7 +4,6 @@
   connection: local
   vars:
     - ansible_python_interpreter: /usr/bin/python2
-  gather_facts: no
   tasks:
     - name: Check if "~/.latexmkrc" exists
       stat:
@@ -26,8 +25,41 @@
         state: directory
     - name: Download indent.sty
       get_url:
-        url: "https://www.ctan.org/tex-archive/macros/latex209/contrib/misc/indent.sty"
+        url: "ftp://ftp.kddilabs.jp/CTAN/macros/latex209/contrib/misc/indent.sty"
         dest: ~/texmf/tex/latex/indent.sty
         force: yes
         sha256sum: "13143b53d756bee5e222b24cca41e14c45f1ba5c9fe7cfb7f661296f9deb0472"
+    - name: Check if udline.sty exists
+      stat:
+        path: ~/texmf/tex/latex/udline.sty
+      register: udline
+    - name: Install lhasa
+      apt:
+        name: lhasa
+        state: latest
+      when: udline.stat.exists == False
+    - name: Download udline
+      get_url:
+        url: "http://homepage2.nifty.com/domae/tex/udline25.lzh"
+        dest: ~/Downloads/udline25.lzh
+        force: yes
+        sha256sum: "8a5963e7ca1e13dc1e5790178cca39acde0f285b6b6a0ecff0fd639321048fab"
+      when: udline.stat.exists == False
+    - name: Extract udline
+      shell: lha xq udline25.lzh
+      args:
+        chdir: ~/Downloads
+      when: udline.stat.exists == False
+    - name: Extract udline
+      shell: mv ~/Downloads/udline.sty ~/texmf/tex/latex/
+      args:
+        chdir: ~/Downloads
+      when: udline.stat.exists == False
+    - name: Guess encoding
+      shell: nkf -g ~/texmf/tex/latex/udline.sty
+      register: udlineenc
+      changed_when: False
+    - name: Convert udline.sty into UTF-8
+      shell: nkf -w --overwrite ~/texmf/tex/latex/udline.sty
+      when: udlineenc.stdout == "Shift_JIS"
 ...
