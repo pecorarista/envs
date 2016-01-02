@@ -1,0 +1,33 @@
+---
+# vim:ft=ansible:
+- hosts: localhost
+  connection: local
+  vars:
+    - ansible_python_interpreter: /usr/bin/python2
+  gather_facts: no
+  tasks:
+    - name: Check if "~/.latexmkrc" exists
+      stat:
+        path: ~/.latexmkrc
+      register: latexmkrc
+    - name: Create a symbolic link to "~/envs/.latexmkrc"
+      shell: ln -s ~/envs/.latexmkrc ~/.latexmkrc
+      when: latexmkrc.stat.exists == False
+    - name: Check if "~/.jlatexmkrc" exists
+      stat:
+        path: ~/.jlatexmkrc
+      register: jlatexmkrc
+    - name: Create a symbolic link to "~/envs/.jlatexmkrc"
+      shell: ln -s ~/envs/.jlatexmkrc ~/.jlatexmkrc
+      when: jlatexmkrc.stat.exists == False
+    - name: Create a directory "~/texmf/tex/latex"
+      file:
+        path: ~/texmf/tex/latex
+        state: directory
+    - name: Download indent.sty
+      get_url:
+        url: "https://www.ctan.org/tex-archive/macros/latex209/contrib/misc/indent.sty"
+        dest: ~/texmf/tex/latex/indent.sty
+        force: yes
+        sha256sum: "13143b53d756bee5e222b24cca41e14c45f1ba5c9fe7cfb7f661296f9deb0472"
+...
