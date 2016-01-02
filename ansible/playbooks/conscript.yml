@@ -1,0 +1,25 @@
+---
+# vim:ft=ansible:
+- hosts: localhost
+  connection: local
+  vars:
+    - ansible_python_interpreter: /usr/bin/python2
+  tasks:
+    - name: Create a directory "/etc/pki/tls/certs"
+      file:
+        path: /etc/pki/tls/certs
+        state: directory
+        owner: root
+        group: root
+      sudo: yes
+    - name: Check if "ca-bundle.crt" exists
+      stat:
+        path: /etc/pki/tls/certs/ca-bundle.crt
+      register: cert
+    - name: Create a symbolic link to "ca-certificates.crt"
+      shell: ln -s /etc/ssl/certs/ca-certificates.crt /etc/pki/tls/certs/ca-bundle.crt
+      sudo: yes
+      when: cert.stat.exists == False
+    - name: Run the installation script
+      shell: curl "https://raw.githubusercontent.com/n8han/conscript/master/setup.sh" | sh
+...
