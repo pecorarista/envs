@@ -1,3 +1,4 @@
+#!/usr/bin/perl
 $pdflatex = 'lualatex %O %S';
 $bibtex = 'pbibtex %O %B';
 $pdf_mode = 1;
