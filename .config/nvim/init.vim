@@ -8,9 +8,13 @@ Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 Plug 'scrooloose/syntastic'
 Plug 'thinca/vim-quickrun'
 Plug 'tomasr/molokai'
+Plug 'tyru/open-browser.vim'
 
 "Ansible
 Plug 'chase/vim-ansible-yaml'
+
+"Git
+Plug 'tpope/vim-fugitive'
 
 "Markdown
 Plug 'kannokanno/previm'
@@ -64,6 +68,7 @@ nnoremap <C-f> <Right>
 let g:deoplete#enable_at_startup = 1
 let g:python3_host_prog = expand('$HOME') . '/anaconda3/bin/python'
 nnoremap <buffer> <silent> <Leader>q :<C-u>QuickRun<CR>
+nmap gx <Plug>(openbrowser-smart-search)
 
 "LaTeX
 let g:quickrun_config = {}
@@ -77,12 +82,7 @@ let g:quickrun_config = {
   \     'command' : 'latexmk',
   \     'cmdopt' : '-pv -shell-escape',
   \     'exec': ['%c %o %s']
-  \   },
-  \   'jtex' : {
-  \     'command' : 'latexmk',
-  \     'cmdopt' : '-r ~/.jlatexmkrc -pv -shell-escape',
-  \     'exec': ['%c %o %s']
-  \   },
+  \   }
   \ }
 
 "Markdown
