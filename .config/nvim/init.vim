@@ -21,6 +21,7 @@ Plug 'kannokanno/previm'
 
 "Python
 Plug 'andviro/flake8-vim'
+Plug 'davidhalter/jedi-vim'
 
 "Scala
 Plug 'derekwyatt/vim-scala'
