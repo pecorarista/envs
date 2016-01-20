@@ -10,6 +10,9 @@ sudo apt-get install nvidia-340
 reboot
 sudo apt-get install fcitx fcitx-mozc kde-config-fcitx
 im-config -n fcitx
+echo 'export GTK_IM_MODULE=fcitx' >> ~/.profile
+echo 'export QT_IM_MODULE=fcitx' >> ~/.profile
+echo 'export XMODIFIERS="@im=fcitx"' >> ~/.profile
 sudo apt-get install tmux git
 
 # Google Chrome, Slack, Skype, Dropbox

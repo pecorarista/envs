@@ -25,6 +25,7 @@
         - cmake
         - libncurses5-dev
         - g++
+        - pkg-config
         - python-dev
         - python-pip
         - python3-dev
