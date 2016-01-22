@@ -40,6 +40,19 @@ sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 575159689BEFB442
 echo 'deb http://download.fpcomplete.com/ubuntu wily main' | sudo tee /etc/apt/sources.list.d/fpco.list
 sudo apt-get update
 sudo apt-get install stack
+stack setup
+stack install cabal-install
+stack install ghc-mod
+git clone https://github.com/belliture/ghc-mod-stack-wrapper.git ~/Library/ghc-mod-stack-wrapper
+chmod +x ~/Library/ghc-mod-stack-wrapper/linux/ghc-mod
+chmod +x ~/Library/ghc-mod-stack-wrapper/linux/ghc-modi
+ln -s ~/Library/ghc-mod-stack-wrapper/linux/ghc-mod ~/bin/ghc-mod
+ln -s ~/Library/ghc-mod-stack-wrapper/linux/ghc-modi ~/bin/ghc-modi
+
+# Node.js
+sudo apt-get install nodejs npm
+sudo npm install -g n
+sudo n stable
 ```
 
 #### Vim

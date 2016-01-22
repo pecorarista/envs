@@ -19,6 +19,11 @@ Plug 'tpope/vim-fugitive'
 "Markdown
 Plug 'kannokanno/previm'
 
+"Hakell
+Plug 'dag/vim2hs'
+Plug 'eagletmt/ghcmod-vim'
+Plug 'eagletmt/neco-ghc'
+
 "Python
 Plug 'andviro/flake8-vim'
 Plug 'davidhalter/jedi-vim'
@@ -70,6 +75,14 @@ let g:deoplete#enable_at_startup = 1
 let g:python3_host_prog = expand('$HOME') . '/anaconda3/bin/python'
 nnoremap <buffer> <silent> <Leader>q :<C-u>QuickRun<CR>
 nmap gx <Plug>(openbrowser-smart-search)
+
+"Haskell
+let g:necoghc_enable_detailed_browse=1
+let g:haskell_conceal_enumerations=0
+autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
+autocmd FileType haskell nnoremap <buffer> <silent> <Leader>g :<C-u>GhcModCheckAndLintAsync<CR>
+autocmd Filetype haskell nnoremap <silent> <Leader>t :<C-u>GhcModType<CR>
+autocmd FileType haskell nnoremap <silent> <Leader>c :<C-u>GhcModTypeClear<CR>
 
 "LaTeX
 let g:quickrun_config = {}
