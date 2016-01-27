@@ -44,7 +44,7 @@ set expandtab
 set nofoldenable
 autocmd FileType make setlocal noexpandtab
 augroup filetypedetect
-  au BufNewFile,BufRead *.hamlet,*.scala.html,*.bib,*.js,*.coffee setlocal tabstop=2 shiftwidth=2 softtabstop=2
+  au BufNewFile,BufRead *.bib,*.coffee,*.css,*.hamlet,*.js,*.scala.html setlocal tabstop=2 shiftwidth=2 softtabstop=2
 augroup END
 set nobackup
 set nowritebackup
