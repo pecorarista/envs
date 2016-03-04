@@ -4,4 +4,5 @@ $bibtex = 'upbibtex %O %B';
 $pdf_mode = 1;
 $bibtex_use = 2;
 $pdf_previewer = 'okular --unique';
-$clean_ext .= '%R.snm %R.ltjruby %R.nav'
+@default_excluded_files = ('hiraminpron-w3.luc', 'hirakakupron-w6.luc');
+$clean_ext .= '%R.ltjruby %R.nav %R.snm';

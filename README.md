@@ -43,11 +43,6 @@ sudo apt-get install stack
 stack setup
 stack install cabal-install
 stack install ghc-mod
-git clone https://github.com/belliture/ghc-mod-stack-wrapper.git ~/Library/ghc-mod-stack-wrapper
-chmod +x ~/Library/ghc-mod-stack-wrapper/linux/ghc-mod
-chmod +x ~/Library/ghc-mod-stack-wrapper/linux/ghc-modi
-ln -s ~/Library/ghc-mod-stack-wrapper/linux/ghc-mod ~/bin/ghc-mod
-ln -s ~/Library/ghc-mod-stack-wrapper/linux/ghc-modi ~/bin/ghc-modi
 
 # Node.js
 sudo apt-get install nodejs npm
