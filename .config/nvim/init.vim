@@ -9,6 +9,7 @@ Plug 'scrooloose/syntastic'
 Plug 'thinca/vim-quickrun'
 Plug 'tomasr/molokai'
 Plug 'tyru/open-browser.vim'
+Plug 'davidhalter/jedi-vim'
 
 "Ansible
 Plug 'chase/vim-ansible-yaml'
@@ -36,7 +37,9 @@ set autoindent
 set smartindent
 set expandtab
 set nofoldenable
-autocmd FileType make setlocal noexpandtab
+autocmd FileType make
+    \ setlocal noexpandtab |
+    \ setlocal list
 augroup filetypedetect
   au BufNewFile,BufRead *.hamlet,*.scala.html,*.bib,*.js,*.coffee setlocal tabstop=2 shiftwidth=2 softtabstop=2
 augroup END
