@@ -9,14 +9,14 @@ anaconda: anaconda2 anaconda3
 
 anaconda2 anaconda3:
 ifeq (,$(ANACONDA_VERSION))
-	(md5sum --check $@.md5) || (rm -f $(ANACONDA_SCRIPT); wget $(ANACONDA_URL))
+	cd anaconda; (md5sum --check $@.md5) || (rm -f $(ANACONDA_SCRIPT); wget $(ANACONDA_URL))
 	@if [ ! -d $(ANACONDA_HOME) ]; \
 	then \
-		bash $(ANACONDA_SCRIPT) -b \
+		bash anaconda/$(ANACONDA_SCRIPT) -b \
 	else \
 		:; \
 	fi
 else
 	@echo "$(ANACONDA_VERSION) is already installed."
 endif
-	$(ANACONDA_HOME)/bin/conda install --file=$@-requirements.txt -y
+	$(ANACONDA_HOME)/bin/conda install --file=anaconda/$@-requirements.txt -y
