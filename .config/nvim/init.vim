@@ -29,6 +29,9 @@ Plug 'eagletmt/neco-ghc'
 Plug 'andviro/flake8-vim'
 Plug 'davidhalter/jedi-vim'
 
+"Rust
+Plug 'rust-lang/rust.vim'
+
 "Scala
 Plug 'derekwyatt/vim-scala'
 
