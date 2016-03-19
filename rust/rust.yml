@@ -1,0 +1,72 @@
+---
+# vim:ft=ansible:
+- hosts: localhost
+  connection: local
+  vars:
+    - ansible_python_interpreter: /usr/bin/python2
+    - rust_url: "https://static.rust-lang.org/dist/rust-1.7.0-x86_64-unknown-linux-gnu.tar.gz"
+    - rust_install_prefix: /usr/local
+  tasks:
+    - name: Check if Rust is installed
+      stat:
+        path: "{{ rust_install_prefix }}/bin/rustc"
+      register: rustc
+      ignore_errors: True
+      changed_when: False
+    - name: Check the version of installed Rust
+      shell: "{{ rust_install_prefix }}/bin/rustc --version | sed -e 's/ (.*//'"
+      register: rustc_version
+      ignore_errors: True
+      changed_when: False
+      when: rustc.stat.exists == True
+    - name: Check if it is the latest version
+      shell: test "{{ rustc_version.stdout }}" = "{{ rust_url | basename | regex_replace('-x86.*', '') | replace('rust', 'rustc') | replace('-', ' ') }}"
+      register: is_latest
+      ignore_errors: True
+      changed_when: False
+      when: rustc.stat.exists == True
+    - name: Uninstall the older version
+      shell: bash "{{ rust_install_prefix }}/lib/rustlib/uninstall.sh"
+      become: yes
+      when: is_latest|failed
+    - name: Download installer
+      get_url:
+        url: "{{ rust_url }}"
+        dest: "{{ ansible_env.HOME }}/envs/rust/"
+        checksum: "sha256:d36634bd8df3d7565487b70af03dfda1c43c635cd6f2993f47cd61fda00d890a"
+      when: (rustc.stat.exists == False) or is_latest|failed
+    - name: Check if the older installer exists
+      stat:
+        path: "{{ ansible_env.HOME }}/envs/rust/{{ rust_url | basename | replace('.tar.gz', '') }}"
+      register: old_installer
+      when: (rustc.stat.exists == False) or is_latest|failed
+    - name: Delete the older installer
+      file:
+        path: "{{ ansible_env.HOME }}/envs/rust/{{ rust_url | basename | replace('.tar.gz', '') }}"
+        state: absent
+      when: ((rustc.stat.exists == False) or is_latest|failed) and old_installer.stat.exists == True
+    - name: Extract installer
+      unarchive:
+        src: "{{ ansible_env.HOME }}/envs/rust/{{ rust_url | basename }}"
+        dest: "{{ ansible_env.HOME }}/envs/rust"
+        copy: no
+      when: (rustc.stat.exists == False) or is_latest|failed
+    - name: Install Rust
+      shell: bash install.sh --prefix={{ rust_install_prefix }}
+      args:
+        chdir: "{{ ansible_env.HOME }}/envs/rust/{{ rust_url | basename | replace('.tar.gz', '') }}"
+      become: yes
+      when: (rustc.stat.exists == False) or is_latest|failed
+    - name: Add RUST_HOME in "~/.profile"
+      lineinfile:
+        dest: ~/.profile
+        state: present
+        line: "export RUST_HOME={{ rust_install_prefix }}"
+      when: rustc.stat.exists == False
+    - name: Edit PATH in "~/.profile"
+      lineinfile:
+        dest: "{{ ansible_env.HOME }}/.profile"
+        state: present
+        line: "export PATH=$RUST_HOME/bin:$PATH"
+      when: rustc.stat.exists == False
+...
