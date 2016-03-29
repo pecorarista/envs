@@ -1,3 +1,4 @@
 anaconda/Anaconda*.sh
 rust/
 !rust/rust.yml
+*.retry

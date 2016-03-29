@@ -1,0 +1,37 @@
+---
+# vim:ft=ansible:
+# Confirmed to work on Ubuntu 14.04 (2016-03-29)
+- name: Check if Oracle Java is installed
+  shell: update-java-alternatives -l | grep java-8-oracle
+  register: java
+  ignore_errors: True
+  changed_when: False
+  become: yes
+- name: Check if repository "ppa:webupd8team/java" is added
+  stat:
+    path: /etc/apt/sources.list.d/webupd8team-java-trusty.list
+  register: webupd8team
+  become: yes
+- name: Add repository "ppa:webupd8team/java"
+  shell: echo "" | sudo apt-add-repository "ppa:webupd8team/java"
+  when: java|failed and webupd8team.stat.exists == False
+  become: yes
+- name: Accept Oracle License
+  debconf:
+    name: "oracle-java8-installer"
+    question: "shared/accepted-oracle-license-v1-1"
+    value: "true"
+    vtype: "select"
+  become: yes
+  when: java|failed
+- name: Install Java
+  apt:
+    pkg: "{{ item }}"
+    state: latest
+    update_cache: yes
+  with_items:
+    - "oracle-java8-installer"
+    - "oracle-java8-set-default"
+  become: yes
+  when: java|failed
+...

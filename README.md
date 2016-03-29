@@ -16,18 +16,6 @@ sudo apt-get install tmux git
 # Google Chrome, Slack, Skype, Dropbox
 sudo apt-get install sni-qt:i386
 
-# Java
-sudo add-apt-repository ppa:webupd8team/java
-sudo apt-get update
-sudo apt-get install oracle-java8-installer
-sudo update-alternatives --config java
-
-# Scala
-echo "deb https://dl.bintray.com/sbt/debian /" | sudo tee -a /etc/apt/sources.list.d/sbt.list
-sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 642AC823
-sudo apt-get update
-sudo apt-get install sbt
-
 # TeXLive
 sudo apt-get install texlive-full xzdec
 tlmgr init-usertree
@@ -46,9 +34,4 @@ chmod +x ~/Library/ghc-mod-stack-wrapper/linux/ghc-mod
 chmod +x ~/Library/ghc-mod-stack-wrapper/linux/ghc-modi
 ln -s ~/Library/ghc-mod-stack-wrapper/linux/ghc-mod ~/bin/ghc-mod
 ln -s ~/Library/ghc-mod-stack-wrapper/linux/ghc-modi ~/bin/ghc-modi
-
-# Node.js
-sudo apt-get install nodejs npm
-sudo npm install -g n
-sudo n stable
 ```
