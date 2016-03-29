@@ -1,0 +1,29 @@
+---
+# vim:ft=ansible:
+# Installs sbt
+- name: Check if sbt is installed
+  shell: "which sbt"
+  register: sbt
+  ignore_errors: True
+  changed_when: False
+- name: Add a repository for sbt
+  lineinfile:
+    dest: /etc/apt/sources.list.d/sbt.list
+    create: yes
+    line: "deb https://dl.bintray.com/sbt/debian /"
+  become: yes
+  when: sbt|failed
+- name: add a key for sbt
+  apt_key:
+    keyserver: keyserver.ubuntu.com
+    id: 642AC823
+  become: yes
+  when: sbt|failed
+- name: Install Java
+  apt:
+    pkg: sbt
+    state: latest
+    update_cache: yes
+  become: yes
+  when: sbt|failed
+...
