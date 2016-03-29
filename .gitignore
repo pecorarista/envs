@@ -1,3 +1,4 @@
 anaconda/Anaconda*.sh
-roles/rust/files/rust-1.7.0-x86_64-unknown-linux-gnu.tar.gz
+roles/rust/files/*
+!roles/rust/files/.placeholder
 *.retry

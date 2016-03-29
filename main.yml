@@ -6,9 +6,10 @@
     - ansible_python_interpreter: "/usr/bin/python2"
     - become: yes
   roles:
-    - "java"
-    - "sbt"
-    - "opencv"
-    - "node"
+    - java
+    - sbt
+    - opencv
+    - node
+    - rust
 #   - "mongodb"
 ...
