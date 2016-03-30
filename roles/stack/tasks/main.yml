@@ -1,0 +1,29 @@
+---
+# vim:ft=ansible:
+# Installs sbt
+- name: Check if stack is installed
+  shell: "/usr/bin/stack --version"
+  register: stack
+  ignore_errors: True
+  changed_when: False
+- name: Add a repository for sbt
+  lineinfile:
+    dest: /etc/apt/sources.list.d/fpco.list
+    create: yes
+    line: "deb http://download.fpcomplete.com/ubuntu wily main"
+  become: yes
+  when: stack|failed
+- name: add a key for sbt
+  apt_key:
+    keyserver: keyserver.ubuntu.com
+    id: 575159689BEFB442
+  become: yes
+  when: stack|failed
+- name: Install stack
+  apt:
+    pkg: stack
+    state: latest
+    update_cache: yes
+  become: yes
+  when: stack|failed
+...
