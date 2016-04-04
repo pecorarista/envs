@@ -61,6 +61,7 @@ set backspace=indent,eol,start
 set termbidi
 set statusline=%<%F\ %h%m%r%=%-14.(%l,%c%)\ %p%%
 syntax on
+set t_Co=256
 try
   colorscheme molokai
 catch
