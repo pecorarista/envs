@@ -1,10 +1,10 @@
-call plug#begin('~/.config/nvim/plugged')
+call plug#begin('~/.vim/plugged')
 
 Plug 'haya14busa/incsearch.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'ntpeters/vim-better-whitespace'
-Plug 'Shougo/deoplete.nvim'
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
+Plug 'Shougo/neocomplete.vim'
 Plug 'scrooloose/syntastic'
 Plug 'thinca/vim-quickrun'
 Plug 'tomasr/molokai'
@@ -77,10 +77,8 @@ inoremap <C-e> <End>
 inoremap <C-f> <Right>
 nnoremap <C-e> <End>
 nnoremap <C-f> <Right>
-let g:deoplete#enable_at_startup = 1
-let g:python3_host_prog = expand('$HOME') . '/anaconda3/bin/python'
 nnoremap <buffer> <silent> <Leader>q :<C-u>QuickRun<CR>
-nmap gx <Plug>(openbrowser-smart-search)
+let g:neocomplete#enable_at_startup = 1
 
 "Haskell
 let g:necoghc_enable_detailed_browse=1

@@ -5,7 +5,6 @@ then
     yum --enablerepo=epel update -y
     yum --enablerepo=epel install ansible
     yum install git
-fi
 elif [ -f /etc/debian_version ]
 then
     apt-get update
