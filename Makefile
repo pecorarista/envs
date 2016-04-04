@@ -1,11 +1,11 @@
-.PHONY: anaconda anaconda2 anaconda3 nltk stack
+.PHONY: anaconda anaconda2 anaconda3 nltk stack texlive
 
 ANACONDA_HOME = $(HOME)/$@
 ANACONDA_SCRIPT = $(shell echo "$@-2.5.0-Linux-x86_64.sh" | sed -e 's/^./\U&/')
 ANACONDA_URL = http://repo.continuum.io/archive/$(ANACONDA_SCRIPT)
 ANACONDA_VERSION = $(shell $(ANACONDA_HOME)/bin/python -c "from __future__ import print_function; import sys; version = sys.version.split('|')[1]; print(version if version == 'Anaconda 2.5.0 (64-bit)' else '');" 2> /dev/null)
 
-all: anaconda stack
+all: anaconda stack texlive
 anaconda: anaconda2 anaconda3 nltk
 
 anaconda2 anaconda3:
@@ -34,3 +34,7 @@ stack:
 	chmod +x $(HOME)/.ghc-mod-stack-wrapper/linux/ghc-modi
 	ln -sf $(HOME)/.ghc-mod-stack-wrapper/linux/ghc-mod $(HOME)/bin/ghc-mod
 	ln -sf $(HOME)/.ghc-mod-stack-wrapper/linux/ghc-modi $(HOME)/bin/ghc-modi
+
+texlive:
+	tlmgr init-usertree
+	tlmgr update --self

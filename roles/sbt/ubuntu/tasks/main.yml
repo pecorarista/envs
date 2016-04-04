@@ -19,7 +19,7 @@
     id: 642AC823
   become: yes
   when: sbt|failed
-- name: Install Java
+- name: Install sbt
   apt:
     pkg: sbt
     state: latest
