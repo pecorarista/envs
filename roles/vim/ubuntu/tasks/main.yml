@@ -1,5 +1,4 @@
 ---
-# vim:ft=ansible:
 - name: Install Vim
   apt:
     pkg: "vim-gnome"

@@ -1,7 +1,4 @@
 ---
-# vim:ft=ansible:
-# Installs OpenCV
-# Confirmed to work on Ubuntu 14.04 (2016-03-29)
 - name: Check if OpenCV is installed
   shell: /sbin/ldconfig -p | grep -i opencv
   become: yes

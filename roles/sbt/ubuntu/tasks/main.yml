@@ -1,6 +1,4 @@
 ---
-# vim:ft=ansible:
-# Installs sbt
 - name: Check if sbt is installed
   shell: "which sbt"
   register: sbt

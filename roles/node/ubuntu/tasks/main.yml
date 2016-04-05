@@ -1,6 +1,4 @@
 ---
-# vim:ft=ansible:
-# Install Node.js and related packages
 - name: Check if "n" is installed
   shell: "/usr/local/bin/n --version"
   register: node

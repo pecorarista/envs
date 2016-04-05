@@ -1,6 +1,4 @@
 ---
-# vim:ft=ansible:
-# Installs sbt
 - name: Check if stack is installed
   shell: "/usr/bin/stack --version"
   register: stack

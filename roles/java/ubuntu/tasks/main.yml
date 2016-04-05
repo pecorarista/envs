@@ -1,6 +1,4 @@
 ---
-# vim:ft=ansible:
-# Confirmed to work on Ubuntu 14.04 (2016-03-29)
 - name: Check if Oracle Java is installed
   shell: update-java-alternatives -l | grep java-8-oracle
   register: java

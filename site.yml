@@ -1,5 +1,4 @@
 ---
-# vim:ft=ansible:
 - hosts: localhost
   connection: local
   vars:

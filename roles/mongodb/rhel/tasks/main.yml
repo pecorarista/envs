@@ -1,6 +1,4 @@
 ---
-# vim:ft=ansible:
-# For RHEL7
 - name: Copy mongodb-org-3.2.repo
   copy:
     src: ../conf/mongodb-org-3.2.repo
