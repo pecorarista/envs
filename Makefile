@@ -1,11 +1,11 @@
-.PHONY: anaconda anaconda2 anaconda3 nltk stack texlive
+.PHONY: vim anaconda anaconda2 anaconda3 nltk stack texlive
 
 ANACONDA_HOME = $(HOME)/$@
 ANACONDA_SCRIPT = $(shell echo "$@-2.5.0-Linux-x86_64.sh" | sed -e 's/^./\U&/')
 ANACONDA_URL = http://repo.continuum.io/archive/$(ANACONDA_SCRIPT)
 ANACONDA_VERSION = $(shell $(ANACONDA_HOME)/bin/python -c "from __future__ import print_function; import sys; version = sys.version.split('|')[1]; print(version if version == 'Anaconda 2.5.0 (64-bit)' else '');" 2> /dev/null)
 
-all: anaconda stack texlive
+all: vim anaconda stack texlive
 anaconda: anaconda2 anaconda3 nltk
 
 anaconda2 anaconda3:
@@ -13,7 +13,7 @@ ifeq (,$(ANACONDA_VERSION))
 	cd anaconda; (md5sum --check $@.md5) || (rm -f $(ANACONDA_SCRIPT); wget $(ANACONDA_URL))
 	@if [ ! -d $(ANACONDA_HOME) ]; \
 	then \
-		bash anaconda/$(ANACONDA_SCRIPT) -b \
+		bash anaconda/$(ANACONDA_SCRIPT) -b; \
 	else \
 		:; \
 	fi
@@ -38,3 +38,18 @@ stack:
 texlive:
 	tlmgr init-usertree
 	tlmgr update --self
+
+vim:
+	@if [ -f /etc/debian_version ] && [ ! -f $(HOME)/.curlrc ]; \
+	then \
+		echo "cacert=/etc/ssl/certs/ca-certificates.crt" > $(HOME)/.curlrc; \
+	fi
+	@if [ ! -f $(HOME)/.vim/autoload/plug.vim ]; \
+	then \
+		curl -fLo $(HOME)/.vim/autoload/plug.vim --create-dirs \
+			https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim; \
+	fi
+	@if [ ! -L $(HOME)/.vimrc ]; \
+	then \
+		ln -s $(curl)/.vimrc $(HOME)/.vimrc; \
+	fi
