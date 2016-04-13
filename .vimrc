@@ -46,12 +46,17 @@ set autoindent
 set smartindent
 set expandtab
 set nofoldenable
+set foldmethod=manual
 autocmd FileType make
-    \ setlocal noexpandtab |
-    \ setlocal list
-augroup filetypedetect
-  au BufNewFile,BufRead *.bib,*.coffee,*.css,*.hamlet,*.js,*.scala.html setlocal tabstop=2 shiftwidth=2 softtabstop=2
-augroup END
+  \ setlocal noexpandtab |
+  \ setlocal list
+autocmd BufNewFile,BufRead *.tsv
+  \ setlocal noexpandtab |
+  \ setlocal list
+autocmd BufNewFile,BufRead *.bib,*.coffee,*.css,*.hamlet,*.js,*.scala.html
+  \ setlocal tabstop=2 |
+  \ setlocal shiftwidth=2
+  \ setlocal softtabstop=2
 set nobackup
 set nowritebackup
 set noswapfile
@@ -85,6 +90,7 @@ let g:neocomplete#enable_at_startup = 1
 let g:necoghc_enable_detailed_browse=1
 let g:haskell_conceal_enumerations=0
 autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
+autocmd FileType haskell setlocal foldmethod=manual
 autocmd FileType haskell nnoremap <buffer> <silent> <Leader>g :<C-u>GhcModCheckAndLintAsync<CR>
 autocmd Filetype haskell nnoremap <silent> <Leader>t :<C-u>GhcModType<CR>
 autocmd FileType haskell nnoremap <silent> <Leader>c :<C-u>GhcModTypeClear<CR>
