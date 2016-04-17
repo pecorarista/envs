@@ -55,7 +55,7 @@ autocmd BufNewFile,BufRead *.tsv
   \ setlocal list
 autocmd BufNewFile,BufRead *.bib,*.coffee,*.css,*.hamlet,*.js,*.scala.html
   \ setlocal tabstop=2 |
-  \ setlocal shiftwidth=2
+  \ setlocal shiftwidth=2 |
   \ setlocal softtabstop=2
 set nobackup
 set nowritebackup
