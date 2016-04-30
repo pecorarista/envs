@@ -1,6 +1,6 @@
 if has('nvim')
   let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-  let g:python3_host_prog = expand('$HOME') . '/anaconda3/bin/python3'
+  let g:python3_host_prog = expand('$ANACONDA3_HOME') . '/bin/python3'
   function! DoRemote(arg)
     UpdateRemotePlugins
   endfunction

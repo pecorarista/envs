@@ -1,0 +1,2 @@
+alias 'vi'='nvim'
+alias 'py'="source $ANACONDA_HOME/bin/activate root"
