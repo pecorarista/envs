@@ -1,10 +1,24 @@
+if has('nvim')
+  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+  let g:python3_host_prog = expand('$HOME') . '/anaconda3/bin/python3'
+  function! DoRemote(arg)
+    UpdateRemotePlugins
+  endfunction
+endif
+
 call plug#begin('~/.vim/plugged')
 
 Plug 'haya14busa/incsearch.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
-Plug 'Shougo/neocomplete.vim'
+
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
+else
+  Plug 'Shougo/neocomplete.vim'
+endif
+
 Plug 'scrooloose/syntastic'
 Plug 'thinca/vim-quickrun'
 Plug 'tomasr/molokai'
@@ -84,11 +98,16 @@ inoremap <C-f> <Right>
 nnoremap <C-e> <End>
 nnoremap <C-f> <Right>
 nnoremap <buffer> <silent> <Leader>q :<C-u>QuickRun<CR>
-let g:neocomplete#enable_at_startup = 1
+
+if has('nvim')
+  let g:deoplete#enable_at_startup = 1
+else
+  let g:neocomplete#enable_at_startup = 1
+endif
 
 "Haskell
-let g:necoghc_enable_detailed_browse=1
-let g:haskell_conceal_enumerations=0
+let g:necoghc_enable_detailed_browse = 1
+let g:haskell_conceal_enumerations = 0
 autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
 autocmd FileType haskell setlocal foldmethod=manual
 autocmd FileType haskell nnoremap <buffer> <silent> <Leader>g :<C-u>GhcModCheckAndLintAsync<CR>
