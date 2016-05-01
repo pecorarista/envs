@@ -1,11 +1,3 @@
-if has('nvim')
-  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-  let g:python3_host_prog = expand('$ANACONDA3_HOME') . '/bin/python3'
-  function! DoRemote(arg)
-    UpdateRemotePlugins
-  endfunction
-endif
-
 call plug#begin('~/.vim/plugged')
 
 Plug 'haya14busa/incsearch.vim'
@@ -14,6 +6,10 @@ Plug 'ntpeters/vim-better-whitespace'
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 
 if has('nvim')
+  let g:python3_host_prog = expand('$ANACONDA_HOME') . '/bin/python3'
+  function! DoRemote(arg)
+    UpdateRemotePlugins
+  endfunction
   Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
 else
   Plug 'Shougo/neocomplete.vim'
@@ -100,6 +96,7 @@ nnoremap <C-f> <Right>
 nnoremap <buffer> <silent> <Leader>q :<C-u>QuickRun<CR>
 
 if has('nvim')
+  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
   let g:deoplete#enable_at_startup = 1
 else
   let g:neocomplete#enable_at_startup = 1
