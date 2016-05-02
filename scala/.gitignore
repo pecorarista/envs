@@ -1,4 +1,10 @@
 .idea/
 project/target/
+project/project/
 target/
 *.iml
+.project
+.cache-main
+.classpath
+.settings
+bin

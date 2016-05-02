@@ -1,3 +1,5 @@
+- vim-X11
+
 [google-chrome]
 name=google-chrome - \$basearch
 baseurl=http://dl.google.com/linux/chrome/rpm/stable/\$basearch
@@ -61,7 +63,3 @@ make anaconda2
 make anaconda3
 make nltk
 make stack
-
-dnf copr enable dperson/neovim
-
-- neovim

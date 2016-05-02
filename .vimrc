@@ -4,16 +4,7 @@ Plug 'haya14busa/incsearch.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
-
-if has('nvim')
-  let g:python3_host_prog = expand('$ANACONDA_HOME') . '/bin/python3'
-  function! DoRemote(arg)
-    UpdateRemotePlugins
-  endfunction
-  Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
-else
-  Plug 'Shougo/neocomplete.vim'
-endif
+Plug 'Shougo/neocomplete.vim'
 
 Plug 'scrooloose/syntastic'
 Plug 'thinca/vim-quickrun'
@@ -44,6 +35,7 @@ Plug 'rust-lang/rust.vim'
 
 "Scala
 Plug 'derekwyatt/vim-scala'
+Plug 'derekwyatt/vim-sbt'
 
 call plug#end()
 
@@ -63,7 +55,7 @@ autocmd FileType make
 autocmd BufNewFile,BufRead *.tsv
   \ setlocal noexpandtab |
   \ setlocal list
-autocmd BufNewFile,BufRead *.bib,*.coffee,*.css,*.hamlet,*.js,*.scala.html
+autocmd BufNewFile,BufRead *.bib,*.coffee,*.css,*.hamlet,*.js,*.scala.html,.vimrc
   \ setlocal tabstop=2 |
   \ setlocal shiftwidth=2 |
   \ setlocal softtabstop=2
@@ -94,13 +86,7 @@ inoremap <C-f> <Right>
 nnoremap <C-e> <End>
 nnoremap <C-f> <Right>
 nnoremap <buffer> <silent> <Leader>q :<C-u>QuickRun<CR>
-
-if has('nvim')
-  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-  let g:deoplete#enable_at_startup = 1
-else
-  let g:neocomplete#enable_at_startup = 1
-endif
+let g:neocomplete#enable_at_startup = 1
 
 "Haskell
 let g:necoghc_enable_detailed_browse = 1
@@ -110,6 +96,13 @@ autocmd FileType haskell setlocal foldmethod=manual
 autocmd FileType haskell nnoremap <buffer> <silent> <Leader>g :<C-u>GhcModCheckAndLintAsync<CR>
 autocmd Filetype haskell nnoremap <silent> <Leader>t :<C-u>GhcModType<CR>
 autocmd FileType haskell nnoremap <silent> <Leader>c :<C-u>GhcModTypeClear<CR>
+
+"Java
+let g:EclimCompletionMethod = "omnifunc"
+if !exists('g:neocomplete#force_omni_input_patterns')
+  let g:neocomplete#force_omni_input_patterns = {}
+endif
+let g:neocomplete#force_omni_input_patterns.java = '\%(\h\w*\|)\)\.\w*'
 
 "LaTeX
 let g:quickrun_config = {}
@@ -132,3 +125,8 @@ let g:previm_open_cmd = 'google-chrome'
 "Python
 let g:syntastic_python_checkers = ["flake8"]
 set listchars=tab:>-,extends:<,trail:-,eol:$
+
+"Scala
+"Be sure to initialize before using eclim by :ProjectCreate . -n scala
+let g:syntastic_ignore_files = ['\m\.sbt$']
+let g:neocomplete#force_omni_input_patterns.scala = '\%(\h\w*\|)\)\.\w*'
