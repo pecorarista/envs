@@ -27,7 +27,7 @@ object Anaconda {
     } else false
   }
 
-  def install(prefix: String, version: Int, update: Boolean = false, downloadNLTK: Boolean = true): Unit = {
+  def install(prefix: String, version: Int): Unit = {
 
     require(version == 2 || version == 3)
 
