@@ -43,8 +43,7 @@ object Anaconda {
       val url = new URL(config.getString(s"anacondas.anaconda$version.installer.url"))
 
       val dir = new File(s"$prefix/.install")
-      val filename = filenameOf(url.getFile)
-      val installer = new File(dir.getPath + "/" + filename)
+      val installer = new File(dir.getPath + "/" + filenameOf(url.getFile))
 
       val expectedMD5Hash = config.getString(s"anacondas.anaconda$version.installer.md5")
 
@@ -53,21 +52,13 @@ object Anaconda {
       if (!hasInstaller) {
         if (!dir.exists) dir.mkdirs()
         println("Downloading " + installer.getName)
-        url #> installer !!
+        url #> installer !
       }
 
       println("Installing " + installer.getName)
       if (!python.exists) {
         s"bash ${installer.getPath()} -b -p $anacondaHome" !
       }
-    }
-
-    if (update) {
-      s"$anacondaHome/bin/conda update --prefix=$anacondaHome --yes anaconda" !
-    }
-
-    if (downloadNLTK) {
-      "bash install.py %s".format(anacondaHome) !
     }
 
   }

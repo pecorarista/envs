@@ -22,6 +22,7 @@ then
     echo "Usage: anaconda.sh -p <installation-root> -v <2 or 3>"
     exit 1
 fi
+mkdir -p "$prefix"
 working_dir="$(pwd)"
 cd scala; \
     sbt -Dconfig.file=$working_dir/anaconda.conf "run --prefix=$prefix --version=$version"; \
