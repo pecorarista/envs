@@ -102,7 +102,6 @@ let g:EclimCompletionMethod = "omnifunc"
 if !exists('g:neocomplete#force_omni_input_patterns')
   let g:neocomplete#force_omni_input_patterns = {}
 endif
-let g:neocomplete#force_omni_input_patterns.java = '\%(\h\w*\|)\)\.\w*'
 
 "LaTeX
 let g:quickrun_config = {}
@@ -129,4 +128,3 @@ set listchars=tab:>-,extends:<,trail:-,eol:$
 "Scala
 "Be sure to initialize before using eclim by :ProjectCreate . -n scala
 let g:syntastic_ignore_files = ['\m\.sbt$']
-let g:neocomplete#force_omni_input_patterns.scala = '\%(\h\w*\|)\)\.\w*'
