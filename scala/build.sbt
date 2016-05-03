@@ -11,3 +11,5 @@ sbtVersion := "0.13.11"
 scalacOptions ++= Seq("-deprecation", "-feature", "-unchecked", "-Xlint", "-Ywarn-unused-import")
 
 scalacOptions in (Compile, console) ~= (_ filterNot (_ == "-Ywarn-unused-import"))
+
+libraryDependencies += "com.typesafe" %  "config" % "1.3.0"

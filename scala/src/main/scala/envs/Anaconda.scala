@@ -7,40 +7,68 @@ import scala.language.postfixOps
 
 import sys.process._
 
+import com.typesafe.config.ConfigFactory
+
 import envs.MD5._
 
 object Anaconda {
 
-  def install(prefix: String, version: Int): Unit = {
+  private def filenameOf(path: String) = {
+    val f = new File(path)
+    f.getName
+  }
+
+  private def versionCheck(python: File, versionMessage: String): Boolean = {
+    if (python.exists) {
+      val stdout = new StringBuilder
+      val stderr = new StringBuilder
+      (python.getPath + " --version") ! ProcessLogger(stdout append _, stderr append _)
+      stderr.toString.trim == versionMessage
+    } else false
+  }
+
+  def install(prefix: String, version: Int, update: Boolean = false, downloadNLTK: Boolean = true): Unit = {
 
     require(version == 2 || version == 3)
 
-    val versionMessage = if (version == 2) "Python 2.7.11 :: Anaconda custom (64-bit)" else "Python 3.5.1 :: Anaconda custom (64-bit)"
+    val config = ConfigFactory.load()
 
-    val python = new File(s"$prefix/anaconda${version.toString}/bin/python")
-    if (python.exists) {
-      val ignore = (s: String) => ""
-      var stderr = ""
-      prefix + "/bin/python --version" ! ProcessLogger(ignore(_), stderr + _)
-      if (stderr == versionMessage) return // scalastyle:ignore
+    val anacondaHome = s"$prefix/anaconda$version"
+    val python = new File(s"$anacondaHome/bin/python")
+    val versionMessage = config.getString(s"anacondas.anaconda$version.version")
+
+    if (versionCheck(python, versionMessage)) {
+      println(s""""$versionMessage" already exists at $anacondaHome""")
+    } else {
+      val url = new URL(config.getString(s"anacondas.anaconda$version.installer.url"))
+
+      val dir = new File(s"$prefix/.install")
+      val filename = filenameOf(url.getFile)
+      val installer = new File(dir.getPath + "/" + filename)
+
+      val expectedMD5Hash = config.getString(s"anacondas.anaconda$version.installer.md5")
+
+      val hasInstaller = if (installer.exists) installer.md5 == expectedMD5Hash else false
+
+      if (!hasInstaller) {
+        if (!dir.exists) dir.mkdirs()
+        println("Downloading " + installer.getName)
+        url #> installer !!
+      }
+
+      println("Installing " + installer.getName)
+      if (!python.exists) {
+        s"bash ${installer.getPath()} -b -p $anacondaHome" !
+      }
     }
 
-    val installDir = new File(s"$prefix/.install")
-    val installer = new File(s"${installDir.getPath()}/Anaconda${version}-4.0.0-Linux-x86_64.sh")
-    val url = """http://repo.continuum.io/archive/""" + installer.getName()
-
-    val expectedMD5Hash = if (version == 2) "31ed3ef07435d7068e1e03be49381b13" else "546d1f02597587c685fa890c1d713b51"
-
-    val hasInstaller = if (installer.exists) installer.md5 == expectedMD5Hash else false
-
-    if (!hasInstaller) {
-      installDir.mkdirs()
-      println(s"Downloading ${installer.getName()}")
-      new URL(url) #> new File(s"${installDir.getPath}/${installer.getName()}") !!
+    if (update) {
+      s"$anacondaHome/bin/conda update --prefix=$anacondaHome --yes anaconda" !
     }
 
-    println(s"Installing ${installer.getName()}")
-    s"bash ${installer.getPath()} -b -p $prefix/anaconda$version" !
+    if (downloadNLTK) {
+      "bash install.py %s".format(anacondaHome) !
+    }
 
   }
 
