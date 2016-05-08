@@ -1,3 +1,2 @@
-alias vi='gvim -v'
 alias py="source $ANACONDA_HOME/bin/activate root"
 alias depy="source deactivate"
