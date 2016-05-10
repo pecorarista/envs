@@ -1,5 +1,7 @@
 .PHONY: stack
 
+export PATH := $(HOME)/.local/bin:$(PATH)
+
 stack:
 	stack setup
 	stack install cabal-install
