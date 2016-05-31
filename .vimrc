@@ -10,7 +10,6 @@ Plug 'scrooloose/syntastic'
 Plug 'thinca/vim-quickrun'
 Plug 'tomasr/molokai'
 Plug 'tyru/open-browser.vim'
-Plug 'davidhalter/jedi-vim'
 
 "Ansible
 Plug 'chase/vim-ansible-yaml'
@@ -75,7 +74,7 @@ catch
   colorscheme default
 endtry
 hi clear Conceal
-hi Normal ctermbg=NONE guibg=NONE
+hi Normal ctermbg=NONE guibg=Black
 hi Pmenu ctermfg=White
 hi PmenuSel ctermfg=Red
 hi Pmenu ctermbg=Black
@@ -85,6 +84,7 @@ inoremap <C-e> <End>
 inoremap <C-f> <Right>
 nnoremap <C-e> <End>
 nnoremap <C-f> <Right>
+inoremap <C-`> <Nop>
 nnoremap <buffer> <silent> <Leader>q :<C-u>QuickRun<CR>
 let g:neocomplete#enable_at_startup = 1
 
@@ -120,6 +120,7 @@ let g:quickrun_config = {
 
 "Markdown
 let g:previm_open_cmd = 'google-chrome'
+autocmd BufNewFile,BufRead *.md set filetype=markdown
 
 "Python
 let g:syntastic_python_checkers = ["flake8"]
