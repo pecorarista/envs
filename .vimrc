@@ -87,6 +87,9 @@ nnoremap <C-f> <Right>
 inoremap <C-`> <Nop>
 nnoremap <buffer> <silent> <Leader>q :<C-u>QuickRun<CR>
 let g:neocomplete#enable_at_startup = 1
+map /  <Plug>(incsearch-forward)
+map ?  <Plug>(incsearch-backward)
+map g/ <Plug>(incsearch-stay)
 
 "Haskell
 let g:necoghc_enable_detailed_browse = 1
