@@ -55,7 +55,7 @@ autocmd FileType make
 autocmd BufNewFile,BufRead *.tsv
   \ setlocal noexpandtab |
   \ setlocal list
-autocmd BufNewFile,BufRead *.bib,*.coffee,*.css,*.hamlet,*.js,*.scala.html,.vimrc
+autocmd BufNewFile,BufRead *.bib,*.coffee,*.css,*.hamlet,*.js,*.ml,*.scala.html,.vimrc
   \ setlocal tabstop=2 |
   \ setlocal shiftwidth=2 |
   \ setlocal softtabstop=2
@@ -101,12 +101,6 @@ autocmd FileType haskell nnoremap <buffer> <silent> <Leader>g :<C-u>GhcModCheckA
 autocmd Filetype haskell nnoremap <silent> <Leader>t :<C-u>GhcModType<CR>
 autocmd FileType haskell nnoremap <silent> <Leader>c :<C-u>GhcModTypeClear<CR>
 
-"Java
-let g:EclimCompletionMethod = "omnifunc"
-if !exists('g:neocomplete#force_omni_input_patterns')
-  let g:neocomplete#force_omni_input_patterns = {}
-endif
-
 "LaTeX
 let g:quickrun_config = {}
 let g:quickrun_config = {
@@ -125,6 +119,16 @@ let g:quickrun_config = {
 "Markdown
 let g:previm_open_cmd = 'google-chrome'
 autocmd BufNewFile,BufRead *.md set filetype=markdown
+
+"OCaml
+let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
+execute 'set rtp+=' . g:opamshare . '/merlin/vim'
+let g:syntastic_ocaml_checkers = ['merlin']
+execute 'set rtp^=' . g:opamshare . '/ocp-indent/vim'
+if !exists('g:neocomplete#force_omni_input_patterns')
+  let g:neocomplete#force_omni_input_patterns = {}
+endif
+let g:neocomplete#force_omni_input_patterns.ocaml = '[^. *\t]\.\w*\|\h\w*|#'
 
 "Python
 let g:syntastic_python_checkers = ["flake8"]

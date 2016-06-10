@@ -1,4 +1,4 @@
-.PHONY: stack
+.PHONY: stack opam
 
 export PATH := $(HOME)/.local/bin:$(PATH)
 
@@ -15,3 +15,7 @@ stack:
 	fi
 	ln -sf $(HOME)/.ghc-mod-stack-wrapper/linux/ghc-mod $(HOME)/bin/ghc-mod
 	ln -sf $(HOME)/.ghc-mod-stack-wrapper/linux/ghc-modi $(HOME)/bin/ghc-modi
+
+opam:
+	opam init
+	opam install --yes merlin ocp-indent
