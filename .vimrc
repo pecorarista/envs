@@ -39,6 +39,7 @@ Plug 'derekwyatt/vim-sbt'
 call plug#end()
 
 set number
+set spelllang=en,cjk
 set shortmess+=I
 set tabstop=4
 set softtabstop=4
