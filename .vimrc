@@ -39,6 +39,7 @@ Plug 'derekwyatt/vim-sbt'
 call plug#end()
 
 set number
+set hlsearch
 set spelllang=en,cjk
 set shortmess+=I
 set tabstop=4
@@ -115,6 +116,7 @@ let g:quickrun_config = {
   \     'exec': ['%c %o %s']
   \   }
   \ }
+let g:syntastic_quiet_messages = { "regex": "Do not use @ in LaTeX macro names"}
 
 "Markdown
 let g:previm_open_cmd = 'google-chrome'
