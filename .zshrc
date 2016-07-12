@@ -40,4 +40,5 @@ bindkey '^[[Z' reverse-menu-complete
 
 alias vi='gvim -v'
 alias vim='gvim -v'
+alias l='ls --color=auto'
 alias ls='ls --color=auto'
