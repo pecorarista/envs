@@ -42,4 +42,14 @@ alias vi='gvim -v'
 alias vim='gvim -v'
 alias l='ls --color=auto'
 alias ls='ls --color=auto'
+<<<<<<< HEAD
 alias R='R --no-save'
+
+if [ -z "$SSH_AUTH_SOCK" ]
+then
+    eval $(ssh-agent)
+fi
+if [ -z "$(ssh-add -l | awk -F' ' '{ print $3 }' | grep 'id_rsa')" ]
+then
+    ssh-add ~/.ssh/id_rsa &> /dev/null
+fi
