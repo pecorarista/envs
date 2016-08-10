@@ -57,7 +57,7 @@ autocmd FileType make
 autocmd BufNewFile,BufRead *.tsv
   \ setlocal noexpandtab |
   \ setlocal list
-autocmd BufNewFile,BufRead *.bib,*.coffee,*.css,*.hamlet,*.js,*.ml,*.mli,*.mly,*.scala.html,.vimrc
+autocmd BufNewFile,BufRead *.bib,*.coffee,*.css,*.hamlet,*.js,*.ml,*.mli,*.mly,*.R,*.scala.html,.vimrc
   \ setlocal tabstop=2 |
   \ setlocal shiftwidth=2 |
   \ setlocal softtabstop=2
