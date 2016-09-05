@@ -140,3 +140,15 @@ set listchars=tab:>-,extends:<,trail:-,eol:$
 "Scala
 "Be sure to initialize before using eclim by :ProjectCreate . -n scala
 let g:syntastic_ignore_files = ['\m\.sbt$']
+
+"International Phonetic Alphabets
+digraph I.   618 "ɪ
+digraph a5   592 "ɐ
+digraph a6   594 "ɒ
+digraph U.   650 "ʊ
+digraph @.   601 "ə
+digraph tS   679 "ʧ
+digraph S.   643 "ʃ
+digraph \".  712 "ˈ
+digraph \"\" 716 "ˌ
+digraph :.   720 "ː
