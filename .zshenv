@@ -6,11 +6,7 @@ then
 fi
 
 texlive=/usr/local/texlive/2016
-# manpath=(
-#     $manpath
-#     $texlive/texmf-dist/doc/man
-# )
-
+export MANPATH=$MANPATH:$texlive/texmf-dist/doc/man
 export INFOPATH=$INFOPATH:$texlive/texmf-dist/doc/info
 
 path=(
