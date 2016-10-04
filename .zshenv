@@ -10,8 +10,9 @@ export MANPATH=$MANPATH:$texlive/texmf-dist/doc/man
 export INFOPATH=$INFOPATH:$texlive/texmf-dist/doc/info
 
 path=(
-    ~/Anacondas/anaconda3/bin
     $texlive/bin/x86_64-linux
+    $HOME/Anacondas/anaconda3/bin
+    $HOME/bin
     $HOME/.local/bin
     $HOME/.local/share/umake/bin
     $path
