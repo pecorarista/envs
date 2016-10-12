@@ -31,6 +31,9 @@ Plug 'dag/vim2hs'
 Plug 'eagletmt/ghcmod-vim'
 Plug 'eagletmt/neco-ghc'
 
+"JavaScript
+Plug 'pmsorhaindo/syntastic-local-eslint.vim'
+
 "Python
 Plug 'andviro/flake8-vim'
 Plug 'davidhalter/jedi-vim'
@@ -41,6 +44,9 @@ Plug 'rust-lang/rust.vim'
 "Scala
 Plug 'derekwyatt/vim-scala'
 Plug 'derekwyatt/vim-sbt'
+
+"Web
+Plug 'digitaltoad/vim-pug'
 
 call plug#end()
 
@@ -63,7 +69,7 @@ autocmd FileType make
 autocmd BufNewFile,BufRead *.tsv
   \ setlocal noexpandtab |
   \ setlocal list
-autocmd BufNewFile,BufRead *.bib,*.coffee,*.css,*.hamlet,*.js,*.ml,*.mli,*.mly,*.R,*.scala.html,.vimrc
+autocmd BufNewFile,BufRead *.bib,*.coffee,*.css,*.hamlet,*.js,*.json,*.ml,*.mli,*.mly,*.pug,*.R,*.scala.html,.vimrc
   \ setlocal tabstop=2 |
   \ setlocal shiftwidth=2 |
   \ setlocal softtabstop=2
@@ -108,6 +114,9 @@ autocmd FileType haskell setlocal foldmethod=manual
 autocmd FileType haskell nnoremap <buffer> <silent> <Leader>g :<C-u>GhcModCheckAndLintAsync<CR>
 autocmd Filetype haskell nnoremap <silent> <Leader>t :<C-u>GhcModType<CR>
 autocmd FileType haskell nnoremap <silent> <Leader>c :<C-u>GhcModTypeClear<CR>
+
+"JavaScript
+let g:syntastic_javascript_checkers=['eslint']
 
 "LaTeX
 let g:quickrun_config = {}
