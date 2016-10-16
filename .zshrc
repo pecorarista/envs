@@ -4,7 +4,7 @@ autoload -Uz promptinit
 promptinit
 if [ "$USER" = "sakura" ]
 then
-    prompt adam1 magenta white
+    prompt adam1 magenta cyan
 else
     prompt adam1
 fi
