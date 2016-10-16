@@ -95,10 +95,15 @@ hi PmenuSel ctermfg=Red
 hi Pmenu ctermbg=Black
 hi Special guifg=#66D9EF guibg=bg gui=bold
 hi CursorColumn ctermbg=Cyan
+inoremap <C-a> <Home>
+inoremap <C-b> <Left>
 inoremap <C-e> <End>
 inoremap <C-f> <Right>
+nnoremap <C-a> <Home>
+nnoremap <C-b> <Left>
 nnoremap <C-e> <End>
 nnoremap <C-f> <Right>
+nnoremap <C-y> <Nop>
 inoremap <C-`> <Nop>
 nnoremap <buffer> <silent> <Leader>q :<C-u>QuickRun<CR>
 let g:neocomplete#enable_at_startup = 1
