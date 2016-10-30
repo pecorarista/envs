@@ -47,6 +47,7 @@ Plug 'derekwyatt/vim-sbt'
 
 "Web
 Plug 'digitaltoad/vim-pug'
+Plug 'cakebaker/scss-syntax.vim'
 
 call plug#end()
 
@@ -69,10 +70,11 @@ autocmd FileType make
 autocmd BufNewFile,BufRead *.tsv
   \ setlocal noexpandtab |
   \ setlocal list
-autocmd BufNewFile,BufRead *.bib,*.coffee,*.css,*.hamlet,*.js,*.json,*.ml,*.mli,*.mly,*.pug,*.R,*.scala.html,.vimrc
+autocmd BufNewFile,BufRead *.bib,*.coffee,*.css,*.hamlet,*.jade,*.js,*.json,*.ml,*.mli,*.mly,*.pug,*.R,*.sass,*.scala.html,*.scss,.vimrc
   \ setlocal tabstop=2 |
   \ setlocal shiftwidth=2 |
   \ setlocal softtabstop=2
+au BufRead,BufNewFile *.scss set filetype=scss.css
 set nobackup
 set nowritebackup
 set noswapfile

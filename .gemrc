@@ -1,0 +1,9 @@
+---
+gem: "--user-install"
+:update_sources: true
+:sources:
+- http://gems.rubyforge.org/
+- http://gemcutter.org
+:verbose: true
+:backtrace: false
+:benchmark: false
