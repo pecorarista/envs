@@ -35,7 +35,7 @@ Plug 'eagletmt/neco-ghc'
 Plug 'pmsorhaindo/syntastic-local-eslint.vim'
 
 "Python
-Plug 'andviro/flake8-vim'
+Plug 'nvie/vim-flake8'
 Plug 'davidhalter/jedi-vim'
 
 "Rust
@@ -44,6 +44,9 @@ Plug 'rust-lang/rust.vim'
 "Scala
 Plug 'derekwyatt/vim-scala'
 Plug 'derekwyatt/vim-sbt'
+
+"TypeScript
+Plug 'leafgarland/typescript-vim'
 
 "Web
 Plug 'digitaltoad/vim-pug'
@@ -67,14 +70,15 @@ set foldmethod=manual
 autocmd FileType make
   \ setlocal noexpandtab |
   \ setlocal list
-autocmd BufNewFile,BufRead *.tsv
+autocmd BufNewFile,BufRead .XCompose,*.tsv
   \ setlocal noexpandtab |
   \ setlocal list
-autocmd BufNewFile,BufRead *.bib,*.coffee,*.css,*.hamlet,*.jade,*.js,*.json,*.ml,*.mli,*.mly,*.pug,*.R,*.sass,*.scala.html,*.scss,.vimrc
+autocmd BufNewFile,BufRead *.bib,*.coffee,*.css,*.hamlet,*.jade,*.js,*.json,*.ml,*.mli,*.mly,*.pug,*.R,*.sass,*.scala.html,*.scss,*.ts,.vimrc
   \ setlocal tabstop=2 |
   \ setlocal shiftwidth=2 |
   \ setlocal softtabstop=2
 au BufRead,BufNewFile *.scss set filetype=scss.css
+au BufRead,BufNewFile *.ts set filetype=typescript
 set nobackup
 set nowritebackup
 set noswapfile
@@ -157,6 +161,8 @@ let g:neocomplete#force_omni_input_patterns.ocaml = '[^. *\t]\.\w*\|\h\w*|#'
 
 "Python
 let g:syntastic_python_checkers = ["flake8"]
+let g:syntastic_python_flake8_args = '--ignore=E731'
+"let g:flake8_ignore="E731"
 set listchars=tab:>-,extends:<,trail:-,eol:$
 
 "Scala
