@@ -49,6 +49,15 @@ alias l='ls --color=auto'
 alias ls='ls --color=auto'
 alias R='R --no-save'
 
+function svg2pdf () {
+    if ! which rsvg-convert && [ -f /etc/debian_version ]
+    then
+        echo 'The command `rsvg-convert` was not found. Install librsvg2-bin.'
+    else
+        rsvg-convert -f pdf -o ${1:r}.pdf $1
+    fi
+}
+
 if [ -z "$SSH_AUTH_SOCK" ]
 then
     eval $(ssh-agent)
