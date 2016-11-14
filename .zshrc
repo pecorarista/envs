@@ -2,12 +2,17 @@
 
 autoload -Uz promptinit
 promptinit
-if [ "$USER" = "sakura" ]
-then
-    prompt adam1 magenta cyan
-else
-    prompt adam1
-fi
+case "$USER" in
+    sakura)
+        prompt adam1 magenta cyan
+        ;;
+    ubuntu)
+        prompt adam1 red cyan
+        ;;
+    *)
+        prompt adam1
+        ;;
+esac
 
 setopt histignorealldups sharehistory
 
