@@ -15,11 +15,11 @@ then
     export GEM_HOME="$(ruby -e 'print Gem.user_dir')"
 fi
 
-anaconda_home=$HOME/Anacondas/anaconda3
+ANACONDA_HOME=$HOME/Anacondas/anaconda3
 
 path=(
     $texlive_home/bin/x86_64-linux
-    $anaconda_home/bin
+    $ANACONDA_HOME/bin
     $GEM_HOME/bin
     $HOME/bin
     $HOME/.local/bin

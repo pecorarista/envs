@@ -180,3 +180,13 @@ digraph S.   643 "ʃ
 digraph \".  712 "ˈ
 digraph \"\" 716 "ˌ
 digraph :.   720 "ː
+
+if has('gui_running')
+  set guifont=DejaVu\ Sans\ Mono\ 12
+  set guioptions-=m
+  set guioptions-=T
+  set guioptions-=r
+  set guioptions-=l
+  set guioptions-=R
+  set guioptions-=L
+endif

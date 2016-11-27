@@ -735,6 +735,7 @@ include "%L"
 <Multi_key> <BackSpace> <e> <h>		: "ɜ"	U025C		# LATIN SMALL LETTER REVERSED OPEN E
 <Multi_key> <less> <e> <r>		: "ɝ"	U025D		# LATIN SMALL LETTER REVERSED OPEN E WITH HOOK
 <Multi_key> <BackSpace> <e> <r>		: "ɝ"	U025D		# LATIN SMALL LETTER REVERSED OPEN E WITH HOOK
+<Multi_key> <t> <underscore> : "ṯ" U1E6F
 # How are these keystrokes?
 <Multi_key> <bar> <apostrophe>		: "ˈ"	U02C8		# MODIFIER LETTER VERTICAL LINE
 <Multi_key> <bar> <comma>		: "ˌ"	U02CC		# MODIFIER LETTER LOW VERTICAL LINE
