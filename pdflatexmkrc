@@ -1,0 +1,6 @@
+#!/usr/bin/perl
+$latex = 'pdflatex %O %S';
+$bibtex = 'bibtex %O %B';
+$pdf_mode = 1;
+$bibtex_use = 2;
+$pdf_previewer = 'okular --unique';
