@@ -161,7 +161,7 @@ let g:neocomplete#force_omni_input_patterns.ocaml = '[^. *\t]\.\w*\|\h\w*|#'
 
 "Python
 let g:syntastic_python_checkers = ["flake8"]
-let g:syntastic_python_flake8_args = '--ignore=E731'
+let g:syntastic_python_flake8_args = '--ignore=E731,E402,E812'
 "let g:flake8_ignore="E731"
 set listchars=tab:>-,extends:<,trail:-,eol:$
 
