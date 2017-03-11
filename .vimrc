@@ -38,6 +38,9 @@ Plug 'pmsorhaindo/syntastic-local-eslint.vim'
 Plug 'nvie/vim-flake8'
 Plug 'davidhalter/jedi-vim'
 
+"reStructuredText
+Plug 'Rykka/riv.vim'
+
 "Rust
 Plug 'rust-lang/rust.vim'
 
