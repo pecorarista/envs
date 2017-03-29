@@ -258,7 +258,9 @@ include "%L"
 <Multi_key> <percent> <percent>		: "‱"	U2031	# PER TEN THOUSAND (basis points)
 # Ordinal indicators, for femenine and masculine, used in Romance languages
 <Multi_key> <minus> <a>	      	  	: "ª"   U00AA		# FEMININE ORDINAL INDICATOR
-<Multi_key> <minus> <o>			: "º"	U00BA		# MASCULINE ORDINAL INDICATOR
+<Multi_key> <minus> <o>			: "ō"	U014D		# LATIN SMALL LETTER O WITH MACRON
+<Multi_key> <o> <minus> <minus>			: "ō"	U014D		# LATIN SMALL LETTER O WITH MACRON
+<Multi_key> <asciicircum> <o>	: "º"	U00BA		# SUPERSCRIPT PLUS
 
 # See also U03A3 (Greek capital sigma)
 <Multi_key> <Multi_key> <s> <u> <m>	: "∑"	U2211		# N-ARY SUMMATION
