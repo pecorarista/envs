@@ -34,6 +34,9 @@ Plug 'eagletmt/neco-ghc'
 "JavaScript
 Plug 'pmsorhaindo/syntastic-local-eslint.vim'
 
+"Nginx
+Plug 'nginx.vim'
+
 "Python
 Plug 'nvie/vim-flake8'
 Plug 'davidhalter/jedi-vim'
@@ -81,6 +84,7 @@ autocmd BufNewFile,BufRead *.bib,*.coffee,*.css,*.hamlet,*.jade,*.js,*.json,*.ml
   \ setlocal shiftwidth=2 |
   \ setlocal softtabstop=2
 au BufRead,BufNewFile *.scss set filetype=scss.css
+au BufRead,BufNewFile *.nginxconf set filetype=nginx
 au BufRead,BufNewFile *.ts set filetype=typescript
 set nobackup
 set nowritebackup
