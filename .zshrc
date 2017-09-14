@@ -55,7 +55,7 @@ alias ls='ls --color=auto'
 alias R='R --no-save'
 
 function svg2pdf () {
-    if ! which rsvg-convert && [ -f /etc/debian_version ]
+    if ! $(which rsvg-convert &> /dev/null) && [ -f /etc/debian_version ]
     then
         echo 'The command `rsvg-convert` was not found. Install librsvg2-bin.'
     else
