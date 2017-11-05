@@ -1,6 +1,6 @@
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-  \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   autocmd VimEnter * PlugInstall | source $MYVIMRC
 endif
 
@@ -19,6 +19,12 @@ call plug#begin('~/.vim/plugged')
 
   "Markdown
   Plug 'kannokanno/previm'
+
+  "Pug
+  Plug 'digitaltoad/vim-pug'
+
+  "Rust
+  Plug 'rust-lang/rust.vim'
 
   "Python
   Plug 'nvie/vim-flake8'
@@ -75,6 +81,8 @@ inoremap <C-b> <Left>
 nnoremap <C-y> <Nop>
 inoremap <C-`> <Nop>
 
+let g:neocomplete#enable_at_startup = 1
+
 "Markdown
 let g:previm_open_cmd = 'google-chrome'
 
@@ -92,3 +100,10 @@ if has('gui_running')
   set guioptions-=R
   set guioptions-=L
 endif
+
+digraph ~~ 771 "tilde
+digraph a5 592 "ɐ
+digraph a6 594 "ɒ
+digraph a2 652 "ʌ
+digraph ep 603 "ɛ
+
