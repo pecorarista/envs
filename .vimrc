@@ -26,8 +26,14 @@ call plug#begin('~/.vim/plugged')
   "Rust
   Plug 'rust-lang/rust.vim'
 
+  "Postgres
+  Plug 'lifepillar/pgsql.vim'
+
   "Python
   Plug 'nvie/vim-flake8'
+
+  "Toml
+  Plug 'cespare/vim-toml'
 call plug#end()
 
 set shortmess+=I
@@ -86,6 +92,9 @@ let g:neocomplete#enable_at_startup = 1
 "Markdown
 let g:previm_open_cmd = 'google-chrome'
 
+"Postgres
+let g:sql_type_default = 'pgsql'
+
 "Python
 let g:syntastic_python_checkers = ["flake8"]
 "let g:flake8_ignore="E731"
@@ -106,4 +115,3 @@ digraph a5 592 "ɐ
 digraph a6 594 "ɒ
 digraph a2 652 "ʌ
 digraph ep 603 "ɛ
-
