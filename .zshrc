@@ -87,3 +87,7 @@ then
     zle -N percol_select_history
     bindkey '^R' percol_select_history
 fi
+
+__git_files () {
+    _wanted files expl 'local files' _files
+}

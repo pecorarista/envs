@@ -17,6 +17,9 @@ call plug#begin('~/.vim/plugged')
   "Ansible
   Plug 'chase/vim-ansible-yaml'
 
+  ".gitignore
+  Plug 'rdolgushin/gitignore.vim'
+
   "Markdown
   Plug 'kannokanno/previm'
 
@@ -31,6 +34,10 @@ call plug#begin('~/.vim/plugged')
 
   "Python
   Plug 'nvie/vim-flake8'
+  Plug 'davidhalter/jedi-vim'
+
+  "Syntastic
+  Plug 'scrooloose/syntastic'
 
   "Toml
   Plug 'cespare/vim-toml'
@@ -99,6 +106,7 @@ let g:sql_type_default = 'pgsql'
 let g:syntastic_python_checkers = ["flake8"]
 "let g:flake8_ignore="E731"
 set listchars=tab:>-,extends:<,trail:-,eol:$
+let g:jedi#popup_on_dot = 0
 
 if has('gui_running')
   set guifont=DejaVu\ Sans\ Mono\ 12
