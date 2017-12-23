@@ -36,6 +36,9 @@ call plug#begin('~/.vim/plugged')
   Plug 'nvie/vim-flake8'
   Plug 'davidhalter/jedi-vim'
 
+  "Scala
+  Plug 'derekwyatt/vim-scala'
+
   "Syntastic
   Plug 'scrooloose/syntastic'
 
