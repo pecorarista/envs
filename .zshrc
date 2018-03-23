@@ -48,12 +48,6 @@ zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 
 bindkey '^[[Z' reverse-menu-complete
 
-alias vi='gvim -v'
-alias vim='gvim -v'
-alias l='ls --color=auto'
-alias ls='ls --color=auto'
-alias R='R --no-save'
-
 function svg2pdf () {
     if ! $(which rsvg-convert &> /dev/null) && [ -f /etc/debian_version ]
     then
@@ -65,7 +59,7 @@ function svg2pdf () {
 
 if [ -z "$SSH_AUTH_SOCK" ]
 then
-    eval $(ssh-agent)
+    eval $(ssh-agent) &> /dev/null
 fi
 if [ -z "$(ssh-add -l | awk -F' ' '{ print $3 }' | grep 'id_rsa')" ]
 then
@@ -73,6 +67,15 @@ then
 fi
 
 function exists { which $1 &> /dev/null }
+
+if exists gvim
+then
+    alias vi='gvim -v'
+    alias vim='gvim -v'
+fi
+alias l='ls --color=auto'
+alias ls='ls --color=auto'
+alias R='R --no-save'
 
 if exists percol
 then

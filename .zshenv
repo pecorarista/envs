@@ -6,7 +6,7 @@ then
     export CURL_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt
 fi
 
-texlive_home=/usr/local/texlive/2016
+texlive_home=/usr/local/texlive/2017
 export MANPATH=$MANPATH:$texlive/texmf-dist/doc/man
 export INFOPATH=$INFOPATH:$texlive/texmf-dist/doc/info
 
