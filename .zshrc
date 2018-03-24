@@ -94,3 +94,20 @@ fi
 __git_files () {
     _wanted files expl 'local files' _files
 }
+
+if grep "Microsoft" /proc/version &> /dev/null
+then
+    [[ -z "$TMUX" && -n "$USE_TMUX" ]] && {
+        [[ -n "$ATTACH_ONLY" ]] && {
+            tmux a 2>/dev/null || {
+                cd && exec tmux
+            }
+            exit
+        }
+
+        tmux new-window -c "$PWD" 2>/dev/null && exec tmux a
+        exec tmux
+    }
+
+    export DISPLAY="localhost:0.0"
+fi
