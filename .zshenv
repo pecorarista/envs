@@ -16,10 +16,10 @@ then
 fi
 
 ANACONDA_HOME=$HOME/Anacondas/anaconda3
+source $ANACONDA_HOME/bin/activate
 
 path=(
     $texlive_home/bin/x86_64-linux
-    $ANACONDA_HOME/bin
     $GEM_HOME/bin
     $HOME/bin
     $HOME/.local/bin
