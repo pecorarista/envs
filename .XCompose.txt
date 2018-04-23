@@ -1,0 +1,2 @@
+﻿<Multi_key> <c> <x>	: "ɕ" U0255	# LATIN SMALL LETTER C WITH CURL
+<Multi_key> <z> <x>	: "ʑ" U0291	# LATIN SMALL LETTER Z WITH CURL
