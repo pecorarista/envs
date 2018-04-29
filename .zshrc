@@ -1,18 +1,16 @@
 # Set up the prompt
+#
+
+function exists { which $1 &> /dev/null }
+
+if exists powerline-daemon
+then
+    powerline-daemon -q
+    source "$HOME/.local/lib/python3.6/site-packages/powerline/bindings/zsh/powerline.zsh"
+fi
 
 autoload -Uz promptinit
 promptinit
-case "$USER" in
-    sakura)
-        prompt adam1 magenta cyan
-        ;;
-    ubuntu)
-        prompt adam1 red cyan
-        ;;
-    *)
-        prompt adam1
-        ;;
-esac
 
 setopt histignorealldups sharehistory
 
@@ -65,8 +63,6 @@ if [ -z "$(ssh-add -l | awk -F' ' '{ print $3 }' | grep 'id_rsa')" ]
 then
     ssh-add ~/.ssh/id_rsa &> /dev/null
 fi
-
-function exists { which $1 &> /dev/null }
 
 if exists gvim
 then

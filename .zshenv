@@ -15,7 +15,7 @@ then
     export GEM_HOME="$(ruby -e 'print Gem.user_dir')"
 fi
 
-ANACONDA_HOME=$HOME/Anacondas/anaconda3
+ANACONDA_HOME=$HOME/anaconda3
 source $ANACONDA_HOME/bin/activate
 
 path=(
