@@ -9,9 +9,6 @@ then
     source "$HOME/.local/lib/python3.6/site-packages/powerline/bindings/zsh/powerline.zsh"
 fi
 
-autoload -Uz promptinit
-promptinit
-
 setopt histignorealldups sharehistory
 
 # Use emacs keybindings even if our EDITOR is set to vi
