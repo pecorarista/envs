@@ -122,7 +122,5 @@ if has('gui_running')
 endif
 
 digraph ~~ 771 "tilde
-digraph a5 592 "ɐ
 digraph a6 594 "ɒ
-digraph a2 652 "ʌ
 digraph ep 603 "ɛ
