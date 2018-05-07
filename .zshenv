@@ -6,7 +6,7 @@ then
     export CURL_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt
 fi
 
-texlive_home=/usr/local/texlive/2017
+texlive_home=/usr/local/texlive/2018
 export MANPATH=$MANPATH:$texlive/texmf-dist/doc/man
 export INFOPATH=$INFOPATH:$texlive/texmf-dist/doc/info
 
@@ -28,4 +28,4 @@ path=(
 )
 
 # OCaml
-source $HOME/.opam/opam-init/init.zsh &> /dev/null || true
+source $HOME/.opam/opam-init/init.zsh 2> /dev/null || true
