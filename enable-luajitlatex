@@ -1,0 +1,3 @@
+#!/bin/bash
+sudo sed -i -e 's/^#!\s*luajitlatex/luajitlatex/' "$(kpsewhich fmtutil.cnf)"
+sudo $(which fmtutil-sys) --byfmt luajitlatex
