@@ -33,7 +33,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'lifepillar/pgsql.vim'
 
   "Python
-  Plug 'nvie/vim-flake8'
+  Plug 'scrooloose/syntastic'
   Plug 'davidhalter/jedi-vim'
 
   "Scala
@@ -96,6 +96,9 @@ nnoremap <C-b> <Left>
 inoremap <C-b> <Left>
 nnoremap <C-y> <Nop>
 inoremap <C-`> <Nop>
+
+"Python
+let g:syntastic_python_checkers = ['pylint']
 
 let g:neocomplete#enable_at_startup = 1
 
