@@ -105,8 +105,6 @@ let g:previm_open_cmd = 'google-chrome'
 "Postgres
 let g:sql_type_default = 'pgsql'
 
-"Python
-let g:syntastic_python_checkers = ["flake8"]
 "let g:flake8_ignore="E731"
 set listchars=tab:>-,extends:<,trail:-,eol:$
 let g:jedi#popup_on_dot = 0
