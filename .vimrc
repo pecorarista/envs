@@ -39,9 +39,6 @@ call plug#begin('~/.vim/plugged')
   "Scala
   Plug 'derekwyatt/vim-scala'
 
-  "Syntastic
-  Plug 'scrooloose/syntastic'
-
   "Toml
   Plug 'cespare/vim-toml'
 call plug#end()
@@ -98,7 +95,7 @@ nnoremap <C-y> <Nop>
 inoremap <C-`> <Nop>
 
 "Python
-let g:syntastic_python_checkers = ['pylint']
+let g:syntastic_python_checkers = ['flake8']
 
 let g:neocomplete#enable_at_startup = 1
 
