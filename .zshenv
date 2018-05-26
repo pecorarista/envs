@@ -21,6 +21,7 @@ source $ANACONDA_HOME/bin/activate
 path=(
     $texlive_home/bin/x86_64-linux
     $GEM_HOME/bin
+    $HOME/.cargo/bin
     $HOME/bin
     $HOME/.local/bin
     $HOME/.local/share/umake/bin

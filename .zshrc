@@ -66,9 +66,11 @@ then
     alias vi='gvim -v'
     alias vim='gvim -v'
 fi
-alias l='ls --color=auto'
+
 alias ls='ls --color=auto'
 alias R='R --no-save'
+alias notebook="jupyter notebook --no-browser --NotebookApp.kernel_spec_manager_class='environment_kernels.EnvironmentKernelSpecManager'"
+alias unittest='python -m unittest discover --start-directory tests -v'
 
 if exists percol
 then
