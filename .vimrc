@@ -35,6 +35,7 @@ call plug#begin('~/.vim/plugged')
   "Python
   Plug 'scrooloose/syntastic'
   Plug 'davidhalter/jedi-vim'
+  Plug 'vim-python/python-syntax'
 
   "Scala
   Plug 'derekwyatt/vim-scala'
@@ -119,6 +120,6 @@ if has('gui_running')
   set guioptions-=L
 endif
 
-digraph ~~ 771 "tilde
-digraph a6 594 "ɒ
-digraph ep 603 "ɛ
+digraph ~~ 771 "Combining tilde
+digraph a6 594 "ɒ: Open back rounded vowel
+digraph ep 603 "ɛ: Open-mid front unrounded vowel
