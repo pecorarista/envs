@@ -7,41 +7,27 @@ endif
 call plug#begin('~/.vim/plugged')
   Plug 'tomasr/molokai'
   Plug 'junegunn/vim-easy-align'
-  Plug 'tyru/open-browser.vim'
-
   Plug 'ntpeters/vim-better-whitespace'
-  Plug 'Shougo/vimproc.vim', { 'do': 'make' }
-
   "Ansible
   Plug 'chase/vim-ansible-yaml'
-
   ".gitignore
   Plug 'rdolgushin/gitignore.vim'
-
-  "Markdown
-  Plug 'kannokanno/previm'
-
   "Pug
   Plug 'digitaltoad/vim-pug'
-
-  "Rust
-  Plug 'rust-lang/rust.vim'
-
   "Postgres
   Plug 'lifepillar/pgsql.vim'
-
   "Python
   Plug 'scrooloose/syntastic'
   Plug 'davidhalter/jedi-vim'
-
-  "Scala
-  Plug 'derekwyatt/vim-scala'
-
+  "Rust
+  Plug 'rust-lang/rust.vim'
   "Toml
   Plug 'cespare/vim-toml'
 call plug#end()
 
 set shortmess+=I
+set number
+set termbidi
 syntax on
 set t_Co=256
 try
@@ -49,13 +35,13 @@ try
 catch
   colorscheme default
 endtry
-set clipboard=unnamed,unnamedplus
 hi Normal ctermbg=NONE guibg=Black
 hi Pmenu ctermfg=White
 hi PmenuSel ctermfg=Red
 hi Pmenu ctermbg=Black
 hi Special guifg=#66D9EF guibg=bg gui=bold
 hi CursorColumn ctermbg=Cyan
+set clipboard=unnamed,unnamedplus
 
 set nobackup
 set nowritebackup
@@ -67,12 +53,11 @@ set expandtab
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
-set incsearch
 
-set number
 set ignorecase
+set wildignorecase
 set hlsearch
-set termbidi
+set incsearch
 set listchars=tab:>-,extends:<,trail:-,eol:$
 
 au BufRead,BufNewFile *.scss set filetype=scss.css
@@ -88,12 +73,7 @@ nnoremap <C-y> <Nop>
 
 "Python
 let g:syntastic_python_checkers = ['flake8']
-
-"Markdown
-let g:previm_open_cmd = 'google-chrome'
+let g:jedi#popup_on_dot = 1
 
 "Postgres
 let g:sql_type_default = 'pgsql'
-
-"let g:flake8_ignore="E731"
-let g:jedi#popup_on_dot = 1
