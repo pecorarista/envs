@@ -3,11 +3,13 @@
 
 function exists { which $1 &> /dev/null }
 
-if exists powerline-daemon
+if ! exists powerline-daemon
 then
-    powerline-daemon -q
-    source "$HOME/.local/lib/python3.6/site-packages/powerline/bindings/zsh/powerline.zsh"
+    pip install --user powerline-status
 fi
+
+powerline-daemon -q
+source "$HOME/.local/lib/$(python -V | sed -e 's/Python 3\.\([6-7]\)\.[0-9]\+/python3.\1/')/site-packages/powerline/bindings/zsh/powerline.zsh"
 
 setopt histignorealldups sharehistory
 
@@ -72,19 +74,21 @@ alias R='R --no-save'
 alias notebook="jupyter notebook --no-browser --NotebookApp.kernel_spec_manager_class='environment_kernels.EnvironmentKernelSpecManager'"
 alias unittest='python -m unittest discover --start-directory tests -v'
 
-if exists percol
+if ! exists percol
 then
-    function percol_select_history() {
-        local tac
-        exists gtac && tac="gtac" || { exists tac && tac="tac" || { tac="tail -r" } }
-        BUFFER=$(fc -l -n 1 | eval $tac | percol --query "$LBUFFER")
-        CURSOR=$#BUFFER         # move cursor
-        zle -R -c               # refresh
-    }
-
-    zle -N percol_select_history
-    bindkey '^R' percol_select_history
+    pip install --user percol
 fi
+
+function percol_select_history() {
+    local tac
+    exists gtac && tac="gtac" || { exists tac && tac="tac" || { tac="tail -r" } }
+    BUFFER=$(fc -l -n 1 | eval $tac | percol --query "$LBUFFER")
+    CURSOR=$#BUFFER         # move cursor
+    zle -R -c               # refresh
+}
+
+zle -N percol_select_history
+bindkey '^R' percol_select_history
 
 __git_files () {
     _wanted files expl 'local files' _files
