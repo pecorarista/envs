@@ -8,10 +8,12 @@ call plug#begin('~/.vim/plugged')
   Plug 'tomasr/molokai'
   Plug 'junegunn/vim-easy-align'
   Plug 'ntpeters/vim-better-whitespace'
-  "Ansible
-  Plug 'chase/vim-ansible-yaml'
   ".gitignore
   Plug 'rdolgushin/gitignore.vim'
+  "Ansible
+  Plug 'chase/vim-ansible-yaml'
+  "JavaScript
+  Plug 'pmsorhaindo/syntastic-local-eslint.vim'
   "Pug
   Plug 'digitaltoad/vim-pug'
   "Postgres
@@ -70,6 +72,9 @@ inoremap <C-a> <Home>
 nnoremap <C-e> <End>
 inoremap <C-e> <End>
 nnoremap <C-y> <Nop>
+
+"JavaScript
+let g:syntastic_javascript_checkers = ['eslint']
 
 "Python
 let g:syntastic_python_checkers = ['flake8']
