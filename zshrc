@@ -1,7 +1,13 @@
-# Set up the prompt
-#
-
 function exists { which $1 &> /dev/null }
+
+# Python
+if [ ! -d $HOME/anaconda3 ]
+then
+    curl -fsSL https://repo.continuum.io/archive/Anaconda3-2018.12-Linux-x86_64.sh | bash -b
+fi
+ANACONDA_HOME=$HOME/anaconda3
+source $HOME/anaconda3/etc/profile.d/conda.sh
+conda activate
 
 if ! exists powerline-daemon
 then
@@ -44,6 +50,8 @@ zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
 zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 
 bindkey '^[[Z' reverse-menu-complete
+bindkey '^[[1~' beginning-of-line
+bindkey '^[[4~' end-of-line
 
 function svg2pdf () {
     if ! $(which rsvg-convert &> /dev/null) && [ -f /etc/debian_version ]
@@ -63,16 +71,8 @@ then
     ssh-add ~/.ssh/id_rsa &> /dev/null
 fi
 
-if exists gvim
-then
-    alias vi='gvim -v'
-    alias vim='gvim -v'
-fi
-
 alias ls='ls --color=auto'
 alias R='R --no-save'
-alias notebook="jupyter notebook --no-browser --NotebookApp.kernel_spec_manager_class='environment_kernels.EnvironmentKernelSpecManager'"
-alias unittest='python -m unittest discover --start-directory tests -v'
 
 if ! exists percol
 then
