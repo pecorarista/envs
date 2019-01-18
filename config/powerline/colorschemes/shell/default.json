@@ -1,0 +1,20 @@
+{
+  "name": "default",
+  "groups": {
+    "hostname": {
+      "fg": "white",
+      "bg": "darkred",
+      "attrs": ["bold"]
+    },
+    "user": {
+      "fg": "white",
+      "bg": "darkestpurple",
+      "attrs": []
+    },
+    "virtualenv": {
+      "fg": "white",
+      "bg": "mediumpurple",
+      "attrs": []
+    }
+  }
+}
