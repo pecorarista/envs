@@ -78,7 +78,7 @@ let g:syntastic_javascript_checkers = ['eslint']
 
 "Python
 let g:syntastic_python_checkers = ['flake8']
-let g:jedi#popup_on_dot = 1
+let g:jedi#popup_on_dot = 0
 
 "Postgres
 let g:sql_type_default = 'pgsql'
