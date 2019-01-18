@@ -74,21 +74,17 @@ fi
 alias ls='ls --color=auto'
 alias R='R --no-save'
 
-if ! exists percol
+if exists percol
 then
-    pip install --user percol
+    function peco-history-selection() {
+        BUFFER="$(history -nr 1 | awk '!a[$0]++' | peco --query "$LBUFFER" | sed 's/\\n/\n/')"
+        CURSOR=$#BUFFER
+        zle -R -c
+    }
+
+    zle -N peco-history-selection
+    bindkey '^R' peco-history-selection
 fi
-
-function percol_select_history() {
-    local tac
-    exists gtac && tac="gtac" || { exists tac && tac="tac" || { tac="tail -r" } }
-    BUFFER=$(fc -l -n 1 | eval $tac | percol --query "$LBUFFER")
-    CURSOR=$#BUFFER         # move cursor
-    zle -R -c               # refresh
-}
-
-zle -N percol_select_history
-bindkey '^R' percol_select_history
 
 __git_files () {
     _wanted files expl 'local files' _files
