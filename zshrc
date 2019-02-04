@@ -74,7 +74,7 @@ fi
 alias ls='ls --color=auto'
 alias R='R --no-save'
 
-if exists percol
+if exists peco
 then
     function peco-history-selection() {
         BUFFER="$(history -nr 1 | awk '!a[$0]++' | peco --query "$LBUFFER" | sed 's/\\n/\n/')"
