@@ -71,6 +71,8 @@ nnoremap <C-a> <Home>
 inoremap <C-a> <Home>
 nnoremap <C-e> <End>
 inoremap <C-e> <End>
+nnoremap <C-f> <Right>
+inoremap <C-f> <Right>
 nnoremap <C-y> <Nop>
 
 "JavaScript

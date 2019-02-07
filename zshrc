@@ -15,7 +15,17 @@ then
 fi
 
 powerline-daemon -q
-source "$HOME/.local/lib/$(python -V | sed -e 's/Python 3\.\([6-7]\)\.[0-9]\+/python3.\1/')/site-packages/powerline/bindings/zsh/powerline.zsh"
+python37lib="$HOME/.local/lib/python3.7"
+python36lib="$HOME/.local/lib/python3.6"
+if [ -d $python37lib ]
+then
+    source "$python37lib/site-packages/powerline/bindings/zsh/powerline.zsh"
+elif [ -d $python36lib ]
+then
+    source "$python36lib/site-packages/powerline/bindings/zsh/powerline.zsh"
+else
+    :
+fi
 
 setopt histignorealldups sharehistory
 
