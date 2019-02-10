@@ -62,10 +62,11 @@ set hlsearch
 set incsearch
 set listchars=tab:>-,extends:<,trail:-,eol:$
 
-au BufRead,BufNewFile *.scss set filetype=scss.css
 au BufRead,BufNewFile *.nginxconf set filetype=nginx
-au BufRead,BufNewFile *.ts set filetype=typescript
 au BufRead,BufNewFile *.pug setlocal tabstop=2 softtabstop=2 shiftwidth=2
+au BufRead,BufNewFile *.rs set filetype=rust
+au BufRead,BufNewFile *.scss set filetype=scss.css
+au BufRead,BufNewFile *.ts set filetype=typescript
 
 nnoremap <C-a> <Home>
 inoremap <C-a> <Home>
@@ -84,3 +85,6 @@ let g:jedi#popup_on_dot = 0
 
 "Postgres
 let g:sql_type_default = 'pgsql'
+
+"Rust
+let g:rustfmt_autosave = 1
