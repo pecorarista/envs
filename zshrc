@@ -63,6 +63,8 @@ bindkey '^[[Z' reverse-menu-complete
 bindkey '^[[1~' beginning-of-line
 bindkey '^[[4~' end-of-line
 
+export ZLE_REMOVE_SUFFIX_CHARS=""
+
 function svg2pdf () {
     if ! $(which rsvg-convert &> /dev/null) && [ -f /etc/debian_version ]
     then
