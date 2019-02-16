@@ -1,0 +1,13 @@
+[core]
+	editor = vi
+	quotepath = false
+[user]
+	name = Miyazawa Akira
+[diff]
+	tool = vimdiff
+[merge]
+	tool = vimdiff
+[difftool]
+	prompt = false
+[mergetool]
+	prompt = false
