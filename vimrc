@@ -14,6 +14,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'chase/vim-ansible-yaml'
   "JavaScript
   Plug 'pmsorhaindo/syntastic-local-eslint.vim'
+  Plug 'othree/yajs.vim'
   "Pug
   Plug 'digitaltoad/vim-pug'
   "Postgres
