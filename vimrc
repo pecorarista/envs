@@ -26,6 +26,8 @@ call plug#begin('~/.vim/plugged')
   Plug 'rust-lang/rust.vim'
   "Toml
   Plug 'cespare/vim-toml'
+  "TypeScript
+  Plug 'leafgarland/typescript-vim'
 call plug#end()
 
 set shortmess+=I
@@ -64,10 +66,9 @@ set incsearch
 set listchars=tab:>-,extends:<,trail:-,eol:$
 
 au BufRead,BufNewFile *.nginxconf set filetype=nginx
-au BufRead,BufNewFile *.pug setlocal tabstop=2 softtabstop=2 shiftwidth=2
 au BufRead,BufNewFile *.rs set filetype=rust
-au BufRead,BufNewFile *.scss set filetype=scss.css
-au BufRead,BufNewFile *.ts set filetype=typescript
+
+au FileType html,pug,javascript,typescript setlocal tabstop=2 softtabstop=2 shiftwidth=2
 
 nnoremap <C-a> <Home>
 inoremap <C-a> <Home>
