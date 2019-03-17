@@ -15,6 +15,9 @@ done
 if [ -x $HOME/.linuxbrew/bin/brew ]
 then
     eval $($HOME/.linuxbrew/bin/brew shellenv)
+elif [ -x /home/linuxbrew/.linuxbrew ]
+then
+    eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
 fi
 export LC_TIME="en_US.UTF-8"
 export LC_COLLATE="C"
