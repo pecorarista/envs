@@ -3,7 +3,9 @@ function exists { which $1 &> /dev/null }
 # Python
 if [ ! -d $HOME/anaconda3 ]
 then
-    curl -fsSL https://repo.continuum.io/archive/Anaconda3-2018.12-Linux-x86_64.sh | bash -b
+    mkdir -p $HOME/Downloads
+    wget --no-clobber https://repo.continuum.io/archive/Anaconda3-2018.12-Linux-x86_64.sh -O $HOME/Downloads/Anaconda3-2018.12-Linux-x86_64.sh
+    bash $HOME/Downloads/Anaconda3-2018.12-Linux-x86_64.sh -b
 fi
 ANACONDA_HOME=$HOME/anaconda3
 source $HOME/anaconda3/etc/profile.d/conda.sh

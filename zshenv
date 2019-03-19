@@ -3,6 +3,11 @@ then
     export CURL_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt
 fi
 
+if [ ! -L $HOME/.gitconfig ]
+then
+    ln -s $HOME/envs/gitconfig $HOME/.gitconfig
+fi
+
 for d in "bin" "usr/bin" ".local/bin"
 do
     if [ -d $HOME/$d ]
