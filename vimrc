@@ -12,9 +12,13 @@ call plug#begin('~/.vim/plugged')
   Plug 'rdolgushin/gitignore.vim'
   "Ansible
   Plug 'chase/vim-ansible-yaml'
+  "HTML
+  Plug 'othree/html5.vim'
   "JavaScript
   Plug 'pmsorhaindo/syntastic-local-eslint.vim'
   Plug 'othree/yajs.vim'
+  "Nginx
+  Plug 'chr4/nginx.vim'
   "Pug
   Plug 'digitaltoad/vim-pug'
   "Postgres
