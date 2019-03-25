@@ -72,7 +72,7 @@ set listchars=tab:>-,extends:<,trail:-,eol:$
 au BufRead,BufNewFile *.nginxconf set filetype=nginx
 au BufRead,BufNewFile *.rs set filetype=rust
 
-au FileType html,pug,javascript,typescript,json setlocal tabstop=2 softtabstop=2 shiftwidth=2
+au FileType html,pug,javascript,typescript,json,scss setlocal tabstop=2 softtabstop=2 shiftwidth=2
 
 nnoremap <C-a> <Home>
 inoremap <C-a> <Home>
