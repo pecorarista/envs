@@ -14,6 +14,8 @@ call plug#begin('~/.vim/plugged')
   Plug 'chase/vim-ansible-yaml'
   "HTML
   Plug 'othree/html5.vim'
+  "Jinja
+  Plug 'Glench/Vim-Jinja2-Syntax'
   "JavaScript
   Plug 'pmsorhaindo/syntastic-local-eslint.vim'
   Plug 'othree/yajs.vim'
@@ -28,6 +30,8 @@ call plug#begin('~/.vim/plugged')
   Plug 'davidhalter/jedi-vim'
   "Rust
   Plug 'rust-lang/rust.vim'
+  "Scala
+  Plug 'derekwyatt/vim-scala'
   "Toml
   Plug 'cespare/vim-toml'
   "TypeScript
@@ -71,8 +75,9 @@ set listchars=tab:>-,extends:<,trail:-,eol:$
 
 au BufRead,BufNewFile *.nginxconf set filetype=nginx
 au BufRead,BufNewFile *.rs set filetype=rust
+au BufRead,BufNewFile *.njk set filetype=jinja.html
 
-au FileType html,pug,javascript,typescript,json,scss setlocal tabstop=2 softtabstop=2 shiftwidth=2
+au FileType html,pug,javascript,typescript,json,scss,jinja.html,yaml setlocal tabstop=2 softtabstop=2 shiftwidth=2
 
 nnoremap <C-a> <Home>
 inoremap <C-a> <Home>
