@@ -19,6 +19,8 @@ call plug#begin('~/.vim/plugged')
   "JavaScript
   Plug 'pmsorhaindo/syntastic-local-eslint.vim'
   Plug 'othree/yajs.vim'
+  "Jinja
+  Plug 'lepture/vim-jinja'
   "Nginx
   Plug 'chr4/nginx.vim'
   "Pug
@@ -77,7 +79,7 @@ au BufRead,BufNewFile *.nginxconf set filetype=nginx
 au BufRead,BufNewFile *.rs set filetype=rust
 au BufRead,BufNewFile *.njk set filetype=jinja.html
 
-au FileType html,pug,javascript,typescript,json,scss,jinja.html,yaml setlocal tabstop=2 softtabstop=2 shiftwidth=2
+au FileType html,pug,javascript,typescript,json,scss,lua,jinja.html,yaml setlocal tabstop=2 softtabstop=2 shiftwidth=2
 
 nnoremap <C-a> <Home>
 inoremap <C-a> <Home>
