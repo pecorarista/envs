@@ -3,6 +3,7 @@
 	quotepath = false
 [user]
 	name = Miyazawa Akira
+	email = pecorarista@gmail.com
 [diff]
 	tool = vimdiff
 [merge]
