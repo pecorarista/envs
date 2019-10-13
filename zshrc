@@ -30,6 +30,7 @@ else
 fi
 
 setopt histignorealldups sharehistory
+setopt menu_complete
 
 # Use emacs keybindings even if our EDITOR is set to vi
 bindkey -e
@@ -39,33 +40,16 @@ HISTSIZE=10000
 SAVEHIST=10000
 HISTFILE=~/.zsh_history
 
-# Use modern completion system
+
 autoload -Uz compinit
 compinit
 
-zstyle ':completion:*' auto-description 'specify: %d'
 zstyle ':completion:*' completer _expand _complete _correct _approximate
-zstyle ':completion:*' format 'Completing %d'
-zstyle ':completion:*' group-name ''
-zstyle ':completion:*' menu select=2
 eval "$(dircolors -b)"
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
-zstyle ':completion:*' list-colors ''
-zstyle ':completion:*' list-prompt %SAt %p: Hit TAB for more, or the character to insert%s
-zstyle ':completion:*' matcher-list '' 'm:{a-z}={A-Z}' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=* l:|=*'
-zstyle ':completion:*' menu select=long
-zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
-zstyle ':completion:*' use-compctl false
-zstyle ':completion:*' verbose true
 
-zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
-zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
-
-bindkey '^[[Z' reverse-menu-complete
 bindkey '^[[1~' beginning-of-line
 bindkey '^[[4~' end-of-line
-
-export ZLE_REMOVE_SUFFIX_CHARS=""
 
 function svg2pdf () {
     if ! $(which rsvg-convert &> /dev/null) && [ -f /etc/debian_version ]
@@ -85,38 +69,29 @@ then
     ssh-add ~/.ssh/id_rsa &> /dev/null
 fi
 
-alias ls='ls --color=auto'
+alias xs='ls -F --group-directories-first --color=never'
 alias R='R --no-save'
 
 if exists peco
 then
     function peco-history-selection() {
-        BUFFER="$(history -nr 1 | awk '!a[$0]++' | peco --query "$LBUFFER" | sed 's/\\n/\n/')"
+        BUFFER="$(history -n -r 1 | peco --query "$LBUFFER")"
         CURSOR=$#BUFFER
-        zle -R -c
+        zle reset-prompt
     }
-
     zle -N peco-history-selection
     bindkey '^R' peco-history-selection
+
+    function peco-find() {
+        BUFFER="$(fd --max-depth=5 --hidden --follow --exclude '.git' | peco --query "$LBUFFER")"
+        CURSOR=$#BUFFER
+        zle reset-prompt
+    }
+    zle -N peco-find
+    bindkey '^T' peco-find
 fi
 
-__git_files () {
-    _wanted files expl 'local files' _files
-}
-
-if grep "Microsoft" /proc/version &> /dev/null
+if [ -z "$TMUX" ]
 then
-    [[ -z "$TMUX" && -n "$USE_TMUX" ]] && {
-        [[ -n "$ATTACH_ONLY" ]] && {
-            tmux a 2>/dev/null || {
-                cd && exec tmux
-            }
-            exit
-        }
-
-        tmux new-window -c "$PWD" 2>/dev/null && exec tmux a
-        exec tmux
-    }
-
-    export DISPLAY="localhost:0.0"
+    tmux
 fi

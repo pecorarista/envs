@@ -3,7 +3,7 @@ then
     export CURL_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt
 fi
 
-if [ ! -L $HOME/.gitconfig ]
+if [ ! -f $HOME/.gitconfig ]
 then
     ln -s $HOME/envs/gitconfig $HOME/.gitconfig
 fi
@@ -24,8 +24,7 @@ elif [ -x /home/linuxbrew/.linuxbrew ]
 then
     eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
 fi
-export LC_TIME="en_US.UTF-8"
-export LC_COLLATE="C"
+export LC_ALL="C.UTF-8"
 
 # Rust
 if [ -f $HOME/.cargo/env ]

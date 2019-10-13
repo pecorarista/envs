@@ -1,5 +1,0 @@
----
-rust_url: "https://static.rust-lang.org/dist/rust-1.7.0-x86_64-unknown-linux-gnu.tar.gz"
-rust_install_prefix: /usr/local
-rust_file_prefix: "{{ ansible_env.HOME }}/envs/roles/rust/files"
-...

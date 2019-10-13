@@ -1,8 +1,0 @@
----
-- name: Install Vim
-  apt:
-    pkg: "vim-gnome"
-    state: latest
-    update_cache: yes
-  become: yes
-...
