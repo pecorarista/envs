@@ -1,14 +1,23 @@
 function exists { which $1 &> /dev/null }
 
-# Python
-if [ ! -d $HOME/anaconda3 ]
-then
-    mkdir -p $HOME/Downloads
-    wget --no-clobber https://repo.continuum.io/archive/Anaconda3-2018.12-Linux-x86_64.sh -O $HOME/Downloads/Anaconda3-2018.12-Linux-x86_64.sh
-    bash $HOME/Downloads/Anaconda3-2018.12-Linux-x86_64.sh -b
-fi
+function install-anaconda() {
+    if [ ! -d $HOME/anaconda3 ]
+    then
+        case "$OSTYPE" in
+            linux*)
+                local url="https://repo.anaconda.com/archive/Anaconda3-2019.07-Linux-x86_64.sh";;
+            darwin*)
+                local url="https://repo.anaconda.com/archive/Anaconda3-2019.07-MacOSX-x86_64.sh";;
+        esac
+        mkdir -p $HOME/Downloads
+        local filename="$HOME/Downloads/$(basename $url)"
+        wget --no-clobber $url -O $filename
+        bash $filename -b
+    fi
+}
+
 ANACONDA_HOME=$HOME/anaconda3
-source $HOME/anaconda3/etc/profile.d/conda.sh
+source $ANACONDA_HOME/etc/profile.d/conda.sh
 conda activate
 
 if ! exists powerline-daemon
@@ -17,17 +26,7 @@ then
 fi
 
 powerline-daemon -q
-python37lib="$HOME/.local/lib/python3.7"
-python36lib="$HOME/.local/lib/python3.6"
-if [ -d $python37lib ]
-then
-    source "$python37lib/site-packages/powerline/bindings/zsh/powerline.zsh"
-elif [ -d $python36lib ]
-then
-    source "$python36lib/site-packages/powerline/bindings/zsh/powerline.zsh"
-else
-    :
-fi
+source "$HOME/.local/lib/python3.7/site-packages/powerline/bindings/zsh/powerline.zsh"
 
 setopt histignorealldups sharehistory
 setopt menu_complete
@@ -40,11 +39,11 @@ HISTSIZE=10000
 SAVEHIST=10000
 HISTFILE=~/.zsh_history
 
-
 autoload -Uz compinit
 compinit
 
 zstyle ':completion:*' completer _expand _complete _correct _approximate
+zstyle ':completion:*' matcher-list '' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}'
 eval "$(dircolors -b)"
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 
@@ -72,7 +71,7 @@ fi
 alias xs='ls -F --group-directories-first --color=never'
 alias R='R --no-save'
 
-if exists peco
+if exists peco && exists fd
 then
     function peco-history-selection() {
         BUFFER="$(history -n -r 1 | peco --query "$LBUFFER")"
@@ -83,7 +82,7 @@ then
     bindkey '^R' peco-history-selection
 
     function peco-find() {
-        BUFFER="$(fd --max-depth=5 --hidden --follow --exclude '.git' | peco --query "$LBUFFER")"
+        BUFFER="$(fd --max-depth=6 --hidden --follow --exclude '.git' | peco --query "$LBUFFER")"
         CURSOR=$#BUFFER
         zle reset-prompt
     }

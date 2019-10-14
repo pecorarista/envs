@@ -3,7 +3,7 @@ then
     export CURL_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt
 fi
 
-if [ ! -f $HOME/.gitconfig ]
+if [ ! -f $HOME/.gitconfig ] && [ -f $HOME/envs/gitconfig ]
 then
     ln -s $HOME/envs/gitconfig $HOME/.gitconfig
 fi
@@ -24,6 +24,7 @@ elif [ -x /home/linuxbrew/.linuxbrew ]
 then
     eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
 fi
+
 export LC_ALL="C.UTF-8"
 
 # Rust
@@ -33,20 +34,14 @@ then
 fi
 
 # TeX
-if [ -d /usr/local/texlive/2018 ]
+if [ -d /usr/local/texlive/2019 ]
 then
-    texlive_home=/usr/local/texlive/2018
+    texlive_home=/usr/local/texlive/2019
     PATH=$texlive_home/bin/x86_64-linux:$PATH
     MANPATH=$texlive_home/texmf-dist/doc/man:$MANPATH
     INFOPATH=$texlive_home/texmf-dist/doc/info:$INFOPATH
 fi
 
-if [ -d $HOME/usr/lib ]
-then
-    LD_LIBRARY_PATH=$HOME/usr/lib:$LD_LIBRARY_PATH
-fi
-
-export LD_LIBRARY_PATH
 export PATH
 export MANPATH
 export INFOPATH
