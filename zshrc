@@ -52,12 +52,8 @@ case "$OSTYPE" in
 esac
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 
-bindkey '^[[1~' beginning-of-line
-bindkey '^[[4~' end-of-line
-
 alias R='R --no-save'
 alias python='python3'
-alias vim='/Users/akira-miyazawa/usr/local/bin/vim'
 alias vi='vim'
 case "$OSTYPE" in
     linux*)
@@ -89,13 +85,25 @@ fi
 
 if exists peco
 then
-    function peco-history-selection() {
+    function peco-ssh() {
+        BUFFER="ssh $(cat ~/.ssh/config \
+            | grep -e '^Host' \
+            | sed -e 's/^Host[ \t]//' \
+            | grep -v '^\(\*\|github.com\)$' \
+            | peco)"
+        CURSOR=$#BUFFER
+        zle reset-prompt
+    }
+    zle -N peco-ssh
+    bindkey '^T' peco-ssh
+
+    function peco-history() {
         BUFFER="$(history -n -r 1 | peco --query "$LBUFFER")"
         CURSOR=$#BUFFER
         zle reset-prompt
     }
-    zle -N peco-history-selection
-    bindkey '^R' peco-history-selection
+    zle -N peco-history
+    bindkey '^R' peco-history
 
     if exists fd
     then
@@ -111,12 +119,13 @@ then
     if exists psql
     then
         function peco-postgres() {
-            if [ -f $HOME/.pgpass ]
+            local pgpass="$HOME/.pgpass"
+            if [ -f $pgpass ]
             then
-                touch $HOME/.pgpass
-                chmod 600 $HOME/.pgpass
+                touch $pgpass
+                chmod 600 $pgpass
             fi
-            BUFFER="$(cat $HOME/.pgpass \
+            BUFFER="$(cat $pgpass \
                 | grep -v '^#' \
                 | awk 'BEGIN { FS = ":"; OFS = ":"; } { print $1, $2, $3, $4 }' \
                 | column -s':' -t \
