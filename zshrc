@@ -1,22 +1,5 @@
 function exists { which $1 &> /dev/null }
 
-function install-anaconda() {
-    if [ ! -d $HOME/anaconda3 ]
-    then
-        case "$OSTYPE" in
-            linux*)
-                local url="https://repo.anaconda.com/archive/Anaconda3-2019.07-Linux-x86_64.sh";;
-            darwin*)
-                local url="https://repo.anaconda.com/archive/Anaconda3-2019.07-MacOSX-x86_64.sh";;
-        esac
-        mkdir -p $HOME/Downloads
-        local filename="$HOME/Downloads/$(basename $url)"
-        wget --no-clobber $url -O $filename
-        bash $filename -b
-    fi
-}
-
-ANACONDA_HOME=$HOME/anaconda3
 source $ANACONDA_HOME/etc/profile.d/conda.sh
 conda activate
 
@@ -53,7 +36,6 @@ esac
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 
 alias R='R --no-save'
-alias python='python3'
 case "$OSTYPE" in
     linux*)
         alias ls='ls -F --group-directories-first --color=never';;
