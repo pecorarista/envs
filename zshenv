@@ -17,13 +17,23 @@ do
 done
 
 # Linuxbrew
-if [ -x $HOME/.linuxbrew/bin/brew ]
-then
-    eval $($HOME/.linuxbrew/bin/brew shellenv)
-elif [ -x /home/linuxbrew/.linuxbrew ]
-then
-    eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
-fi
+case $OSTYPE in
+    linux*)
+        if [ -x $HOME/.linuxbrew/bin/brew ]
+        then
+            eval $($HOME/.linuxbrew/bin/brew shellenv)
+        elif [ -x /home/linuxbrew/.linuxbrew ]
+        then
+            eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+        fi
+        ;;
+    darwin*)
+        if [ -x $HOME/homebrew/bin/brew ]
+        then
+            eval $($HOME/homebrew/bin/brew shellenv)
+        fi
+        ;;
+esac
 
 export LC_ALL="C.UTF-8"
 

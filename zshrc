@@ -44,11 +44,27 @@ compinit
 
 zstyle ':completion:*' completer _expand _complete _correct _approximate
 zstyle ':completion:*' matcher-list '' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}'
-eval "$(dircolors -b)"
+case "$OSTYPE" in
+    linux*)
+        eval "$(dircolors -b)";;
+    darwin*)
+        eval "$($HOME/homebrew/bin/gdircolors -b)";;
+esac
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 
 bindkey '^[[1~' beginning-of-line
 bindkey '^[[4~' end-of-line
+
+alias R='R --no-save'
+alias python='python3'
+alias vi='vim'
+case "$OSTYPE" in
+    linux*)
+        alias ls='ls -F --group-directories-first --color=never';;
+    darwin*)
+        alias ls='gls -F --group-directories-first --color=never';;
+esac
+
 
 function svg2pdf () {
     if ! $(which rsvg-convert &> /dev/null) && [ -f /etc/debian_version ]
@@ -59,6 +75,7 @@ function svg2pdf () {
     fi
 }
 
+
 if [ -z "$SSH_AUTH_SOCK" ]
 then
     eval $(ssh-agent) &> /dev/null
@@ -68,10 +85,8 @@ then
     ssh-add ~/.ssh/id_rsa &> /dev/null
 fi
 
-alias xs='ls -F --group-directories-first --color=never'
-alias R='R --no-save'
 
-if exists peco && exists fd
+if exists peco
 then
     function peco-history-selection() {
         BUFFER="$(history -n -r 1 | peco --query "$LBUFFER")"
@@ -81,16 +96,43 @@ then
     zle -N peco-history-selection
     bindkey '^R' peco-history-selection
 
-    function peco-find() {
-        BUFFER="$(fd --max-depth=6 --hidden --follow --exclude '.git' | peco --query "$LBUFFER")"
-        CURSOR=$#BUFFER
-        zle reset-prompt
-    }
-    zle -N peco-find
-    bindkey '^T' peco-find
+    if exists fd
+    then
+        function peco-find() {
+            BUFFER="$(fd --max-depth=6 --hidden --follow --exclude '.git' | peco --query "$LBUFFER")"
+            CURSOR=$#BUFFER
+            zle reset-prompt
+        }
+        zle -N peco-find
+        bindkey '^X^F' peco-find
+    fi
+
+    if exists psql
+    then
+        function peco-postgres() {
+            if [ -f $HOME/.pgpass ]
+            then
+                touch $HOME/.pgpass
+                chmod 600 $HOME/.pgpass
+            fi
+            BUFFER="$(cat $HOME/.pgpass \
+                | grep -v '^#' \
+                | awk 'BEGIN { FS = ":"; OFS = ":"; } { print $1, $2, $3, $4 }' \
+                | column -s':' -t \
+                | peco --prompt 'SELECT CONNECTION>' \
+                | sed -e 's/ \{2,\}/ /g' \
+                | awk 'BEGIN { FS = " "; OFS = " "; } { print "psql -h", $1, "-p", $2, "-U", $4, "-d", $3; }')"
+            CURSOR=$#BUFFER
+            zle reset-prompt
+        }
+        zle -N peco-postgres
+        bindkey '^X^P' peco-postgres
+    fi
 fi
+
 
 if [ -z "$TMUX" ]
 then
-    tmux
+    # `-A` indicates tmux behaves like `tmux attach-session`
+    tmux new-session -A -s default
 fi
