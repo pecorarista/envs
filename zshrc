@@ -48,19 +48,22 @@ case "$OSTYPE" in
     linux*)
         eval "$(dircolors -b)";;
     darwin*)
-        eval "$($HOME/homebrew/bin/gdircolors -b)";;
+        eval "$(gdircolors -b)";;
 esac
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 
 alias R='R --no-save'
 alias python='python3'
-alias vi='vim'
 case "$OSTYPE" in
     linux*)
         alias ls='ls -F --group-directories-first --color=never';;
     darwin*)
         alias ls='gls -F --group-directories-first --color=never';;
 esac
+if [ -f $HOME/.aliases ]
+then
+    source $HOME/.aliases
+fi
 
 
 function svg2pdf () {
