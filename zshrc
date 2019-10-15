@@ -57,6 +57,7 @@ bindkey '^[[4~' end-of-line
 
 alias R='R --no-save'
 alias python='python3'
+alias vim='/Users/akira-miyazawa/usr/local/bin/vim'
 alias vi='vim'
 case "$OSTYPE" in
     linux*)
@@ -119,7 +120,7 @@ then
                 | grep -v '^#' \
                 | awk 'BEGIN { FS = ":"; OFS = ":"; } { print $1, $2, $3, $4 }' \
                 | column -s':' -t \
-                | peco --prompt 'SELECT CONNECTION>' \
+                | peco \
                 | sed -e 's/ \{2,\}/ /g' \
                 | awk 'BEGIN { FS = " "; OFS = " "; } { print "psql -h", $1, "-p", $2, "-U", $4, "-d", $3; }')"
             CURSOR=$#BUFFER
