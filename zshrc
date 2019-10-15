@@ -90,7 +90,7 @@ then
             | grep -e '^Host' \
             | sed -e 's/^Host[ \t]//' \
             | grep -v '^\(\*\|github.com\)$' \
-            | peco)"
+            | peco --prompt='ssh> ')"
         CURSOR=$#BUFFER
         zle reset-prompt
     }
@@ -98,7 +98,7 @@ then
     bindkey '^T' peco-ssh
 
     function peco-history() {
-        BUFFER="$(history -n -r 1 | peco --query "$LBUFFER")"
+        BUFFER="$(history -n -r 1 | peco --prompt='history> ' --query="$LBUFFER")"
         CURSOR=$#BUFFER
         zle reset-prompt
     }
@@ -108,7 +108,8 @@ then
     if exists fd
     then
         function peco-find() {
-            BUFFER="$(fd --max-depth=6 --hidden --follow --exclude '.git' | peco --query "$LBUFFER")"
+            BUFFER="$(fd --max-depth=6 --hidden --follow --exclude '.git' \
+                | peco --prompt='fd> ' --query="$LBUFFER")"
             CURSOR=$#BUFFER
             zle reset-prompt
         }
@@ -129,7 +130,7 @@ then
                 | grep -v '^#' \
                 | awk 'BEGIN { FS = ":"; OFS = ":"; } { print $1, $2, $3, $4 }' \
                 | column -s':' -t \
-                | peco \
+                | peco --prompt='postgres> ' \
                 | sed -e 's/ \{2,\}/ /g' \
                 | awk 'BEGIN { FS = " "; OFS = " "; } { print "psql -h", $1, "-p", $2, "-U", $4, "-d", $3; }')"
             CURSOR=$#BUFFER
