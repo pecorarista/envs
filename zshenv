@@ -35,7 +35,8 @@ case $OSTYPE in
         ;;
 esac
 
-export LC_ALL="C.UTF-8"
+export LANG="C"
+export LC_CTYPE="en_US.UTF-8"
 
 # Rust
 if [ -f $HOME/.cargo/env ]

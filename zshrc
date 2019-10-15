@@ -133,6 +133,5 @@ fi
 
 if [ -z "$TMUX" ]
 then
-    # `-A` indicates tmux behaves like `tmux attach-session`
-    tmux new-session -A -s default
+    tmux
 fi
