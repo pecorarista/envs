@@ -12,7 +12,6 @@ powerline-daemon -q
 source "$HOME/.local/lib/python3.7/site-packages/powerline/bindings/zsh/powerline.zsh"
 
 setopt histignorealldups sharehistory
-setopt menu_complete
 
 # Use emacs keybindings even if our EDITOR is set to vi
 bindkey -e

@@ -75,11 +75,11 @@ set hlsearch
 set incsearch
 set listchars=tab:>-,extends:<,trail:-,eol:$
 
-au BufRead,BufNewFile *.nginxconf set filetype=nginx
-au BufRead,BufNewFile *.rs set filetype=rust
-au BufRead,BufNewFile *.njk set filetype=jinja.html
+autocmd BufRead,BufNewFile *.nginxconf set filetype=nginx
+autocmd BufRead,BufNewFile *.rs set filetype=rust
+autocmd BufRead,BufNewFile *.njk set filetype=jinja.html
 
-au FileType html,pug,javascript,typescript,json,scss,lua,jinja.html,yaml setlocal tabstop=2 softtabstop=2 shiftwidth=2
+autocmd FileType html,pug,javascript,typescript,json,scss,lua,jinja.html,yaml setlocal tabstop=2 softtabstop=2 shiftwidth=2
 
 nnoremap <C-a> <Home>
 inoremap <C-a> <Home>

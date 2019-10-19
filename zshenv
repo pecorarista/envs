@@ -78,3 +78,8 @@ PATH=$HOME/anaconda3/bin:$PATH
 export PATH
 export MANPATH
 export INFOPATH
+
+if grep -q "Microsoft" "/proc/version"
+then
+    export DISPLAY="localhost:0.0"
+fi
