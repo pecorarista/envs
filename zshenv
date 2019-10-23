@@ -45,10 +45,17 @@ then
 fi
 
 # TeX
-if [ -d /usr/local/texlive/2019 ]
+local texlive_home=/usr/local/texlive/2019
+if [ -d $texlive_home ]
 then
-    texlive_home=/usr/local/texlive/2019
-    PATH=$texlive_home/bin/x86_64-linux:$PATH
+    case $OSTYPE in
+    linux*)
+        PATH=$texlive_home/bin/x86_64-linux:$PATH
+        ;;
+    darwin*)
+        PATH=$texlive_home/bin/x86_64-darwin:$PATH
+        ;;
+    esac
     MANPATH=$texlive_home/texmf-dist/doc/man:$MANPATH
     INFOPATH=$texlive_home/texmf-dist/doc/info:$INFOPATH
 fi
@@ -59,9 +66,11 @@ function install-anaconda() {
     then
         case "$OSTYPE" in
             linux*)
-                local url="https://repo.anaconda.com/archive/Anaconda3-2019.07-Linux-x86_64.sh";;
+                local url="https://repo.anaconda.com/archive/Anaconda3-2019.07-Linux-x86_64.sh"
+                ;;
             darwin*)
-                local url="https://repo.anaconda.com/archive/Anaconda3-2019.07-MacOSX-x86_64.sh";;
+                local url="https://repo.anaconda.com/archive/Anaconda3-2019.07-MacOSX-x86_64.sh"
+                ;;
         esac
         mkdir -p $HOME/Downloads
         local filename="$HOME/Downloads/$(basename $url)"
@@ -79,7 +88,7 @@ export PATH
 export MANPATH
 export INFOPATH
 
-if grep -q "Microsoft" "/proc/version"
+if [ -f "/proc/version" ] && grep -q "Microsoft" "/proc/version"
 then
     export DISPLAY="localhost:0.0"
 fi
