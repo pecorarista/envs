@@ -60,30 +60,6 @@ then
     INFOPATH=$texlive_home/texmf-dist/doc/info:$INFOPATH
 fi
 
-# Anaconda
-function install-anaconda() {
-    if [ ! -d $HOME/anaconda3 ]
-    then
-        case "$OSTYPE" in
-            linux*)
-                local url="https://repo.anaconda.com/archive/Anaconda3-2019.07-Linux-x86_64.sh"
-                ;;
-            darwin*)
-                local url="https://repo.anaconda.com/archive/Anaconda3-2019.07-MacOSX-x86_64.sh"
-                ;;
-        esac
-        mkdir -p $HOME/Downloads
-        local filename="$HOME/Downloads/$(basename $url)"
-        wget --no-clobber $url -O $filename
-        bash $filename -b
-    fi
-}
-
-unfunction install-anaconda
-
-export ANACONDA_HOME=$HOME/anaconda3
-PATH=$HOME/anaconda3/bin:$PATH
-
 export PATH
 export MANPATH
 export INFOPATH

@@ -1,8 +1,5 @@
 function exists { which $1 &> /dev/null }
 
-source $ANACONDA_HOME/etc/profile.d/conda.sh
-conda activate
-
 if ! exists powerline-daemon
 then
     pip install --user powerline-status
