@@ -2,11 +2,11 @@ function exists { which $1 &> /dev/null }
 
 if ! exists powerline-daemon
 then
-    pip install --user powerline-status
+    $(brew --prefix)/bin/pip3 install powerline-status
 fi
 
 powerline-daemon -q
-source "$HOME/.local/lib/python3.7/site-packages/powerline/bindings/zsh/powerline.zsh"
+source "$(brew --prefix)/lib/python3.7/site-packages/powerline/bindings/zsh/powerline.zsh"
 
 setopt histignorealldups sharehistory
 
