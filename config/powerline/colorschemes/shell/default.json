@@ -3,7 +3,7 @@
   "groups": {
     "hostname": {
       "fg": "white",
-      "bg": "darkred",
+      "bg": "darkestred",
       "attrs": ["bold"]
     },
     "user": {
