@@ -5,16 +5,6 @@
       "fg": "white",
       "bg": "darkestred",
       "attrs": ["bold"]
-    },
-    "user": {
-      "fg": "white",
-      "bg": "darkestpurple",
-      "attrs": []
-    },
-    "virtualenv": {
-      "fg": "white",
-      "bg": "mediumpurple",
-      "attrs": []
     }
   }
 }
