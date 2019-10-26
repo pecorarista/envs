@@ -56,6 +56,8 @@ hi PmenuSel ctermfg=Red
 hi Pmenu ctermbg=Black
 hi Special guifg=#66D9EF guibg=bg gui=bold
 hi CursorColumn ctermbg=Cyan
+
+set backspace=indent,eol,start
 set clipboard=unnamed,unnamedplus
 
 set nobackup
