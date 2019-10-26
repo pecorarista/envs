@@ -68,3 +68,6 @@ if [ -f "/proc/version" ] && grep -q "Microsoft" "/proc/version"
 then
     export DISPLAY="localhost:0.0"
 fi
+
+export PIPENV_SHELL_FANCY=1
+export PIPENV_HIDE_EMOJIS=1
