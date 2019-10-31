@@ -34,9 +34,9 @@ zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 alias R='R --no-save'
 case "$OSTYPE" in
     linux*)
-        alias ls='ls -F --group-directories-first --color=never';;
+        alias ls='ls -F --group-directories-first --color=auto';;
     darwin*)
-        alias ls='gls -F --group-directories-first --color=never';;
+        alias ls='gls -F --group-directories-first --color=auto';;
 esac
 if [ -f $HOME/.aliases ]
 then
@@ -122,6 +122,17 @@ then
     fi
 fi
 
+export SDKMAN_DIR="$HOME/.sdkman"
+local sdkman="$SDKMAN_DIR/bin/sdkman-init.sh"
+if [ -f $sdkman ]
+then
+    source $sdkman
+fi
+
+if [ -f $HOME/.cargo/env ]
+then
+    source $HOME/.cargo/env
+fi
 
 if [ -z "$TMUX" ]
 then

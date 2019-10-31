@@ -19,7 +19,6 @@ do
     fi
 done
 
-# Linuxbrew
 case $OSTYPE in
     linux*)
         if [ -x $HOME/.linuxbrew/bin/brew ]
@@ -37,14 +36,7 @@ case $OSTYPE in
         fi
         ;;
 esac
-
 # Rust
-if [ -f $HOME/.cargo/env ]
-then
-    source $HOME/.cargo/env
-fi
-
-# TeX
 local texlive_home=/usr/local/texlive/2019
 if [ -d $texlive_home ]
 then
@@ -64,10 +56,11 @@ export PATH
 export MANPATH
 export INFOPATH
 
+export PIPENV_SHELL_FANCY=1
+export PIPENV_HIDE_EMOJIS=1
+
 if [ -f "/proc/version" ] && grep -q "Microsoft" "/proc/version"
 then
     export DISPLAY="localhost:0.0"
 fi
 
-export PIPENV_SHELL_FANCY=1
-export PIPENV_HIDE_EMOJIS=1
