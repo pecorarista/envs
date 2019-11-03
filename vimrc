@@ -10,6 +10,8 @@ call plug#begin('~/.vim/plugged')
   Plug 'ntpeters/vim-better-whitespace'
   ".gitignore
   Plug 'rdolgushin/gitignore.vim'
+  "AppleScript
+  Plug 'vim-scripts/applescript.vim'
   "Ansible
   Plug 'chase/vim-ansible-yaml'
   "HTML
@@ -103,3 +105,9 @@ let g:sql_type_default = 'pgsql'
 
 "Rust
 let g:rustfmt_autosave = 1
+
+if has('mac')
+  let g:enter_eisu = 'osascript -e "tell application \"System Events\" to key code 102"'
+  inoremap <silent> <ESC> <ESC>:call system(g:enter_eisu)<CR>
+  nnoremap <silent> <ESC> <ESC>:call system(g:enter_eisu)<CR>
+endif

@@ -36,7 +36,7 @@ case $OSTYPE in
         fi
         ;;
 esac
-# Rust
+
 local texlive_home=/usr/local/texlive/2019
 if [ -d $texlive_home ]
 then
@@ -52,6 +52,20 @@ then
     INFOPATH=$texlive_home/texmf-dist/doc/info:$INFOPATH
 fi
 
+# JAVA
+export SDKMAN_DIR="$HOME/.sdkman"
+local sdkman="$SDKMAN_DIR/bin/sdkman-init.sh"
+if [ -f $sdkman ]
+then
+    source $sdkman
+fi
+
+# Rust
+if [ -f $HOME/.cargo/env ]
+then
+    source $HOME/.cargo/env
+fi
+
 export PATH
 export MANPATH
 export INFOPATH
@@ -63,4 +77,3 @@ if [ -f "/proc/version" ] && grep -q "Microsoft" "/proc/version"
 then
     export DISPLAY="localhost:0.0"
 fi
-

@@ -122,18 +122,6 @@ then
     fi
 fi
 
-export SDKMAN_DIR="$HOME/.sdkman"
-local sdkman="$SDKMAN_DIR/bin/sdkman-init.sh"
-if [ -f $sdkman ]
-then
-    source $sdkman
-fi
-
-if [ -f $HOME/.cargo/env ]
-then
-    source $HOME/.cargo/env
-fi
-
 if [ -z "$TMUX" ]
 then
     tmux
