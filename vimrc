@@ -40,6 +40,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'cespare/vim-toml'
   "TypeScript
   Plug 'leafgarland/typescript-vim'
+  Plug 'peitalin/vim-jsx-typescript'
 call plug#end()
 
 set shortmess+=I
@@ -83,7 +84,8 @@ autocmd BufRead,BufNewFile *.nginxconf set filetype=nginx
 autocmd BufRead,BufNewFile *.rs set filetype=rust
 autocmd BufRead,BufNewFile *.njk set filetype=jinja.html
 
-autocmd FileType html,pug,javascript,typescript,json,scss,lua,jinja.html,yaml setlocal tabstop=2 softtabstop=2 shiftwidth=2
+autocmd FileType html,pug,javascript,typescript,typescript.tsx,json,scss,lua,jinja.html,yaml
+  \ setlocal tabstop=2 softtabstop=2 shiftwidth=2
 
 nnoremap <C-a> <Home>
 inoremap <C-a> <Home>
@@ -105,6 +107,11 @@ let g:sql_type_default = 'pgsql'
 
 "Rust
 let g:rustfmt_autosave = 1
+
+"Typescript
+hi tsxTagName ctermfg=161
+hi tsxCloseString ctermfg=161
+hi tsxCloseTag ctermfg=118
 
 if has('mac')
   let g:enter_eisu = 'osascript -e "tell application \"System Events\" to key code 102"'
