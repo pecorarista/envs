@@ -5,7 +5,10 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/plugged')
+  "Colorscheme
   Plug 'tomasr/molokai'
+  Plug 'jonathanfilip/vim-lucius'
+
   Plug 'junegunn/vim-easy-align'
   Plug 'ntpeters/vim-better-whitespace'
   ".gitignore
@@ -49,16 +52,22 @@ set termbidi
 syntax on
 set t_Co=256
 try
+  "colorscheme lucius
   colorscheme molokai
 catch
   colorscheme default
 endtry
-hi Normal ctermbg=NONE guibg=Black
-hi Pmenu ctermfg=White
-hi PmenuSel ctermfg=Red
-hi Pmenu ctermbg=Black
-hi Special guifg=#66D9EF guibg=bg gui=bold
-hi CursorColumn ctermbg=Cyan
+
+highlight Normal ctermbg=NONE
+highlight Pmenu ctermfg=White
+highlight PmenuSel ctermfg=Red
+highlight Pmenu ctermbg=Black
+highlight CursorColumn ctermbg=Cyan
+
+"Typescript
+highlight link tsxTagName Keyword
+highlight link tsxCloseString Keyword
+highlight link tsxCloseTag Function
 
 set backspace=indent,eol,start
 set clipboard=unnamed,unnamedplus
@@ -107,14 +116,3 @@ let g:sql_type_default = 'pgsql'
 
 "Rust
 let g:rustfmt_autosave = 1
-
-"Typescript
-hi tsxTagName ctermfg=161
-hi tsxCloseString ctermfg=161
-hi tsxCloseTag ctermfg=118
-
-if has('mac')
-  let g:enter_eisu = 'osascript -e "tell application \"System Events\" to key code 102"'
-  inoremap <silent> <ESC> <ESC>:call system(g:enter_eisu)<CR>
-  nnoremap <silent> <ESC> <ESC>:call system(g:enter_eisu)<CR>
-endif
