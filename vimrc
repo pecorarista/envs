@@ -44,6 +44,7 @@ call plug#begin('~/.vim/plugged')
   "TypeScript
   Plug 'leafgarland/typescript-vim'
   Plug 'peitalin/vim-jsx-typescript'
+  Plug 'Quramy/tsuquyomi'
 call plug#end()
 
 set shortmess+=I
@@ -116,3 +117,7 @@ let g:sql_type_default = 'pgsql'
 
 "Rust
 let g:rustfmt_autosave = 1
+
+"Typescript
+let g:tsuquyomi_completion_detail = 1
+autocmd FileType typescript,typescript.tsx setlocal completeopt-=preview
