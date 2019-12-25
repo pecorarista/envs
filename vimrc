@@ -44,6 +44,7 @@ call plug#begin('~/.vim/plugged')
   "TypeScript
   Plug 'leafgarland/typescript-vim'
   Plug 'peitalin/vim-jsx-typescript'
+  Plug 'Shougo/vimproc', { 'do': 'make' }
   Plug 'Quramy/tsuquyomi'
 call plug#end()
 
@@ -53,8 +54,10 @@ set termbidi
 syntax on
 set t_Co=256
 try
-  "colorscheme lucius
-  colorscheme molokai
+  let g:lucius_style = 'dark'
+  let g:lucius_contrast = 'normal'
+  colorscheme lucius
+  "colorscheme molokai
 catch
   colorscheme default
 endtry
@@ -94,13 +97,15 @@ autocmd BufRead,BufNewFile *.nginxconf set filetype=nginx
 autocmd BufRead,BufNewFile *.rs set filetype=rust
 autocmd BufRead,BufNewFile *.njk set filetype=jinja.html
 
-autocmd FileType html,pug,javascript,typescript,typescript.tsx,json,scss,lua,jinja.html,yaml
+autocmd FileType dot,html,javascript,jinja.html,json,lua,pug,scss,typescript,typescript.tsx,yaml
   \ setlocal tabstop=2 softtabstop=2 shiftwidth=2
 
 nnoremap <C-a> <Home>
 inoremap <C-a> <Home>
 nnoremap <C-e> <End>
 inoremap <C-e> <End>
+nnoremap <C-b> <Left>
+inoremap <C-b> <Left>
 nnoremap <C-f> <Right>
 inoremap <C-f> <Right>
 nnoremap <C-y> <Nop>
@@ -110,7 +115,7 @@ let g:syntastic_javascript_checkers = ['eslint']
 
 "Python
 let g:syntastic_python_checkers = ['flake8']
-let g:jedi#popup_on_dot = 0
+let g:jedi#popup_on_dot = 1
 
 "Postgres
 let g:sql_type_default = 'pgsql'
@@ -120,4 +125,4 @@ let g:rustfmt_autosave = 1
 
 "Typescript
 let g:tsuquyomi_completion_detail = 1
-autocmd FileType typescript,typescript.tsx setlocal completeopt-=preview
+autocmd FileType python,typescript,typescript.tsx setlocal completeopt-=preview
