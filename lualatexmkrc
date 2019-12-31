@@ -4,5 +4,9 @@ $bibtex = 'upbibtex %O %B';
 # $biber = 'biber --bblencoding=utf8 -u -U --output_safechars';
 $pdf_mode = 1;
 $bibtex_use = 2;
-$pdf_previewer = 'okular --unique';
+if ($^O eq 'darwin') {
+  $pdf_previewer = 'zathura';
+} else {
+  $pdf_previewer = 'okular --unique';
+}
 $clean_ext .= '%R.bbl %R.ltjruby %R.nav %R.snm %R.vrb %R.run.xml';
