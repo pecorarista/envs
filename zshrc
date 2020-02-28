@@ -1,12 +1,15 @@
 function exists { which $1 &> /dev/null }
 
-if ! exists powerline-daemon
+if exists brew
 then
-    $(brew --prefix)/bin/pip3 install powerline-status
-fi
+    if ! exists powerline-daemon
+    then
+        $(brew --prefix)/bin/pip3 install powerline-status
+    fi
 
-powerline-daemon -q
-source "$(brew --prefix)/lib/python3.7/site-packages/powerline/bindings/zsh/powerline.zsh"
+    powerline-daemon -q
+    source "$(brew --prefix)/lib/python3.7/site-packages/powerline/bindings/zsh/powerline.zsh"
+fi
 
 setopt histignorealldups sharehistory
 
@@ -122,7 +125,7 @@ then
     fi
 fi
 
-if [ -z "$TMUX" ]
+if exists tmux && [ -z "$TMUX" ]
 then
     tmux
 fi
