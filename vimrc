@@ -54,10 +54,9 @@ set termbidi
 syntax on
 set t_Co=256
 try
-  "let g:lucius_style = 'dark'
-  "let g:lucius_contrast = 'normal'
-  "colorscheme lucius
-  colorscheme molokai
+  let g:lucius_style = 'dark'
+  let g:lucius_contrast = 'normal'
+  colorscheme lucius
 catch
   colorscheme default
 endtry
