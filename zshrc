@@ -128,7 +128,7 @@ then
     fi
 fi
 
-if exists tmux && [ -z "$TMUX" ]
+if exists tmux && [ -z "$TMUX" ] && [ -z "$SSH_CONNECTION" ]
 then
     tmux
 fi
