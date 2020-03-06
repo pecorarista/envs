@@ -2,11 +2,14 @@ function exists { which $1 &> /dev/null }
 
 if exists brew
 then
+    if ! exists pip3
+    then
+        brew install python3
+    fi
     if ! exists powerline-daemon
     then
         $(brew --prefix)/bin/pip3 install powerline-status
     fi
-
     powerline-daemon -q
     source "$(brew --prefix)/lib/python3.7/site-packages/powerline/bindings/zsh/powerline.zsh"
 fi
