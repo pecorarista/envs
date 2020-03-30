@@ -26,6 +26,8 @@ call plug#begin('~/.vim/plugged')
   Plug 'othree/yajs.vim'
   "Jinja
   Plug 'lepture/vim-jinja'
+  "Markdown
+  Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
   "Nginx
   Plug 'chr4/nginx.vim'
   "Pug

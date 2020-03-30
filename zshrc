@@ -38,14 +38,13 @@ case "$OSTYPE" in
     darwin*)
         alias ls='gls -F --group-directories-first --color=auto';;
 esac
-if [ -f $HOME/.aliases ]
+if [ -e $HOME/.aliases ]
 then
     source $HOME/.aliases
 fi
 
-
 function svg2pdf () {
-    if ! $(which rsvg-convert &> /dev/null) && [ -f /etc/debian_version ]
+    if ! exists rsvg-convert && [ -f /etc/debian_version ]
     then
         echo 'The command `rsvg-convert` was not found. Install librsvg2-bin.'
     else
@@ -53,6 +52,14 @@ function svg2pdf () {
     fi
 }
 
+function pdf2png () {
+    if ! exists convert
+    then
+        echo 'The command `convert` was not found. Install Imageagick.'
+    else
+        convert $1 ${1:r}.png
+    fi
+}
 
 if [ -z "$SSH_AUTH_SOCK" ]
 then
