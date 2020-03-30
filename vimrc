@@ -59,7 +59,6 @@ try
   let g:lucius_style = 'dark'
   let g:lucius_contrast = 'normal'
   colorscheme lucius
-  "colorscheme molokai
 catch
   colorscheme default
 endtry
@@ -114,6 +113,9 @@ nnoremap <C-y> <Nop>
 
 "JavaScript
 let g:syntastic_javascript_checkers = ['eslint']
+
+"Markdown
+autocmd FileType markdown EnableWhitespace
 
 "Python
 let g:syntastic_python_checkers = ['flake8']
