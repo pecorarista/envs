@@ -1,58 +1,24 @@
-export LANG="C"
-export LC_CTYPE="en_US.UTF-8"
-
-if [ -f /etc/debian_version ]
+if [ -d "$HOME/.local/bin" ]
 then
-    export CURL_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt
+    PATH="$HOME/.local/bin:$PATH"
 fi
 
-if [ ! -f $HOME/.gitconfig ] && [ -f $HOME/envs/gitconfig ]
-then
-    ln -s $HOME/envs/gitconfig $HOME/.gitconfig
-fi
-
-for d in "bin" "usr/bin" ".local/bin"
-do
-    if [ -d $HOME/$d ]
-    then
-        PATH=$HOME/$d:$PATH
-    fi
-done
-
-case $OSTYPE in
-    linux*)
-        if [ -x $HOME/.linuxbrew/bin/brew ]
-        then
-            eval $($HOME/.linuxbrew/bin/brew shellenv)
-        elif [ -x /home/linuxbrew/.linuxbrew ]
-        then
-            eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
-        fi
-        ;;
-    darwin*)
-        if [ -x $HOME/homebrew/bin/brew ]
-        then
-            eval $($HOME/homebrew/bin/brew shellenv)
-        fi
-        ;;
-esac
-
-local texlive_home=/usr/local/texlive/2019
+local texlive_home=/usr/local/texlive/2020
 if [ -d $texlive_home ]
 then
     case $OSTYPE in
-    linux*)
-        PATH=$texlive_home/bin/x86_64-linux:$PATH
-        ;;
-    darwin*)
-        PATH=$texlive_home/bin/x86_64-darwin:$PATH
-        ;;
+        linux*)
+            PATH=$texlive_home/bin/x86_64-linux:$PATH
+            ;;
+        darwin*)
+            PATH=$texlive_home/bin/x86_64-darwin:$PATH
+            ;;
     esac
     MANPATH=$texlive_home/texmf-dist/doc/man:$MANPATH
     INFOPATH=$texlive_home/texmf-dist/doc/info:$INFOPATH
 fi
 
-# JAVA
+# JVM Languages
 export SDKMAN_DIR="$HOME/.sdkman"
 local sdkman="$SDKMAN_DIR/bin/sdkman-init.sh"
 if [ -f $sdkman ]
@@ -70,9 +36,9 @@ export PATH
 export MANPATH
 export INFOPATH
 
-if [ -f "/proc/version" ] && grep -q "Microsoft" "/proc/version"
+# Make sure that VcXsrv is running and allowed to communicate with WSL2 by Windows Firewall
+if [ -f "/proc/version" ] && grep -q -i "microsoft" "/proc/version"
 then
-    export DISPLAY="localhost:0.0"
+    local local_ip="$(cat /etc/resolv.conf | grep nameserver | awk '{ print $2 }')"
+    export DISPLAY="$local_ip:0.0"
 fi
-
-export AIRFLOW_HOME="$HOME/airflow"
