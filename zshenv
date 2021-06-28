@@ -37,6 +37,17 @@ export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init --path)"
 
+# GCP
+if [ -f "$HOME/google-cloud-sdk/path.zsh.inc" ]
+then
+    . "$HOME/google-cloud-sdk/path.zsh.inc"
+fi
+
+if [ -f "$HOME/google-cloud-sdk/completion.zsh.inc" ]
+then
+    . "$HOME/google-cloud-sdk/completion.zsh.inc"
+fi
+
 export PATH
 export MANPATH
 export INFOPATH
