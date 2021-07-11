@@ -5,10 +5,18 @@
 	name = Miyazawa Akira
 	email = pecorarista@gmail.com
 [diff]
-	tool = vimdiff
-[merge]
-	tool = vimdiff
+	tool = vimdiff_swap_panes
 [difftool]
-	prompt = false
+    prompt = false
+[difftool "vimdiff_swap_panes"]
+    cmd = vimdiff "$REMOTE" "$LOCAL"
+[merge]
+    tool = vim_mergetool
+    conflictStyle = diff3
 [mergetool]
-	prompt = false
+    keepBackup = false
+[mergetool "vim_mergetool"]
+    cmd = vim -f -c "MergetoolStart" "$MERGED" "$BASE" "$LOCAL" "$REMOTE"
+    trustExitCode = false
+[alias]
+    lol = log --graph --decorate=full --pretty=oneline --abbrev-commit --all

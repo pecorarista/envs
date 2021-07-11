@@ -17,6 +17,8 @@ call plug#begin('~/.vim/plugged')
   Plug 'vim-scripts/applescript.vim'
   "Ansible
   Plug 'chase/vim-ansible-yaml'
+  "Git
+  Plug 'samoshkin/vim-mergetool'
   "HTML
   Plug 'othree/html5.vim'
   "Jinja
@@ -110,6 +112,9 @@ inoremap <C-b> <Left>
 nnoremap <C-f> <Right>
 inoremap <C-f> <Right>
 nnoremap <C-y> <Nop>
+
+"Git
+let g:mergetool_layout = 'mr'
 
 "JavaScript
 let g:syntastic_javascript_checkers = ['eslint']
