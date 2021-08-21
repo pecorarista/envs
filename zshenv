@@ -48,6 +48,18 @@ then
     . "$HOME/google-cloud-sdk/completion.zsh.inc"
 fi
 
+# JavaScript
+NPM_PACKAGES="$HOME/.npm-packages"
+if [ -d $NPM_PACKAGES ]
+then
+    PATH="$PATH:$NPM_PACKAGES/bin"
+    MANPATH=$NPM_PACKAGES/share/man:$MANPATH
+    alias yarn="$NPM_PACKAGES/bin/yarn"
+fi
+
+alias R='R --no-save'
+alias vi='vim'
+
 export PATH
 export MANPATH
 export INFOPATH

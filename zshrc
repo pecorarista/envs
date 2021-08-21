@@ -10,11 +10,6 @@ function exists {
     which $1 &> /dev/null
 }
 
-if [ -e $HOME/.aliases ]
-then
-    source $HOME/.aliases
-fi
-
 if exists powerline-daemon
 then
     powerline-daemon -q
