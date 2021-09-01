@@ -49,12 +49,10 @@ then
 fi
 
 # JavaScript
-NPM_PACKAGES="$HOME/.npm-packages"
-if [ -d $NPM_PACKAGES ]
+export NVM_DIR="$HOME/.nvm"
+if [ -f "$NVM_DIR/nvm.sh" ]
 then
-    PATH="$PATH:$NPM_PACKAGES/bin"
-    MANPATH=$NPM_PACKAGES/share/man:$MANPATH
-    alias yarn="$NPM_PACKAGES/bin/yarn"
+    source "$NVM_DIR/nvm.sh"
 fi
 
 alias R='R --no-save'

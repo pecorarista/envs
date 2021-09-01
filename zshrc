@@ -5,6 +5,7 @@ HISTSIZE=10000
 SAVEHIST=10000
 HISTFILE=$HOME/.zsh_history
 PROMPT='%n@%m:%c$ '
+ZLE_SPACE_SUFFIX_CHARS=$'|&'
 
 function exists {
     which $1 &> /dev/null
