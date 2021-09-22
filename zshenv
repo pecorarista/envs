@@ -57,6 +57,12 @@ fi
 
 alias R='R --no-save'
 alias vi='vim'
+case "$OSTYPE" in
+    linux*)
+        alias ls='ls -F --group-directories-first --color=auto';;
+esac
+alias lt='ls -lt'
+
 
 export PATH
 export MANPATH

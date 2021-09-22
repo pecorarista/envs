@@ -21,11 +21,6 @@ then
     fi
 fi
 
-case "$OSTYPE" in
-    linux*)
-        alias ls='ls -F --group-directories-first --color=auto';;
-esac
-
 if exists peco
 then
     function peco-history() {
