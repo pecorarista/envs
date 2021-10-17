@@ -61,7 +61,7 @@ case "$OSTYPE" in
     linux*)
         alias ls='ls -F --group-directories-first --color=auto';;
 esac
-alias lt='ls -lt'
+alias lt='ls -lt --color | less -R'
 
 
 export PATH
