@@ -34,7 +34,7 @@ fi
 
 # Python
 export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
+PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init --path)"
 
 # GCP
@@ -63,8 +63,11 @@ case "$OSTYPE" in
 esac
 alias lt='ls -lt --color | less -R'
 
+export C_INCLUDE_PATH="$HOME/local/include:$C_INCLUDE_PATH"
+export CPLUS_INCLUDE_PATH=$C_INCLUDE_PATH
+export LD_LIBRARY_PATH="$HOME/local/lib:$LD_LIBRRY_PATH"
 
-export PATH
+export PATH="$HOME/local/bin:$PATH"
 export MANPATH
 export INFOPATH
 

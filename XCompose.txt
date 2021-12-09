@@ -1,7 +1,7 @@
-﻿<Multi_key> <c> <x>	: "ɕ" U0255	# LATIN SMALL LETTER C WITH CURL
-<Multi_key> <z> <x>	: "ʑ" U0291	# LATIN SMALL LETTER Z WITH CURL
-<Multi_key> <h> <a>	: "ɒ" U0252	# LATIN SMALL LETTER TURNED ALPHA
-<Multi_key> <h> <r>	: "ʁ" U0281 # LATIN LETTER SMALL CAPITAL INVERTED R
-<Multi_key> <o> <(>	: "ʿ" U02BF	# MODIFIER LETTER LEFT HALF RING
-<Multi_key> <o> <)>	: "ʾ" U02BE	# MODIFIER LETTER RIGHT HALF RING
-<Multi_key> <'> <h>	: "ˈ" U02C8	# MODIFIER LETTER VERTICAL LINE
+﻿<Multi_key> <c> <x> : "ɕ" U0255 # LATIN SMALL LETTER C WITH CURL
+<Multi_key> <z> <x> : "ʑ" U0291 # LATIN SMALL LETTER Z WITH CURL
+<Multi_key> <h> <a> : "ɒ" U0252 # LATIN SMALL LETTER TURNED ALPHA
+<Multi_key> <h> <r> : "ʁ" U0281 # LATIN LETTER SMALL CAPITAL INVERTED R
+<Multi_key> <o> <(> : "ʿ" U02BF # MODIFIER LETTER LEFT HALF RING
+<Multi_key> <o> <)> : "ʾ" U02BE # MODIFIER LETTER RIGHT HALF RING
+<Multi_key> <'> <h> : "ˈ" U02C8 # MODIFIER LETTER VERTICAL LINE
