@@ -39,6 +39,7 @@ call plug#begin('~/.vim/plugged')
   "Python
   Plug 'scrooloose/syntastic'
   Plug 'davidhalter/jedi-vim'
+  Plug 'vim-python/python-syntax'
   "Rust
   Plug 'rust-lang/rust.vim'
   "Scala
@@ -123,8 +124,10 @@ let g:syntastic_javascript_checkers = ['eslint']
 autocmd FileType markdown EnableWhitespace
 
 "Python
+let g:python_highlight_all = 1
 let g:syntastic_python_checkers = ['flake8']
 let g:jedi#popup_on_dot = 1
+let g:jedi#completions_command = "<C-w>"
 
 "Postgres
 let g:sql_type_default = 'pgsql'
