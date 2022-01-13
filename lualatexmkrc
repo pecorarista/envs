@@ -5,7 +5,8 @@ $bibtex = 'upbibtex %O %B';
 $pdf_mode = 1;
 $bibtex_use = 2;
 if ($^O eq 'darwin') {
-  $pdf_previewer = 'zathura';
+  # -g: Do not bring the application to the foreground.
+  $pdf_previewer = 'open -g -a /Applications/Skim.app';
 } else {
   $pdf_previewer = 'okular --unique';
 }
