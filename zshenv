@@ -3,7 +3,7 @@ then
     PATH="$HOME/.local/bin:$PATH"
 fi
 
-local texlive_home=/usr/local/texlive/2020
+local texlive_home=/usr/local/texlive/2021
 if [ -d $texlive_home ]
 then
     case $OSTYPE in
@@ -59,7 +59,8 @@ alias R='R --no-save'
 alias vi='vim'
 case "$OSTYPE" in
     linux*)
-        alias ls='ls -F --group-directories-first --color=auto';;
+        alias ls='ls -F --group-directories-first --color=auto'
+        alias pbcopy='xclip';;
 esac
 alias lt='ls -lt --color | less -R'
 
