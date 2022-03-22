@@ -78,7 +78,8 @@ highlight link tsxCloseString Keyword
 highlight link tsxCloseTag Function
 
 set backspace=indent,eol,start
-set clipboard=unnamed,unnamedplus
+set clipboard&
+set clipboard^=unnamedplus
 
 set nobackup
 set nowritebackup
