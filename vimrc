@@ -21,13 +21,13 @@ call plug#begin('~/.vim/plugged')
   Plug 'samoshkin/vim-mergetool'
   "HTML
   Plug 'othree/html5.vim'
-  "Jinja
-  Plug 'Glench/Vim-Jinja2-Syntax'
   "JavaScript
   Plug 'pmsorhaindo/syntastic-local-eslint.vim'
   Plug 'othree/yajs.vim'
+  "JSON Lines
+  Plug 'kyoh86/vim-jsonl'
   "Jinja
-  Plug 'lepture/vim-jinja'
+  Plug 'Glench/Vim-Jinja2-Syntax'
   "Markdown
   Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
   "Nginx
@@ -100,7 +100,6 @@ set listchars=tab:>-,extends:<,trail:-,eol:$
 
 autocmd BufRead,BufNewFile *.nginxconf set filetype=nginx
 autocmd BufRead,BufNewFile *.rs set filetype=rust
-autocmd BufRead,BufNewFile *.njk set filetype=jinja.html
 
 autocmd FileType dot,html,javascript,jinja.html,json,lua,pug,scss,typescript,typescript.tsx,yaml
   \ setlocal tabstop=2 softtabstop=2 shiftwidth=2
