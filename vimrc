@@ -11,6 +11,8 @@ call plug#begin('~/.vim/plugged')
 
   Plug 'junegunn/vim-easy-align'
   Plug 'ntpeters/vim-better-whitespace'
+  Plug 'nathanaelkane/vim-indent-guides'
+
   ".gitignore
   Plug 'rdolgushin/gitignore.vim'
   "AppleScript
@@ -24,8 +26,6 @@ call plug#begin('~/.vim/plugged')
   "JavaScript
   Plug 'pmsorhaindo/syntastic-local-eslint.vim'
   Plug 'othree/yajs.vim'
-  "JSON Lines
-  Plug 'kyoh86/vim-jsonl'
   "Jinja
   Plug 'Glench/Vim-Jinja2-Syntax'
   "Markdown
@@ -113,6 +113,7 @@ inoremap <C-b> <Left>
 nnoremap <C-f> <Right>
 inoremap <C-f> <Right>
 nnoremap <C-y> <Nop>
+nnoremap <C-i> :IndentGuidesToggle<CR>
 
 "Git
 let g:mergetool_layout = 'mr'
