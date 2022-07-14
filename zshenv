@@ -37,32 +37,12 @@ export PYENV_ROOT="$HOME/.pyenv"
 PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init --path)"
 
-# GCP
-if [ -f "$HOME/google-cloud-sdk/path.zsh.inc" ]
-then
-    . "$HOME/google-cloud-sdk/path.zsh.inc"
-fi
-
-if [ -f "$HOME/google-cloud-sdk/completion.zsh.inc" ]
-then
-    . "$HOME/google-cloud-sdk/completion.zsh.inc"
-fi
-
 # JavaScript
 export NVM_DIR="$HOME/.nvm"
 if [ -f "$NVM_DIR/nvm.sh" ]
 then
     source "$NVM_DIR/nvm.sh"
 fi
-
-alias R='R --no-save'
-alias vi='vim'
-case "$OSTYPE" in
-    linux*)
-        alias ls='ls -F --group-directories-first --color=auto'
-        alias pbcopy='xclip';;
-esac
-alias lt='ls -lt --color | less -R'
 
 export C_INCLUDE_PATH="$HOME/local/include:$C_INCLUDE_PATH"
 export CPLUS_INCLUDE_PATH=$C_INCLUDE_PATH
@@ -71,10 +51,3 @@ export LD_LIBRARY_PATH="$HOME/local/lib:$LD_LIBRRY_PATH"
 export PATH="$HOME/local/bin:$PATH"
 export MANPATH
 export INFOPATH
-
-# Make sure that VcXsrv is running and allowed to communicate with WSL2 by Windows Firewall
-if [ -f "/proc/version" ] && grep -q -i "microsoft" "/proc/version"
-then
-    local local_ip="$(cat /etc/resolv.conf | grep nameserver | awk '{ print $2 }')"
-    export DISPLAY="$local_ip:0.0"
-fi

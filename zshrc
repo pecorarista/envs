@@ -32,6 +32,38 @@ then
     bindkey '^R' peco-history
 fi
 
+if exists fdfind
+then
+    alias fd='fdfind'
+fi
+
+# GCP
+if [ -f "$HOME/google-cloud-sdk/path.zsh.inc" ]
+then
+    . "$HOME/google-cloud-sdk/path.zsh.inc"
+fi
+
+if [ -f "$HOME/google-cloud-sdk/completion.zsh.inc" ]
+then
+    . "$HOME/google-cloud-sdk/completion.zsh.inc"
+fi
+
+alias R='R --no-save'
+alias vi='vim'
+case "$OSTYPE" in
+    linux*)
+        alias ls='ls -F --group-directories-first --color=auto'
+        alias pbcopy='xclip';;
+esac
+alias lslt='ls -lt --color | less -R'
+
+# Make sure that VcXsrv is running and allowed to communicate with WSL2 by Windows Firewall
+if [ -f "/proc/version" ] && grep -q -i "microsoft" "/proc/version"
+then
+    local local_ip="$(cat /etc/resolv.conf | grep nameserver | awk '{ print $2 }')"
+    export DISPLAY="$local_ip:0.0"
+fi
+
 if exists tmux && [ -z "$TMUX" ] && [ -z "$SSH_CONNECTION" ]
 then
     tmux
