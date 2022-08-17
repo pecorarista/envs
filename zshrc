@@ -38,7 +38,7 @@ alias vi='vim'
 
 if exists exa
 then
-    alias ls='exa --icons'
+    alias ls='exa'
     alias lx='exa --long --sort=old'
 fi
 
