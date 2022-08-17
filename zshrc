@@ -11,16 +11,6 @@ function exists {
     which $1 &> /dev/null
 }
 
-# if exists powerline-daemon
-# then
-#     powerline-daemon -q
-#     plconf="$HOME/.local/lib/python3.8/site-packages/powerline/bindings/zsh/powerline.zsh"
-#     if [ -f $plconf ]
-#     then
-#         source $plconf
-#     fi
-# fi
-
 if exists peco
 then
     function peco-history() {
@@ -49,6 +39,7 @@ alias vi='vim'
 if exists exa
 then
     alias ls='exa --icons'
+    alias lx='exa --long --sort=old'
 fi
 
 if exists fdfind
