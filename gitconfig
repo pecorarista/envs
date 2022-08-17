@@ -1,11 +1,11 @@
 [core]
-	editor = vi
-	quotepath = false
+    editor = vi
+    quotepath = false
 [user]
-	name = Miyazawa Akira
-	email = pecorarista@gmail.com
+    name = Miyazawa Akira
+    email = pecorarista@gmail.com
 [diff]
-	tool = vimdiff_swap_panes
+    tool = vimdiff_swap_panes
 [difftool]
     prompt = false
 [difftool "vimdiff_swap_panes"]

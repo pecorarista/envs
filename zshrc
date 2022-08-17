@@ -11,15 +11,15 @@ function exists {
     which $1 &> /dev/null
 }
 
-if exists powerline-daemon
-then
-    powerline-daemon -q
-    plconf="$HOME/.local/lib/python3.8/site-packages/powerline/bindings/zsh/powerline.zsh"
-    if [ -f $plconf ]
-    then
-        source $plconf
-    fi
-fi
+# if exists powerline-daemon
+# then
+#     powerline-daemon -q
+#     plconf="$HOME/.local/lib/python3.8/site-packages/powerline/bindings/zsh/powerline.zsh"
+#     if [ -f $plconf ]
+#     then
+#         source $plconf
+#     fi
+# fi
 
 if exists peco
 then
@@ -30,11 +30,6 @@ then
     }
     zle -N peco-history
     bindkey '^R' peco-history
-fi
-
-if exists fdfind
-then
-    alias fd='fdfind'
 fi
 
 # GCP
@@ -50,12 +45,26 @@ fi
 
 alias R='R --no-save'
 alias vi='vim'
+
+if exists exa
+then
+    alias ls='exa --icons'
+fi
+
+if exists fdfind
+then
+    alias fd='fdfind'
+fi
+
+if exists rg
+then
+    alias grep='rg'
+fi
+
 case "$OSTYPE" in
     linux*)
-        alias ls='ls -F --group-directories-first --color=auto'
         alias pbcopy='xclip';;
 esac
-alias lslt='ls -lt --color | less -R'
 
 # Make sure that VcXsrv is running and allowed to communicate with WSL2 by Windows Firewall
 if [ -f "/proc/version" ] && grep -q -i "microsoft" "/proc/version"
@@ -68,3 +77,5 @@ if exists tmux && [ -z "$TMUX" ] && [ -z "$SSH_CONNECTION" ]
 then
     tmux
 fi
+
+eval "$(starship init zsh)"
