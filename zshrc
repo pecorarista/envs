@@ -34,7 +34,14 @@ then
 fi
 
 alias R='R --no-save'
-alias vi='vim'
+
+if exists gvim
+then
+    alias vim='gvim -v'
+    alias vi='vim'
+else
+    alias vi='vim'
+fi
 
 if exists exa
 then
