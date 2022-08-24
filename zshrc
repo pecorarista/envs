@@ -76,4 +76,6 @@ then
     tmux
 fi
 
+export PIPENV_VENV_IN_PROJECT="1"
+
 eval "$(starship init zsh)"
