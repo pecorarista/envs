@@ -33,10 +33,6 @@ then
 fi
 
 # Python
-export PYENV_ROOT="$HOME/.pyenv"
-PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init --path)"
-
 # JavaScript
 export NVM_DIR="$HOME/.nvm"
 if [ -f "$NVM_DIR/nvm.sh" ]
@@ -48,6 +44,11 @@ export C_INCLUDE_PATH="$HOME/local/include:$C_INCLUDE_PATH"
 export CPLUS_INCLUDE_PATH=$C_INCLUDE_PATH
 export LD_LIBRARY_PATH="$HOME/local/lib:$LD_LIBRRY_PATH"
 
-export PATH="$HOME/local/bin:$PATH"
-export MANPATH
-export INFOPATH
+export HOMEBREW_PREFIX="/home/linuxbrew/.linuxbrew";
+export HOMEBREW_CELLAR="/home/linuxbrew/.linuxbrew/Cellar";
+export HOMEBREW_REPOSITORY="/home/linuxbrew/.linuxbrew/Homebrew";
+export PATH="/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin${PATH+:$PATH}";
+export MANPATH="/home/linuxbrew/.linuxbrew/share/man${MANPATH+:$MANPATH}:";
+export INFOPATH="/home/linuxbrew/.linuxbrew/share/info:${INFOPATH:-}";
+
+eval "$(pyenv init --path)"

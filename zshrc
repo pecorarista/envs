@@ -7,6 +7,8 @@ HISTFILE=$HOME/.zsh_history
 PROMPT='%n@%m:%c$ '
 ZLE_SPACE_SUFFIX_CHARS=$'|&'
 
+export COLORTERM="truecolor"
+
 function exists {
     which $1 &> /dev/null
 }
@@ -46,17 +48,12 @@ fi
 if exists exa
 then
     alias ls='exa'
-    alias lx='exa --long --sort=old'
+    alias lt='exa --long --sort=old'
 fi
 
 if exists fdfind
 then
     alias fd='fdfind'
-fi
-
-if exists rg
-then
-    alias grep='rg'
 fi
 
 case "$OSTYPE" in
