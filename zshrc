@@ -50,7 +50,10 @@ then
     alias lt='exa --long --sort=old'
 fi
 
-alias dl="docker exec --interactive --tty $(docker ps --quiet --latest --filter 'status=running') /bin/bash --login"
+if exists docker
+then
+    alias dl="docker exec --interactive --tty --user ${USER} --workdir ${HOME} $(docker ps --quiet --latest --filter 'status=running') /bin/bash --login"
+fi
 
 if exists fdfind
 then
