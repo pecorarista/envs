@@ -4,7 +4,6 @@ setopt histignorealldups sharehistory
 HISTSIZE=10000
 SAVEHIST=10000
 HISTFILE=$HOME/.zsh_history
-PROMPT='%n@%m:%c$ '
 ZLE_SPACE_SUFFIX_CHARS=$'|&'
 
 export COLORTERM="truecolor"
@@ -50,6 +49,8 @@ then
     alias ls='exa'
     alias lt='exa --long --sort=old'
 fi
+
+alias dl="docker exec --interactive --tty $(docker ps --quiet --latest --filter 'status=running') /bin/bash --login"
 
 if exists fdfind
 then
