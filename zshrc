@@ -21,6 +21,33 @@ then
     }
     zle -N peco-history
     bindkey '^R' peco-history
+
+    if exists docker
+    then
+      function docker-login() {
+        local container_id="$(docker ps --format '{{.ID}} | {{.Image}} | {{.Names}} | {{.Status}} | {{.CreatedAt}}' | peco --query "$LBUFFER" | cut -d ' ' -f1)"
+        if [ -n "$container_id" ]
+        then
+          local user="$1"
+          local home="$2"
+          local login_shell="$3"
+          BUFFER="docker exec --interactive --tty --user $user --workdir $home $container_id $login_shell --login"
+          CURSOR=$#BUFFER
+          zle reset-prompt
+        fi
+      }
+      function docker-login-root() {
+        docker-login 'root' '/' '/bin/bash'
+      }
+      function docker-login-user() {
+        docker-login $USER $HOME $SHELL
+      }
+      zle -N docker-login-root
+      bindkey "^V^R" docker-login-root
+
+      zle -N docker-login-user
+      bindkey "^V^U" docker-login-user
+    fi
 fi
 
 # GCP
@@ -34,25 +61,25 @@ then
     . "$HOME/google-cloud-sdk/completion.zsh.inc"
 fi
 
-alias R='R --no-save'
+if exists R
+then
+    alias R='R --no-save'
+fi
 
 if exists gvim
 then
     alias vim='gvim -v'
     alias vi='vim'
 else
-    alias vi='vim'
+    if exists vim
+    then
+        alias vi='vim'
+    fi
 fi
 
 if exists exa
 then
     alias ls='exa'
-    alias lt='exa --long --sort=old'
-fi
-
-if exists docker
-then
-    alias dl="docker exec --interactive --tty --user ${USER} --workdir ${HOME} $(docker ps --quiet --latest --filter 'status=running') /bin/bash --login"
 fi
 
 if exists fdfind
