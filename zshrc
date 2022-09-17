@@ -51,41 +51,15 @@ then
 fi
 
 # GCP
-if [ -f "$HOME/google-cloud-sdk/path.zsh.inc" ]
-then
-    . "$HOME/google-cloud-sdk/path.zsh.inc"
-fi
+[ -f "$HOME/google-cloud-sdk/path.zsh.inc" ] && source "$HOME/google-cloud-sdk/path.zsh.inc"
+[ -f "$HOME/google-cloud-sdk/completion.zsh.inc" ] && source "$HOME/google-cloud-sdk/completion.zsh.inc"
 
-if [ -f "$HOME/google-cloud-sdk/completion.zsh.inc" ]
-then
-    . "$HOME/google-cloud-sdk/completion.zsh.inc"
-fi
-
-if exists R
-then
-    alias R='R --no-save'
-fi
-
-if exists gvim
-then
-    alias vim='gvim -v'
-    alias vi='vim'
-else
-    if exists vim
-    then
-        alias vi='vim'
-    fi
-fi
-
-if exists exa
-then
-    alias ls='exa'
-fi
-
-if exists fdfind
-then
-    alias fd='fdfind'
-fi
+exists gvim && alias vim='gvim -v'
+exists vim && alias vi='vim'
+exists R && alias R='R --no-save'
+exists exa && alias ls='exa'
+exists fdfind && alias fd='fdfind'
+exists nvm && alias nlts='nvm use lts/gallium'
 
 case "$OSTYPE" in
     linux*)
@@ -99,10 +73,7 @@ then
     export DISPLAY="$local_ip:0.0"
 fi
 
-if exists tmux && [ -z "$TMUX" ] && [ -z "$SSH_CONNECTION" ]
-then
-    tmux
-fi
+exists tmux && [ -z "$TMUX" ] && [ -z "$SSH_CONNECTION" ] && tmux
 
 export PIPENV_VENV_IN_PROJECT="1"
 

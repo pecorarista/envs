@@ -19,36 +19,23 @@ then
 fi
 
 # JVM Languages
-export SDKMAN_DIR="$HOME/.sdkman"
-local sdkman="$SDKMAN_DIR/bin/sdkman-init.sh"
-if [ -f $sdkman ]
-then
-    source $sdkman
-fi
+[ -f "$HOME/.sdkman/bin/sdkman-init.sh" ] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+
+# JavaScript
+[ -f "$HOME/.nvm/nvm.sh" ] && source "$HOME/.nvm/nvm.sh"
 
 # Rust
-if [ -f $HOME/.cargo/env ]
-then
-    source $HOME/.cargo/env
-fi
-
-# Python
-# JavaScript
-export NVM_DIR="$HOME/.nvm"
-if [ -f "$NVM_DIR/nvm.sh" ]
-then
-    source "$NVM_DIR/nvm.sh"
-fi
+[ -f $HOME/.cargo/env ] && source $HOME/.cargo/env
 
 export C_INCLUDE_PATH="$HOME/local/include:$C_INCLUDE_PATH"
 export CPLUS_INCLUDE_PATH=$C_INCLUDE_PATH
 export LD_LIBRARY_PATH="$HOME/local/lib:$LD_LIBRRY_PATH"
 
 export HOMEBREW_PREFIX="/home/linuxbrew/.linuxbrew";
-export HOMEBREW_CELLAR="/home/linuxbrew/.linuxbrew/Cellar";
-export HOMEBREW_REPOSITORY="/home/linuxbrew/.linuxbrew/Homebrew";
-export PATH="/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin${PATH+:$PATH}";
-export MANPATH="/home/linuxbrew/.linuxbrew/share/man${MANPATH+:$MANPATH}:";
-export INFOPATH="/home/linuxbrew/.linuxbrew/share/info:${INFOPATH:-}";
+export HOMEBREW_CELLAR="$HOMEBREW_PREFIX/Cellar";
+export HOMEBREW_REPOSITORY="$HOMEBREW_PREFIX/Homebrew";
+export PATH="$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin:$PATH";
+export MANPATH="$HOMEBREW_PREFIX/share/man:$NPM_PACKAGES/bin:$MANPATH";
+export INFOPATH="$HOMEBREW_PREFIX/share/info:$INFOPATH";
 
 eval "$(pyenv init --path)"
