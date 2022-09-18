@@ -12,13 +12,14 @@ call plug#begin('~/.vim/plugged')
   Plug 'junegunn/vim-easy-align'
   Plug 'ntpeters/vim-better-whitespace'
   Plug 'nathanaelkane/vim-indent-guides'
-
   ".gitignore
   Plug 'rdolgushin/gitignore.vim'
   "AppleScript
   Plug 'vim-scripts/applescript.vim'
   "Ansible
   Plug 'chase/vim-ansible-yaml'
+  "CSS
+  Plug 'dense-analysis/ale'
   "Git
   Plug 'samoshkin/vim-mergetool'
   "HTML
@@ -116,6 +117,9 @@ nnoremap <C-f> <Right>
 inoremap <C-f> <Right>
 nnoremap <C-y> <Nop>
 nnoremap <C-i> :IndentGuidesToggle<CR>
+
+"CSS
+let g:ale_lint_on_text_changed = 'never'
 
 "Git
 let g:mergetool_layout = 'mr'
