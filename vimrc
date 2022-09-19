@@ -25,7 +25,6 @@ call plug#begin('~/.vim/plugged')
   "HTML
   Plug 'othree/html5.vim'
   "JavaScript
-  Plug 'pmsorhaindo/syntastic-local-eslint.vim'
   Plug 'othree/yajs.vim'
   "Jinja
   Plug 'Glench/Vim-Jinja2-Syntax'
@@ -38,7 +37,6 @@ call plug#begin('~/.vim/plugged')
   "Postgres
   Plug 'lifepillar/pgsql.vim'
   "Python
-  Plug 'scrooloose/syntastic'
   Plug 'davidhalter/jedi-vim'
   Plug 'vim-python/python-syntax'
   "Rust
@@ -118,21 +116,20 @@ inoremap <C-f> <Right>
 nnoremap <C-y> <Nop>
 nnoremap <C-i> :IndentGuidesToggle<CR>
 
-"CSS
+"JavaScript, CSS, Python
+let g:ale_lint_on_enter = 0
 let g:ale_lint_on_text_changed = 'never'
+let g:ale_linters = {'css': ['stylelint'], 'javascript': ['eslint'], 'python': ['flake8']}
+let g:ale_linters_explicit = 1
 
 "Git
 let g:mergetool_layout = 'mr'
-
-"JavaScript
-let g:syntastic_javascript_checkers = ['eslint']
 
 "Markdown
 autocmd FileType markdown EnableWhitespace
 
 "Python
 let g:python_highlight_all = 1
-let g:syntastic_python_checkers = ['flake8']
 let g:jedi#popup_on_dot = 1
 let g:jedi#completions_command = "<C-w>"
 

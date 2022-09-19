@@ -20,33 +20,40 @@ then
         zle reset-prompt
     }
     zle -N peco-history
+    bindkey -r '^R'
     bindkey '^R' peco-history
 
     if exists docker
     then
-      function docker-login() {
-        local container_id="$(docker ps --format '{{.ID}} | {{.Image}} | {{.Names}} | {{.Status}} | {{.CreatedAt}}' | peco --query "$LBUFFER" | cut -d ' ' -f1)"
-        if [ -n "$container_id" ]
-        then
-          local user="$1"
-          local home="$2"
-          local login_shell="$3"
-          BUFFER="docker exec --interactive --tty --user $user --workdir $home $container_id $login_shell --login"
-          CURSOR=$#BUFFER
-          zle reset-prompt
-        fi
-      }
-      function docker-login-root() {
-        docker-login 'root' '/' '/bin/bash'
-      }
-      function docker-login-user() {
-        docker-login $USER $HOME $SHELL
-      }
-      zle -N docker-login-root
-      bindkey "^V^R" docker-login-root
+        DOCKER_PS_FORMAT='{{.ID}} | {{.Image}} | {{.Names}} | {{.Status}} | {{.CreatedAt}}'
+        # Start a Docker container
+        function ds() {
+            local container_id=$(
+            docker ps --all --filter 'status=exited' --format "$DOCKER_PS_FORMAT" \
+                | peco --query "$LBUFFER" \
+                | cut -d ' ' -f1
+            )
+            if [ -n "$container_id" ]
+            then
+                local user="$1"
+                local home="$2"
+                local login_shell="$3"
+                print -z "docker start $container_id"
+            fi
+        }
 
-      zle -N docker-login-user
-      bindkey "^V^U" docker-login-user
+        # Connect to a Docker container
+        function dl() {
+            local container_id=$(
+            docker ps --format "$DOCKER_PS_FORMAT" \
+                | peco --query "$LBUFFER" \
+                | cut -d ' ' -f1
+            )
+            if [ -n "$container_id" ]
+            then
+                print -z "docker exec -it -u root --workdir / $container_id /bin/bash --login"
+            fi
+        }
     fi
 fi
 
