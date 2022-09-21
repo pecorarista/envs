@@ -39,3 +39,4 @@ export MANPATH="$HOMEBREW_PREFIX/share/man:$NPM_PACKAGES/bin:$MANPATH";
 export INFOPATH="$HOMEBREW_PREFIX/share/info:$INFOPATH";
 
 eval "$(pyenv init --path)"
+eval "$(rbenv init - zsh)"

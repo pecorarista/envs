@@ -6,7 +6,6 @@ endif
 
 call plug#begin('~/.vim/plugged')
   "Colorscheme
-  Plug 'tomasr/molokai'
   Plug 'jonathanfilip/vim-lucius'
 
   "Syntax
@@ -20,6 +19,13 @@ call plug#begin('~/.vim/plugged')
   Plug 'chase/vim-ansible-yaml'
   "Git
   Plug 'samoshkin/vim-mergetool'
+  "Go
+  Plug 'prabirshrestha/async.vim'
+  Plug 'prabirshrestha/asyncomplete.vim'
+  Plug 'prabirshrestha/asyncomplete-lsp.vim'
+  Plug 'prabirshrestha/vim-lsp'
+  Plug 'mattn/vim-lsp-settings'
+  Plug 'mattn/vim-goimports'
   "HTML
   Plug 'othree/html5.vim'
   "JavaScript

@@ -12,46 +12,77 @@ function exists {
     which $1 &> /dev/null
 }
 
-if exists peco
+if exists fzf
 then
-    function peco-history() {
-        BUFFER="$(history -n -r 1 | peco --prompt='history> ' --query="$LBUFFER")"
+    export FZF_DEFAULT_OPTS="--layout=reverse --info='hidden' --pointer='➡'"
+    function fzf-history() {
+        BUFFER=$(
+            history -n -r 1 \
+            | fzf --prompt='history> ' --query="$LBUFFER"
+        )
         CURSOR=$#BUFFER
         zle reset-prompt
     }
-    zle -N peco-history
+    zle -N fzf-history
     bindkey -r '^R'
-    bindkey '^R' peco-history
+    bindkey '^R' fzf-history
 
     if exists docker
     then
-        DOCKER_PS_FORMAT='{{.ID}} | {{.Image}} | {{.Names}} | {{.Status}} | {{.CreatedAt}}'
-        # Start a Docker container
-        function ds() {
-            local container_id=$(
-            docker ps --all --filter 'status=exited' --format "$DOCKER_PS_FORMAT" \
-                | peco --query "$LBUFFER" \
-                | cut -d ' ' -f1
-            )
-            if [ -n "$container_id" ]
-            then
-                local user="$1"
-                local home="$2"
-                local login_shell="$3"
-                print -z "docker start $container_id"
-            fi
-        }
-
+        DOCKER_PS_FORMAT='🐋{{.ID}} ({{ .Names }}) 📀{{.Image }} ⌛{{ .Status }} ⏰{{ .CreatedAt }}'
         # Connect to a Docker container
         function dl() {
-            local container_id=$(
-            docker ps --format "$DOCKER_PS_FORMAT" \
-                | peco --query "$LBUFFER" \
-                | cut -d ' ' -f1
+            local selected=$(
+                docker container ls --all --format "$DOCKER_PS_FORMAT" \
+                | fzf --prompt='container> ' --query "$LBUFFER"
             )
-            if [ -n "$container_id" ]
+            local container_id="$(echo $selected | sed -e 's/^🐋\([^ ]\+\).*/\1/')"
+            local image="$(echo $selected | sed -e 's/^[^📀]\+📀\([^ ]\+\).*/\1/')"
+            if [ -z "$container_id" ] || [ -z "$image" ]
             then
-                print -z "docker exec -it -u root --workdir / $container_id /bin/bash --login"
+                return
+            fi
+            case "$image" in
+                postgres*)
+                    local user="postgres"
+                    local workdir="/var/lib/postgresql"
+                    ;;
+                *)
+                    local user="root"
+                    local workdir="/"
+                    ;;
+            esac
+            print -z "docker exec -it -u $user -w $workdir $container_id /bin/bash --login"
+        }
+    fi
+
+    if exists rbenv
+    then
+        function rs() {
+            local selected=$(
+                rbenv versions \
+                | tr -d ' ' \
+                | sed -e 's/^/💎 /' \
+                | fzf --prompt='ruby> ' --query "$LBUFFER"
+            )
+            if [ -n "$selected" ]
+            then
+                print -z "rbenv shell $(echo $selected | sed -e 's/💎 //')"
+            fi
+        }
+    fi
+
+    if exists pyenv
+    then
+        function pe() {
+            local selected=$(
+                pyenv versions --bare \
+                | sed -e 's/^/🐍 /' \
+                | fzf --prompt='python> ' --query "$LBUFFER"
+            )
+            if [ -n "$selected" ]
+            then
+                print -z "pyenv local $(echo $selected | sed -e 's/🐍 //')"
             fi
         }
     fi
@@ -70,7 +101,8 @@ exists nvm && alias nlts='nvm use lts/gallium'
 
 case "$OSTYPE" in
     linux*)
-        alias pbcopy='xclip';;
+        alias pbcopy='xclip'
+        ;;
 esac
 
 # Make sure that VcXsrv is running and allowed to communicate with WSL2 by Windows Firewall
