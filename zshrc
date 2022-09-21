@@ -8,10 +8,6 @@ ZLE_SPACE_SUFFIX_CHARS=$'|&'
 
 export COLORTERM="truecolor"
 
-function exists {
-    which $1 &> /dev/null
-}
-
 if exists fzf
 then
     export FZF_DEFAULT_OPTS="--layout=reverse --info='hidden' --pointer='➡'"
@@ -60,7 +56,7 @@ then
     then
         function rs() {
             local selected=$(
-                rbenv versions \
+                rbenv versions --bare \
                 | tr -d ' ' \
                 | sed -e 's/^/💎 /' \
                 | fzf --prompt='ruby> ' --query "$LBUFFER"

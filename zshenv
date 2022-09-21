@@ -1,3 +1,7 @@
+function exists {
+    which $1 &> /dev/null
+}
+
 if [ -d "$HOME/.local/bin" ]
 then
     PATH="$HOME/.local/bin:$PATH"
@@ -38,5 +42,5 @@ export PATH="$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin:$PATH";
 export MANPATH="$HOMEBREW_PREFIX/share/man:$NPM_PACKAGES/bin:$MANPATH";
 export INFOPATH="$HOMEBREW_PREFIX/share/info:$INFOPATH";
 
-eval "$(pyenv init --path)"
-eval "$(rbenv init - zsh)"
+exists pyenv && eval "$(pyenv init --path)"
+exists rbenv && eval "$(rbenv init - zsh)"
