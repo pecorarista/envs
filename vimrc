@@ -19,13 +19,6 @@ call plug#begin('~/.vim/plugged')
   Plug 'chase/vim-ansible-yaml'
   "Git
   Plug 'samoshkin/vim-mergetool'
-  "Go
-  Plug 'prabirshrestha/async.vim'
-  Plug 'prabirshrestha/asyncomplete.vim'
-  Plug 'prabirshrestha/asyncomplete-lsp.vim'
-  Plug 'prabirshrestha/vim-lsp'
-  Plug 'mattn/vim-lsp-settings'
-  Plug 'mattn/vim-goimports'
   "HTML
   Plug 'othree/html5.vim'
   "JavaScript
@@ -121,7 +114,6 @@ nnoremap <C-y> <Nop>
 nnoremap <C-i> :IndentGuidesToggle<CR>
 
 "JavaScript, CSS, Python
-let g:syntastic_css_checkers = ['stylelint']
 let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_python_checkers = ['flake8']
 

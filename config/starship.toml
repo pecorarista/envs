@@ -6,3 +6,6 @@ show_always = true
 
 [directory]
 truncate_to_repo = false
+
+[nodejs]
+symbol = "nodejs "
