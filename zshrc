@@ -93,7 +93,6 @@ exists vim && alias vi='vim'
 exists R && alias R='R --no-save'
 exists exa && alias ls='exa'
 exists fdfind && alias fd='fdfind'
-exists nvm && alias nlts='nvm use lts/gallium'
 
 case "$OSTYPE" in
     linux*)
@@ -112,4 +111,4 @@ exists tmux && [ -z "$TMUX" ] && [ -z "$SSH_CONNECTION" ] && tmux
 
 export PIPENV_VENV_IN_PROJECT="1"
 
-eval "$(starship init zsh)"
+exists starship && eval "$(starship init zsh)"
