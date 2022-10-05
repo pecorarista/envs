@@ -61,7 +61,7 @@ then
         local selected=$(
             grep '^Host' $HOME/.ssh/config \
             | sed -e 's/^Host //' \
-            | grep -v '^github$' \
+            | grep -v '^github.com$' \
             | grep -v '^\*$' \
             | (
                 while read -r host
@@ -121,15 +121,27 @@ fi
 [ -f "$HOME/google-cloud-sdk/path.zsh.inc" ] && source "$HOME/google-cloud-sdk/path.zsh.inc"
 [ -f "$HOME/google-cloud-sdk/completion.zsh.inc" ] && source "$HOME/google-cloud-sdk/completion.zsh.inc"
 
-exists gvim && alias vim='gvim -v'
-exists vim && alias vi='vim'
+if exists pipenv
+then
+    function pipenv-pytest() {
+        BUFFER="pipenv run pytest --verbose --capture=no --disable-pytest-warnings"
+        CURSOR=$#BUFFER
+        zle reset-prompt
+    }
+fi
+zle -N pipenv-pytest
+bindkey -r '^T'
+bindkey '^T' pipenv-pytest
+
+
 exists R && alias R='R --no-save'
 exists exa && alias ls='exa'
 exists fdfind && alias fd='fdfind'
-
 case "$OSTYPE" in
     linux*)
-        alias pbcopy='xclip'
+        exists gvim && alias vim='gvim -v'
+        exists vim && alias vi='vim'
+        exists xclip && alias pbcopy='xclip'
         ;;
 esac
 

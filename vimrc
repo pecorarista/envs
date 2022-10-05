@@ -78,7 +78,7 @@ set laststatus=2
 
 set backspace=indent,eol,start
 set clipboard&
-set clipboard^=unnamedplus
+set clipboard^=unnamed,unnamedplus
 
 set nobackup
 set nowritebackup
