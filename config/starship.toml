@@ -9,3 +9,6 @@ truncate_to_repo = false
 
 [nodejs]
 symbol = "nodejs "
+
+[cmd_duration]
+disabled = true
