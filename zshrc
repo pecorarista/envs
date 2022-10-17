@@ -1,10 +1,19 @@
 bindkey -e
 
+export LANGUAGE=en_US.UTF-8
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+
 setopt histignorealldups sharehistory
 HISTSIZE=10000
 SAVEHIST=10000
 HISTFILE=$HOME/.zsh_history
 ZLE_SPACE_SUFFIX_CHARS=$'|&'
+
+exists brew && FPATH="$(brew --prefix)/share/zsh-completions:$(brew --prefix)/share/zsh/site-functions:$FPATH"
+
+plugins=(git zsh-completions)
+autoload -Uz compinit && compinit
 
 export COLORTERM="truecolor"
 
