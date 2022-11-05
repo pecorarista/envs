@@ -10,9 +10,9 @@ SAVEHIST=10000
 HISTFILE=$HOME/.zsh_history
 ZLE_SPACE_SUFFIX_CHARS=$'|&'
 
+FPATH="$HOME/.zfunc:$FPATH"
 exists brew && FPATH="$(brew --prefix)/share/zsh-completions:$(brew --prefix)/share/zsh/site-functions:$FPATH"
 
-plugins=(git zsh-completions)
 autoload -Uz compinit && compinit
 
 export COLORTERM="truecolor"

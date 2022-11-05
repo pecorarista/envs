@@ -31,6 +31,9 @@ fi
 # Rust
 [ -f $HOME/.cargo/env ] && source $HOME/.cargo/env
 
+# Ptyhon
+[ -d "$HOME/.local/share/pypoetry/venv/bin" ] && PATH="$HOME/.local/share/pypoetry/venv/bin:$PATH"
+
 export C_INCLUDE_PATH="$HOME/local/include:$C_INCLUDE_PATH"
 export CPLUS_INCLUDE_PATH=$C_INCLUDE_PATH
 export LD_LIBRARY_PATH="$HOME/local/lib:$LD_LIBRRY_PATH"
