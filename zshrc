@@ -35,6 +35,21 @@ then
     if exists docker
     then
         DOCKER_PS_FORMAT='🐋{{.ID}} ({{ .Names }}) 📀{{.Image }} ⌛{{ .Status }} ⏰{{ .CreatedAt }}'
+        # Run a Docker container
+        function di() {
+            local selected=$(
+                docker images --format "📀{{ .Repository}}:{{ .Tag }}" \
+                | fzf --prompt='images> ' --query "$LBUFFER"
+            )
+            local image="$(echo $selected | sed -e 's/^📀\([^ ]\+\).*/\1/')"
+            local names=("mercury" "venus" "mars" "jupiter" "saturn" "uranus" "neptune")
+            local name=$names[$(( 1 + ($RANDOM % ${#names[@]}) ))]
+            if [ -z "$image" ]
+            then
+                return
+            fi
+            print -z "docker run --name $name -d -it --entrypoint /bin/sh $image"
+        }
         # Connect to a Docker container
         function dl() {
             local selected=$(
