@@ -115,12 +115,11 @@ nnoremap <C-y> <Nop>
 nnoremap <C-i> :IndentGuidesToggle<CR>
 
 "JavaScript, CSS, Python
-let g:ale_linters = {'scss': ['stylelint']}
+let g:ale_linters = {'scss': ['stylelint'], 'typescriptreact': ['eslint']}
 let g:ale_linters_explicit = 1
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_insert_leave = 0
 let g:ale_lint_on_enter = 0
-let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_python_checkers = ['flake8']
 
 "Git
