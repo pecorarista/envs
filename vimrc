@@ -100,7 +100,7 @@ set listchars=tab:>-,extends:<,trail:-,eol:$
 autocmd BufRead,BufNewFile *.nginxconf set filetype=nginx
 autocmd BufRead,BufNewFile *.rs set filetype=rust
 
-autocmd FileType dot,html,javascript,jinja.html,json,lua,pug,scss,typescript,typescript.tsx,yaml
+autocmd FileType dot,html,javascript,jinja.html,json,lua,pug,scss,typescript,typescriptreact,yaml
   \ setlocal tabstop=2 softtabstop=2 shiftwidth=2
 
 nnoremap <C-a> <Home>
