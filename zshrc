@@ -139,6 +139,23 @@ then
             fi
         }
     fi
+
+    if exists aws
+    then
+        function ec2() {
+            local query='Reservations[].Instances[].[InstanceId, InstanceType, State.Name, PublicDnsName]'
+            local selected=$(
+                aws ec2 describe-instances --query $query --output=text \
+                | column -t --output-separator=' ' \
+                | fzf --prompt='ec2> ' --query "$LBUFFER"
+            )
+            if [ -n "$selected" ]
+            then
+                local public_dns=$(echo $selected | cut --delimiter=' ' -f4)
+                print -z $public_dns
+            fi
+        }
+    fi
 fi
 
 # GCP
