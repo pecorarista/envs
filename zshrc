@@ -152,7 +152,7 @@ then
             if [ -n "$selected" ]
             then
                 local public_dns=$(echo $selected | cut --delimiter=' ' -f4)
-                print -z $public_dns
+                print -z "echo $public_dns | pbcopy"
             fi
         }
     fi
