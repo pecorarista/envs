@@ -15,7 +15,7 @@ exists brew && FPATH="$(brew --prefix)/share/zsh-completions:$(brew --prefix)/sh
 
 autoload -Uz compinit && compinit
 
-export COLORTERM="truecolor"
+# export COLORTERM="truecolor"
 
 if exists fzf
 then
@@ -151,8 +151,28 @@ then
             )
             if [ -n "$selected" ]
             then
-                local public_dns=$(echo $selected | cut --delimiter=' ' -f4)
-                print -z "echo $public_dns | pbcopy"
+                local instance_id=$(echo $selected | cut --delimiter=' ' -f1)
+                local ip=$(echo $selected | cut --delimiter=' ' -f4)
+                if [[ $selected == *stopped* ]]
+                then
+                    print -z "aws ec2 start-instances --instance-ids $instance_id"
+                else
+                    echo "Choose an action (ssh|stop|terminate) for $instance_id."
+                    read "choice?> "
+                    case $choice in
+                        ssh)
+                            sed -i "s/Hostname\s\+ec2-.*/Hostname $ip/" ~/.ssh/config
+                            ;;
+                        stop)
+                            print -z "aws ec2 stop-instances --instance-ids $instance_id"
+                            ;;
+                        terminate)
+                            print -z "aws ec2 terminate-instances --instance-ids $instance_id"
+                            ;;
+                        *)
+                            ;;
+                    esac
+                fi
             fi
         }
     fi
@@ -176,7 +196,7 @@ bindkey '^T' pipenv-pytest
 
 
 exists R && alias R='R --no-save'
-exists exa && alias ls='exa'
+exists exa && alias ls='exa' && alias lst='exa -l --sort oldest'
 exists fdfind && alias fd='fdfind'
 case "$OSTYPE" in
     linux*)
@@ -186,7 +206,7 @@ case "$OSTYPE" in
         ;;
 esac
 
-# Make sure that VcXsrv is running and allowed to communicate with WSL2 by Windows Firewall
+# # Make sure that VcXsrv is running and allowed to communicate with WSL2 by Windows Firewall
 if [ -f "/proc/version" ] && grep -q -i "microsoft" "/proc/version"
 then
     local local_ip="$(cat /etc/resolv.conf | grep nameserver | awk '{ print $2 }')"
