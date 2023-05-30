@@ -152,7 +152,7 @@ then
             if [ -n "$selected" ]
             then
                 local instance_id=$(echo $selected | cut --delimiter=' ' -f1)
-                local ip=$(echo $selected | cut --delimiter=' ' -f4)
+                local hostname=$(echo $selected | cut --delimiter=' ' -f4)
                 if [[ $selected == *stopped* ]]
                 then
                     print -z "aws ec2 start-instances --instance-ids $instance_id"
@@ -161,7 +161,11 @@ then
                     read "choice?> "
                     case $choice in
                         ssh)
-                            sed -i "s/Hostname\s\+ec2-.*/Hostname $ip/" ~/.ssh/config
+                            if [ -n "$hostname" ]
+                            then
+                                sed -i "s/Hostname\s\+ec2-.*/Hostname $hostname/" ~/.ssh/config
+                                print "\`Hostname\` has been set to \`${hostname}\`."
+                            fi
                             ;;
                         stop)
                             print -z "aws ec2 stop-instances --instance-ids $instance_id"
@@ -196,7 +200,7 @@ bindkey '^T' pipenv-pytest
 
 
 exists R && alias R='R --no-save'
-exists exa && alias ls='exa' && alias lst='exa -l --sort oldest'
+exists exa && alias ls='exa' && alias exalt='exa -l --sort oldest'
 exists fdfind && alias fd='fdfind'
 case "$OSTYPE" in
     linux*)

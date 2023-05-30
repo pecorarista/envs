@@ -113,8 +113,6 @@ nnoremap <C-f> <Right>
 inoremap <C-f> <Right>
 nnoremap <C-y> <Nop>
 nnoremap <C-i> :IndentGuidesToggle<CR>
-nnoremap <C-w> <Nop>
-inoremap <C-w> <Nop>
 
 "JavaScript, CSS, Python
 let g:ale_linters = {'scss': ['stylelint'], 'typescriptreact': ['eslint']}
@@ -133,7 +131,7 @@ autocmd FileType markdown EnableWhitespace
 "Python
 let g:python_highlight_all = 1
 let g:jedi#popup_on_dot = 1
-let g:jedi#completions_command = "<C-w>"
+let g:jedi#completions_command = "<C-Q>"
 
 "Postgres
 let g:sql_type_default = 'pgsql'
