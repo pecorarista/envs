@@ -186,19 +186,6 @@ fi
 [ -f "$HOME/google-cloud-sdk/path.zsh.inc" ] && source "$HOME/google-cloud-sdk/path.zsh.inc"
 [ -f "$HOME/google-cloud-sdk/completion.zsh.inc" ] && source "$HOME/google-cloud-sdk/completion.zsh.inc"
 
-if exists pipenv
-then
-    function pipenv-pytest() {
-        BUFFER="pipenv run pytest --verbose --capture=no --disable-pytest-warnings"
-        CURSOR=$#BUFFER
-        zle reset-prompt
-    }
-fi
-zle -N pipenv-pytest
-bindkey -r '^T'
-bindkey '^T' pipenv-pytest
-
-
 exists R && alias R='R --no-save'
 exists exa && alias ls='exa' && alias exalt='exa -l --sort oldest'
 exists fdfind && alias fd='fdfind'
@@ -217,8 +204,6 @@ then
     export DISPLAY="$local_ip:0.0"
 fi
 
-exists tmux && [ -z "$TMUX" ] && [ -z "$SSH_CONNECTION" ] && tmux
-
-export PIPENV_VENV_IN_PROJECT="1"
+# exists tmux && [ -z "$TMUX" ] && [ -z "$SSH_CONNECTION" ] && tmux
 
 exists starship && eval "$(starship init zsh)"
