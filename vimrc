@@ -131,7 +131,7 @@ autocmd FileType markdown EnableWhitespace
 "Python
 let g:python_highlight_all = 1
 let g:jedi#popup_on_dot = 1
-let g:jedi#completions_command = "<C-Q>"
+let g:jedi#completions_command = '<C-b>'
 
 "Postgres
 let g:sql_type_default = 'pgsql'
