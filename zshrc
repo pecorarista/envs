@@ -15,8 +15,6 @@ exists brew && FPATH="$(brew --prefix)/share/zsh-completions:$(brew --prefix)/sh
 
 autoload -Uz compinit && compinit
 
-# export COLORTERM="truecolor"
-
 if exists fzf
 then
     export FZF_DEFAULT_OPTS="--layout=reverse --info='hidden' --pointer='> ' --color='bg+:#333333' --no-sort"
@@ -197,13 +195,13 @@ case "$OSTYPE" in
         ;;
 esac
 
-# # Make sure that VcXsrv is running and allowed to communicate with WSL2 by Windows Firewall
+# Make sure that VcXsrv is running and allowed to communicate with WSL2 by Windows Firewall
 if [ -f "/proc/version" ] && grep -q -i "microsoft" "/proc/version"
 then
     local local_ip="$(cat /etc/resolv.conf | grep nameserver | awk '{ print $2 }')"
     export DISPLAY="$local_ip:0.0"
 fi
 
-# exists tmux && [ -z "$TMUX" ] && [ -z "$SSH_CONNECTION" ] && tmux
+exists tmux && [ -z "$TMUX" ] && [ -z "$SSH_CONNECTION" ] && tmux
 
 exists starship && eval "$(starship init zsh)"
