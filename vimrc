@@ -107,10 +107,6 @@ nnoremap <C-a> <Home>
 inoremap <C-a> <Home>
 nnoremap <C-e> <End>
 inoremap <C-e> <End>
-nnoremap <C-b> <Left>
-inoremap <C-b> <Left>
-nnoremap <C-f> <Right>
-inoremap <C-f> <Right>
 nnoremap <C-y> <Nop>
 nnoremap <C-i> :IndentGuidesToggle<CR>
 
@@ -131,7 +127,7 @@ autocmd FileType markdown EnableWhitespace
 "Python
 let g:python_highlight_all = 1
 let g:jedi#popup_on_dot = 1
-let g:jedi#completions_command = '<C-m>'
+let g:jedi#completions_command = '<C-b>'
 
 "Postgres
 let g:sql_type_default = 'pgsql'
