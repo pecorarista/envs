@@ -32,14 +32,14 @@ then
 
     if exists docker
     then
-        DOCKER_PS_FORMAT='{{.ID}} ({{ .Names }}) {{.Image }} {{ .Status }} {{ .CreatedAt }}'
+        DOCKER_PS_FORMAT='{{.ID}} ({{ .Names }}) {{ .Image }} {{ .Status }} {{ .CreatedAt }}'
         # Run a Docker container
         function di() {
             local selected=$(
                 docker images --format "{{ .Repository }}:{{ .Tag }}" \
                 | fzf --prompt='images> ' --query "$LBUFFER"
             )
-            local image="$(echo $selected | sed -e 's/^\([^ ]\+\).*/\1/')"
+            local image="$(echo $selected)"
             local names=("mercury" "venus" "mars" "jupiter" "saturn" "uranus" "neptune")
             local name=$names[$(( 1 + ($RANDOM % ${#names[@]}) ))]
             if [ -z "$image" ]
@@ -54,8 +54,10 @@ then
                 docker container ls --all --format "$DOCKER_PS_FORMAT" \
                 | fzf --prompt='container> ' --query "$LBUFFER"
             )
-            local container_id="$(echo $selected | sed -e 's/^\([^ ]\+\).*/\1/')"
-            local image="$(echo $selected | sed -e 's/) \([^ ]\+\).*/\1/')"
+            local container_id="$(echo $selected | cut -d' ' -f1)"
+            echo $container_id
+            local image="$(echo $selected | cut -d' ' -f3)"
+            echo $image
             if [ -z "$container_id" ] || [ -z "$image" ]
             then
                 return
