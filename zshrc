@@ -32,14 +32,14 @@ then
 
     if exists docker
     then
-        DOCKER_PS_FORMAT='🐋{{.ID}} ({{ .Names }}) 📀{{.Image }} ⌛{{ .Status }} ⏰{{ .CreatedAt }}'
+        DOCKER_PS_FORMAT='{{.ID}} ({{ .Names }}) {{.Image }} {{ .Status }} {{ .CreatedAt }}'
         # Run a Docker container
         function di() {
             local selected=$(
-                docker images --format "📀{{ .Repository}}:{{ .Tag }}" \
+                docker images --format "{{ .Repository }}:{{ .Tag }}" \
                 | fzf --prompt='images> ' --query "$LBUFFER"
             )
-            local image="$(echo $selected | sed -e 's/^📀\([^ ]\+\).*/\1/')"
+            local image="$(echo $selected | sed -e 's/^\([^ ]\+\).*/\1/')"
             local names=("mercury" "venus" "mars" "jupiter" "saturn" "uranus" "neptune")
             local name=$names[$(( 1 + ($RANDOM % ${#names[@]}) ))]
             if [ -z "$image" ]
@@ -54,8 +54,8 @@ then
                 docker container ls --all --format "$DOCKER_PS_FORMAT" \
                 | fzf --prompt='container> ' --query "$LBUFFER"
             )
-            local container_id="$(echo $selected | sed -e 's/^🐋\([^ ]\+\).*/\1/')"
-            local image="$(echo $selected | sed -e 's/^[^📀]\+📀\([^ ]\+\).*/\1/')"
+            local container_id="$(echo $selected | sed -e 's/^\([^ ]\+\).*/\1/')"
+            local image="$(echo $selected | sed -e 's/) \([^ ]\+\).*/\1/')"
             if [ -z "$container_id" ] || [ -z "$image" ]
             then
                 return
@@ -96,14 +96,14 @@ then
                         | sed -e 's/^identityfile //' \
                         | xargs -n1 basename
                     )
-                    echo "💻${host} 🙂${user} 🔑${identityfile} 🌏${hostname}"
+                    echo "${host} ${user} ${identityfile} ${hostname}"
                 done;
               ) \
             | fzf --prompt 'host> '
         )
         if [ -n "$selected" ]
         then
-            print -z "ssh $(echo $selected | sed -e 's/^💻\([^ ]\+\) 🙂\([^ ]\+\) .*/\2@\1/')"
+            print -z "ssh $(echo $selected | sed -e 's/^\([^ ]\+\) \([^ ]\+\) .*/\2@\1/')"
         fi
     }
 
@@ -113,12 +113,11 @@ then
             local selected=$(
                 rbenv versions --bare \
                 | tr -d ' ' \
-                | sed -e 's/^/💎 /' \
                 | fzf --prompt='ruby> ' --query "$LBUFFER"
             )
             if [ -n "$selected" ]
             then
-                print -z "rbenv shell $(echo $selected | sed -e 's/💎 //')"
+                print -z "rbenv shell $(echo $selected)"
             fi
         }
     fi
@@ -128,12 +127,11 @@ then
         function pe() {
             local selected=$(
                 pyenv versions --bare \
-                | sed -e 's/^/🐍 /' \
                 | fzf --prompt='python> ' --query "$LBUFFER"
             )
             if [ -n "$selected" ]
             then
-                print -z "pyenv local $(echo $selected | sed -e 's/🐍 //')"
+                print -z "pyenv local $(echo $selected)"
             fi
         }
     fi
