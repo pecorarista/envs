@@ -55,9 +55,7 @@ then
                 | fzf --prompt='container> ' --query "$LBUFFER"
             )
             local container_id="$(echo $selected | cut -d' ' -f1)"
-            echo $container_id
             local image="$(echo $selected | cut -d' ' -f3)"
-            echo $image
             if [ -z "$container_id" ] || [ -z "$image" ]
             then
                 return
