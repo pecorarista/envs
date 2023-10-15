@@ -17,7 +17,7 @@ autoload -Uz compinit && compinit
 
 if exists fzf
 then
-    export FZF_DEFAULT_OPTS="--layout=reverse --info='hidden' --pointer='> ' --color='bg+:#333333' --no-sort"
+    export FZF_DEFAULT_OPTS="--exact --layout=reverse --info='hidden' --pointer='> ' --color='bg+:#333333' --no-sort"
     function fzf-history() {
         BUFFER=$(
             history -n -r 1 \
