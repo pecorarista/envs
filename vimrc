@@ -50,6 +50,8 @@ call plug#begin('~/.vim/plugged')
   Plug 'Quramy/tsuquyomi'
 call plug#end()
 
+set encoding=utf-8
+set fileencoding=utf-8
 set shortmess+=I
 set number
 set termbidi
@@ -97,6 +99,7 @@ set hlsearch
 set incsearch
 set listchars=tab:>-,extends:<,trail:-,eol:$
 
+autocmd BufRead,BufNewFile *.bbx,*.cbx set filetype=tex
 autocmd BufRead,BufNewFile *.nginxconf set filetype=nginx
 autocmd BufRead,BufNewFile *.rs set filetype=rust
 
