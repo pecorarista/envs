@@ -41,6 +41,8 @@ call plug#begin('~/.vim/plugged')
   Plug 'rust-lang/rust.vim'
   "Scala
   Plug 'derekwyatt/vim-scala'
+  "Terraform
+  Plug 'hashivim/vim-terraform'
   "Toml
   Plug 'cespare/vim-toml'
   "TypeScript
@@ -103,7 +105,7 @@ autocmd BufRead,BufNewFile *.bbx,*.cbx set filetype=tex
 autocmd BufRead,BufNewFile *.nginxconf set filetype=nginx
 autocmd BufRead,BufNewFile *.rs set filetype=rust
 
-autocmd FileType dot,html,javascript,jinja.html,json,lua,pug,scss,typescript,typescriptreact,yaml
+autocmd FileType dot,html,javascript,jinja.html,json,lua,pug,scss,sql,typescript,typescriptreact,yaml
   \ setlocal tabstop=2 softtabstop=2 shiftwidth=2
 
 nnoremap <C-a> <Home>
