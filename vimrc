@@ -20,6 +20,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'chase/vim-ansible-yaml'
   "Git
   Plug 'samoshkin/vim-mergetool'
+  Plug 'rhysd/conflict-marker.vim'
   "HTML
   Plug 'othree/html5.vim'
   "JavaScript
