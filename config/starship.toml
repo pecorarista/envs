@@ -14,4 +14,4 @@ disabled = true
 disabled = true
 
 [nodejs]
-symbol = "nodejs "
+format = 'via [🤖 $version](bold green) '
