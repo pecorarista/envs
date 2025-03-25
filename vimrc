@@ -27,6 +27,8 @@ call plug#begin('~/.vim/plugged')
   Plug 'othree/yajs.vim'
   "Jinja
   Plug 'Glench/Vim-Jinja2-Syntax'
+  "jq
+  Plug 'vito-c/jq.vim'
   "Markdown
   Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
   "Nginx
@@ -42,6 +44,8 @@ call plug#begin('~/.vim/plugged')
   Plug 'rust-lang/rust.vim'
   "Scala
   Plug 'derekwyatt/vim-scala'
+  "SQL
+  Plug 'mattn/vim-sqlfmt'
   "Terraform
   Plug 'hashivim/vim-terraform'
   "Toml
@@ -84,6 +88,14 @@ set laststatus=2
 set backspace=indent,eol,start
 set clipboard&
 set clipboard^=unnamed,unnamedplus
+"WSL yank support
+let s:clip = '/mnt/c/Windows/System32/clip.exe'
+if executable(s:clip)
+  augroup WSLYank
+    autocmd!
+    autocmd TextYankPost * if v:event.operator ==# 'y' | call system(s:clip, @0) | endif
+  augroup END
+endif
 
 set nobackup
 set nowritebackup
@@ -140,6 +152,9 @@ let g:sql_type_default = 'pgsql'
 
 "Rust
 let g:rustfmt_autosave = 1
+
+"SQL
+let g:sqlfmt_program = 'pg_format --spaces 2 --type-case 2 -o %s -'
 
 "Typescript
 let g:tsuquyomi_completion_detail = 1
