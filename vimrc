@@ -84,18 +84,7 @@ highlight link tsxCloseString Keyword
 highlight link tsxCloseTag Function
 
 set laststatus=2
-
 set backspace=indent,eol,start
-set clipboard=unnamedplus
-
-let s:clip = 'wl-copy'
-if executable(s:clip)
-  augroup WSLYank
-    autocmd!
-    autocmd TextYankPost * if v:event.operator ==# 'y' | call system(s:clip, @") | endif
-  augroup END
-endif
-
 set nobackup
 set nowritebackup
 set noswapfile
