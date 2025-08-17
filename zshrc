@@ -183,13 +183,13 @@ fi
 [ -f "$HOME/google-cloud-sdk/completion.zsh.inc" ] && source "$HOME/google-cloud-sdk/completion.zsh.inc"
 
 exists R && alias R='R --no-save'
-exists exa && alias ls='exa' && alias exalt='exa -l --sort oldest'
+exists eza && alias ls='eza'
 exists fdfind && alias fd='fdfind'
 case "$OSTYPE" in
     linux*)
         exists gvim && alias vim='gvim -v'
         exists vim && alias vi='vim'
-        exists xclip && alias pbcopy='xclip'
+        exists wl-copy && alias pbcopy='wl-copy'
         ;;
 esac
 

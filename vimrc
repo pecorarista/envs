@@ -86,15 +86,13 @@ highlight link tsxCloseTag Function
 set laststatus=2
 
 set backspace=indent,eol,start
-set clipboard&
-set clipboard^=unnamed,unnamedplus
-"WSL yank support
-let s:nkf = 'nkf -Ww16L'
-let s:clip = '/mnt/c/Windows/System32/clip.exe'
-if executable(s:nkf) &&  executable(s:clip)
+set clipboard=unnamedplus
+
+let s:clip = 'wl-copy'
+if executable(s:clip)
   augroup WSLYank
     autocmd!
-    autocmd TextYankPost * if v:event.operator ==# 'y' | call system(s:nkf . ' | ' . s:clip, @") | endif
+    autocmd TextYankPost * if v:event.operator ==# 'y' | call system(s:clip, @") | endif
   augroup END
 endif
 
