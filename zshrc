@@ -187,7 +187,7 @@ exists eza && alias ls='eza'
 exists fdfind && alias fd='fdfind'
 case "$OSTYPE" in
     linux*)
-        exists gvim && alias vim='gvim -v'
+        exists nvim && alias vim='nvim'
         exists vim && alias vi='vim'
         exists wl-copy && alias pbcopy='wl-copy'
         ;;
