@@ -1,6 +1,10 @@
 call plug#begin(stdpath('data') . '/plugged')
+
   " Colorscheme
   Plug 'jonathanfilip/vim-lucius'
+
+  " Jinja
+  Plug 'Glench/Vim-Jinja2-Syntax'
 
 call plug#end()
 
@@ -27,12 +31,15 @@ set expandtab
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
+set guicursor=a:block
 
 set ignorecase
 set wildignorecase
 set hlsearch
 set incsearch
 set listchars=tab:>-,extends:<,trail:-,eol:$
+
+autocmd FileType dot,html,javascript,jinja.html,json,lua,pug,scss,sql,typescript,typescriptreact,yaml setlocal tabstop=2 softtabstop=2 shiftwidth=2
 
 set clipboard=unnamed
 
@@ -50,7 +57,7 @@ let g:clipboard = {
   \ }
 
 
-autocmd BufRead,BufNewFile *.rs set filetype=rust
+autocmd BufRead,BufNewFile *.rs setfiletype rust
 
 nnoremap <C-a> <Home>
 inoremap <C-a> <Home>

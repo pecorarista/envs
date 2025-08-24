@@ -5,10 +5,10 @@
     name = Miyazawa Akira
     email = pecorarista@gmail.com
 [init]
-	defaultBranch = master
+    defaultBranch = master
 [diff]
-	tool = vimdiff
+    tool = nvimdiff
 [difftool]
-	prompt = false
-[merge]
-	tool = vimdiff
+    prompt = false
+[difftool "nvimdiff"]
+    cmd = nvim -d "$LOCAL" "$REMOTE"
