@@ -11,7 +11,7 @@ then
     PATH="$HOME/.local/bin:$PATH"
 fi
 
-local texlive_home="/usr/local/texlive/2023"
+local texlive_home="/usr/local/texlive/2025"
 if [ -d $texlive_home ]
 then
     case $OSTYPE in
