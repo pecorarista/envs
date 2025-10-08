@@ -12,7 +12,7 @@
     "rounded": true
   },
   "diagnostic.virtualText": false,
-  "diagnostic.messageTarget": "float",
+  "diagnostic.messageTarget": "echo",
   "diagnostic-languageserver.filetypes": {
     "python": ["flake8"]
   },

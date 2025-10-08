@@ -49,6 +49,7 @@ catch
 endtry
 
 highlight Normal ctermbg=NONE
+highlight CocHintFloat guifg=white
 highlight CocErrorFloat guifg=#ff8787
 highlight CocWarningFloat guifg=#d7d75f
 
