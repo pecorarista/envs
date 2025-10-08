@@ -1,0 +1,38 @@
+{
+  "suggest.floatConfig": {
+    "border": true,
+    "rounded": true
+  },
+  "suggest.autoTrigger": "always",
+  "suggest.enablePreselect": true,
+  "python.analysis.autoImportCompletions": true,
+  "python.analysis.useLibraryCodeForTypes": true,
+  "diagnostic.floatConfig": {
+    "border": true,
+    "rounded": true
+  },
+  "diagnostic.virtualText": false,
+  "diagnostic.messageTarget": "float",
+  "diagnostic-languageserver.filetypes": {
+    "python": ["flake8"]
+  },
+  "diagnostic-languageserver.linters": {
+    "flake8": {
+      "command": "poetry",
+      "debounce": 100,
+      "args": [
+        "run",
+        "flake8",
+        "--format=%(row)d:%(col)d:%(code)s:%(text)s",
+        "--stdin-display-name", "%filepath",
+        "-"
+      ],
+      "sourceName": "flake8",
+      "formatPattern": [
+        "^(\\d+):(\\d+):(\\w+):(.*)$",
+        { "line": 1, "column": 2, "code": 3, "message": 4 }
+      ],
+      "securities": { "E": "error", "F": "error", "W": "warning" }
+    }
+  }
+}

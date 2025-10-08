@@ -45,9 +45,9 @@ export LD_LIBRARY_PATH="$HOME/local/lib:$LD_LIBRRY_PATH"
 export HOMEBREW_PREFIX="/home/linuxbrew/.linuxbrew";
 export HOMEBREW_CELLAR="$HOMEBREW_PREFIX/Cellar";
 export HOMEBREW_REPOSITORY="$HOMEBREW_PREFIX/Homebrew";
-export PATH="$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin:$PATH";
+export PATH="$HOME/.pyenv/bin:$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin:$PATH";
 export MANPATH="$HOMEBREW_PREFIX/share/man:$NPM_PACKAGES/bin:$MANPATH";
 export INFOPATH="$HOMEBREW_PREFIX/share/info:$INFOPATH";
 
-exists pyenv && eval "$(pyenv init --path)"
+exists pyenv && eval "$(pyenv init - zsh)"
 exists rbenv && eval "$(rbenv init - zsh)"
