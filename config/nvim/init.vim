@@ -1,6 +1,15 @@
-if executable('pyenv')
+if executable('poetry')
+  let s:poetry_prefix = trim(system('poetry env info -p'))
+  if v:shell_error == 0 && isdirectory(s:poetry_prefix)
+    let s:py = s:poetry_prefix . '/bin/python'
+  endif
+endif
+
+if !exists('s:py') && executable('pyenv')
   let s:py = trim(system('pyenv which python3'))
-else
+endif
+
+if !exists('s:py')
   let s:py = '/usr/bin/python3'
 endif
 
